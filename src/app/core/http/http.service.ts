@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Contact } from '../model/contact';
+import { User } from '../model/user';
 
 @Injectable({
   providedIn: 'root'
@@ -12,38 +12,38 @@ export class HttpService {
   constructor(private http: HttpClient) { }
 
 
-  // get("/api/contacts")
-  getContacts(): Promise<void | Contact[]> {
+  // get("/api/users")
+  getUsers(): Promise<void | User[]> {
     return this.http.get(this.API_URL + "/users")
       .toPromise()
-      .then(response => response as Contact[])
+      .then(response => response as User[])
       .catch(this.handleError);
   }
 
-  // post("/api/contacts")
-  createContact(newContact: Contact): Promise<void | Contact> {
-    return this.http.post(this.API_URL + "/users", newContact)
+  // post("/api/users")
+  createUser(newUser: User): Promise<void | User> {
+    return this.http.post(this.API_URL + "/users", newUser)
       .toPromise()
-      .then(response => response as Contact)
+      .then(response => response as User)
       .catch(this.handleError);
   }
 
-  // get("/api/contacts/:id") endpoint not used by Angular app
+  // get("/api/users/:id") endpoint not used by Angular app
 
-  // delete("/api/contacts/:id")
-  deleteContact(delContactId: String): Promise<void | String> {
-    return this.http.delete(this.API_URL + "/users" + '/' + delContactId)
+  // delete("/api/users/:id")
+  deleteUser(delUserId: String): Promise<void | String> {
+    return this.http.delete(this.API_URL + "/users" + '/' + delUserId)
       .toPromise()
       .then(response => response as String)
       .catch(this.handleError);
   }
 
-  // put("/api/contacts/:id")
-  updateContact(putContact: Contact): Promise<void | Contact> {
-    var putUrl = this.API_URL + "/users" + '/' + putContact._id;
-    return this.http.put(putUrl, putContact)
+  // put("/api/users/:id")
+  updateUser(putUser: User): Promise<void | User> {
+    var putUrl = this.API_URL + "/users" + '/' + putUser._id;
+    return this.http.put(putUrl, putUser)
       .toPromise()
-      .then(response => response as Contact)
+      .then(response => response as User)
       .catch(this.handleError);
   }
 
