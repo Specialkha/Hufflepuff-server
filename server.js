@@ -1,15 +1,18 @@
-var express = require("express");
-var bodyParser = require("body-parser");
-var mongodb = require("mongodb");
-var ObjectID = mongodb.ObjectID;
+const express = require("express");
+const bodyParser = require("body-parser");
+const mongodb = require("mongodb");
+const ObjectID = mongodb.ObjectID;
 
-var USERS_COLLECTION = "users";
+const USERS_COLLECTION = "users";
+const BLOG_COLLECTION = "blog";
+const NEWS_COLLECTION = "news";
+const RESSOURCES_COLLECTION = "ressources";
 
-var app = express();
+const app = express();
 app.use(bodyParser.json());
 
 // Create link to Angular build directory
-var distDir = __dirname + "/dist/";
+const distDir = __dirname + "/dist/";
 app.use(express.static(distDir));
 
 // Rest of server.js code below
@@ -51,6 +54,78 @@ function handleError(res, reason, message, code) {
  */
 
 app.get("/api/" + USERS_COLLECTION, function (req, res) {
+    db.collection(USERS_COLLECTION).find({}).toArray(function (err, docs) {
+        if (err) {
+            handleError(res, err.message, "Failed to get users.");
+        } else {
+            res.status(200).json(docs);
+        }
+    });
+});
+
+app.post("/api/" + USERS_COLLECTION, function (req, res) {
+    var newContact = req.body;
+    newContact.createDate = new Date();
+
+    if (!req.body.name) {
+        handleError(res, "Invalid user input", "Must provide a name.", 400);
+    } else {
+        db.collection(USERS_COLLECTION).insertOne(newContact, function (err, doc) {
+            if (err) {
+                handleError(res, err.message, "Failed to create new contact.");
+            } else {
+                res.status(201).json(doc.ops[0]);
+            }
+        });
+    }
+});
+
+/*  "/api/users/:id"
+ *    GET: find contact by id
+ *    PUT: update contact by id
+ *    DELETE: deletes contact by id
+ */
+
+app.get("/api/" + USERS_COLLECTION + "/:id", function (req, res) {
+    db.collection(USERS_COLLECTION).findOne({ _id: new ObjectID(req.params.id) }, function (err, doc) {
+        if (err) {
+            handleError(res, err.message, "Failed to get contact");
+        } else {
+            res.status(200).json(doc);
+        }
+    });
+});
+
+app.put("/api/" + USERS_COLLECTION + "/:id", function (req, res) {
+    var updateDoc = req.body;
+    delete updateDoc._id;
+
+    db.collection(USERS_COLLECTION).updateOne({ _id: new ObjectID(req.params.id) }, updateDoc, function (err, doc) {
+        if (err) {
+            handleError(res, err.message, "Failed to update contact");
+        } else {
+            updateDoc._id = req.params.id;
+            res.status(200).json(updateDoc);
+        }
+    });
+});
+
+app.delete("/api/" + USERS_COLLECTION + "/:id", function (req, res) {
+    db.collection(USERS_COLLECTION).deleteOne({ _id: new ObjectID(req.params.id) }, function (err, result) {
+        if (err) {
+            handleError(res, err.message, "Failed to delete contact");
+        } else {
+            res.status(200).json(req.params.id);
+        }
+    });
+});
+
+/*  "/api/blog"
+ *    GET: finds all users
+ *    POST: creates a new contact
+ */
+
+app.get("/api/" + BLOG_COLLECTION, function (req, res) {
     db.collection(USERS_COLLECTION).find({}).toArray(function (err, docs) {
         if (err) {
             handleError(res, err.message, "Failed to get users.");
