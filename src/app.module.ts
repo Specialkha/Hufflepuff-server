@@ -11,7 +11,8 @@ import { MainPageComponent } from './app/modules/main-page/main-page.component';
 import { ContactComponent } from './app/modules/contact/contact.component';
 import { BlogPageComponent } from './app/modules/blog-page/blog-page.component';
 import { ActivitiesComponent } from './app/modules/activities/activities.component';
-import { NavMenuComponent } from './app/core/components/nav-menu/nav-menu/nav-menu.component';
+import { NavMenuComponent } from './app/core/components/nav-menu/nav-menu.component';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { NavMenuComponent } from './app/core/components/nav-menu/nav-menu/nav-me
   imports: [
     BrowserModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
