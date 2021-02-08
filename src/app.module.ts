@@ -6,12 +6,24 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { ContactDetailsComponent } from './app/contacts/contact-details/contact-details.component';
 import { ContactListComponent } from './app/contacts/contact-list/contact-list.component';
+import { TosComponent } from './app/modules/tos/tos.component';
+import { MainPageComponent } from './app/modules/main-page/main-page.component';
+import { ContactComponent } from './app/modules/contact/contact.component';
+import { BlogPageComponent } from './app/modules/blog-page/blog-page.component';
+import { ActivitiesComponent } from './app/modules/activities/activities.component';
+import { NavMenuComponent } from './app/core/components/nav-menu/nav-menu/nav-menu.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ContactDetailsComponent,
-    ContactListComponent
+    ContactListComponent,
+    TosComponent,
+    MainPageComponent,
+    ContactComponent,
+    BlogPageComponent,
+    ActivitiesComponent,
+    NavMenuComponent
   ],
   imports: [
     BrowserModule,
