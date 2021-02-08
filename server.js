@@ -1,14 +1,14 @@
-const express = require("express");
-const bodyParser = require("body-parser");
-const mongodb = require("mongodb");
-const ObjectID = mongodb.ObjectID;
+var express = require("express");
+var bodyParser = require("body-parser");
+var mongodb = require("mongodb");
+var ObjectID = mongodb.ObjectID;
 
-const USERS_COLLECTION = "users";
-const BLOG_COLLECTION = "blog";
+var USERS_COLLECTION = "users";
+var BLOG_COLLECTION = "blog";
 const NEWS_COLLECTION = "news";
 const RESSOURCES_COLLECTION = "ressources";
 
-const app = express();
+var app = express();
 app.use(bodyParser.json());
 
 // Create link to Angular build directory
