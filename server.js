@@ -126,7 +126,7 @@ app.delete("/api/" + USERS_COLLECTION + "/:id", function (req, res) {
  */
 
 app.get("/api/" + BLOG_COLLECTION, function (req, res) {
-    db.collection(USERS_COLLECTION).find({}).toArray(function (err, docs) {
+    db.collection(BLOG_COLLECTION).find({}).toArray(function (err, docs) {
         if (err) {
             handleError(res, err.message, "Failed to get users.");
         } else {
@@ -135,14 +135,14 @@ app.get("/api/" + BLOG_COLLECTION, function (req, res) {
     });
 });
 
-app.post("/api/" + USERS_COLLECTION, function (req, res) {
+app.post("/api/" + BLOG_COLLECTION, function (req, res) {
     var newContact = req.body;
     newContact.createDate = new Date();
 
     if (!req.body.name) {
         handleError(res, "Invalid user input", "Must provide a name.", 400);
     } else {
-        db.collection(USERS_COLLECTION).insertOne(newContact, function (err, doc) {
+        db.collection(BLOG_COLLECTION).insertOne(newContact, function (err, doc) {
             if (err) {
                 handleError(res, err.message, "Failed to create new contact.");
             } else {
@@ -152,14 +152,14 @@ app.post("/api/" + USERS_COLLECTION, function (req, res) {
     }
 });
 
-/*  "/api/users/:id"
+/*  "/api/blog/:id"
  *    GET: find contact by id
  *    PUT: update contact by id
  *    DELETE: deletes contact by id
  */
 
-app.get("/api/" + USERS_COLLECTION + "/:id", function (req, res) {
-    db.collection(USERS_COLLECTION).findOne({ _id: new ObjectID(req.params.id) }, function (err, doc) {
+app.get("/api/" + BLOG_COLLECTION + "/:id", function (req, res) {
+    db.collection(BLOG_COLLECTION).findOne({ _id: new ObjectID(req.params.id) }, function (err, doc) {
         if (err) {
             handleError(res, err.message, "Failed to get contact");
         } else {
@@ -168,11 +168,11 @@ app.get("/api/" + USERS_COLLECTION + "/:id", function (req, res) {
     });
 });
 
-app.put("/api/" + USERS_COLLECTION + "/:id", function (req, res) {
+app.put("/api/" + BLOG_COLLECTION + "/:id", function (req, res) {
     var updateDoc = req.body;
     delete updateDoc._id;
 
-    db.collection(USERS_COLLECTION).updateOne({ _id: new ObjectID(req.params.id) }, updateDoc, function (err, doc) {
+    db.collection(BLOG_COLLECTION).updateOne({ _id: new ObjectID(req.params.id) }, updateDoc, function (err, doc) {
         if (err) {
             handleError(res, err.message, "Failed to update contact");
         } else {
@@ -182,8 +182,8 @@ app.put("/api/" + USERS_COLLECTION + "/:id", function (req, res) {
     });
 });
 
-app.delete("/api/" + USERS_COLLECTION + "/:id", function (req, res) {
-    db.collection(USERS_COLLECTION).deleteOne({ _id: new ObjectID(req.params.id) }, function (err, result) {
+app.delete("/api/" + BLOG_COLLECTION + "/:id", function (req, res) {
+    db.collection(BLOG_COLLECTION).deleteOne({ _id: new ObjectID(req.params.id) }, function (err, result) {
         if (err) {
             handleError(res, err.message, "Failed to delete contact");
         } else {
