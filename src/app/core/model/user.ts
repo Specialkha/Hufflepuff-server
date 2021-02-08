@@ -7,4 +7,5 @@ export class User {
         mobile: string;
         work: string;
     }
+    adminLevel:string;
 }
