@@ -4,8 +4,8 @@ export class User {
     firstName: string;
     email: string;
     phone: {
-        mobile: string;
-        work: string;
+        mobile?: string;
+        work?: string;
     }
     adminLevel:string;
 }
