@@ -13,6 +13,7 @@ import { BlogPageComponent } from './app/modules/blog-page/blog-page.component';
 import { ActivitiesComponent } from './app/modules/activities/activities.component';
 import { NavMenuComponent } from './app/core/components/nav-menu/nav-menu.component';
 import { AppRoutingModule } from './app-routing.module';
+import { BlogsListComponent } from './app/modules/activities/blogs-list/blogs-list.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { AppRoutingModule } from './app-routing.module';
     ContactComponent,
     BlogPageComponent,
     ActivitiesComponent,
-    NavMenuComponent
+    NavMenuComponent,
+    BlogsListComponent
   ],
   imports: [
     BrowserModule,

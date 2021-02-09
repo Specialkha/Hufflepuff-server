@@ -1,1 +1,13 @@
-<app-nav-menu></app-nav-menu>
+<div *ngIf="blog" class="row">
+    <form class="col-md-12">
+        <div class="form-group">
+            <label for="blog-name">Title</label>
+            <textarea class="form-control" name="blog-title">{{blog.title}}</textarea> />
+        </div>
+        <div class="form-group">
+            <label for="blog-email">Content</label>
+            <textarea class="form-control" name="blog-content">{{blog.content}}</textarea>
+        </div>
+        <button class="btn btn-danger" *ngIf="blog._id" (click)="deleteBlog(blog._id)">Delete</button>
+    </form>
+</div>

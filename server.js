@@ -121,14 +121,14 @@ app.delete("/api/" + USERS_COLLECTION + "/:id", function (req, res) {
 });
 
 /*  "/api/blog"
- *    GET: finds all users
- *    POST: creates a new contact
+ *    GET: finds all blogs
+ *    POST: creates a new blog
  */
 
 app.get("/api/" + BLOG_COLLECTION, function (req, res) {
     db.collection(BLOG_COLLECTION).find({}).toArray(function (err, docs) {
         if (err) {
-            handleError(res, err.message, "Failed to get users.");
+            handleError(res, err.message, "Failed to get blogs.");
         } else {
             res.status(200).json(docs);
         }
@@ -136,15 +136,15 @@ app.get("/api/" + BLOG_COLLECTION, function (req, res) {
 });
 
 app.post("/api/" + BLOG_COLLECTION, function (req, res) {
-    var newContact = req.body;
+    var newBlog = req.body;
     newContact.createDate = new Date();
 
     if (!req.body.name) {
-        handleError(res, "Invalid user input", "Must provide a name.", 400);
+        handleError(res, "Invalid blog input", "Must provide a name.", 400);
     } else {
         db.collection(BLOG_COLLECTION).insertOne(newContact, function (err, doc) {
             if (err) {
-                handleError(res, err.message, "Failed to create new contact.");
+                handleError(res, err.message, "Failed to create new blog.");
             } else {
                 res.status(201).json(doc.ops[0]);
             }
@@ -169,12 +169,12 @@ app.get("/api/" + BLOG_COLLECTION + "/:id", function (req, res) {
 });
 
 app.put("/api/" + BLOG_COLLECTION + "/:id", function (req, res) {
-    var updateDoc = req.body;
+    var updateBlog = req.body;
     delete updateDoc._id;
 
     db.collection(BLOG_COLLECTION).updateOne({ _id: new ObjectID(req.params.id) }, updateDoc, function (err, doc) {
         if (err) {
-            handleError(res, err.message, "Failed to update contact");
+            handleError(res, err.message, "Failed to update blog");
         } else {
             updateDoc._id = req.params.id;
             res.status(200).json(updateDoc);
@@ -185,7 +185,7 @@ app.put("/api/" + BLOG_COLLECTION + "/:id", function (req, res) {
 app.delete("/api/" + BLOG_COLLECTION + "/:id", function (req, res) {
     db.collection(BLOG_COLLECTION).deleteOne({ _id: new ObjectID(req.params.id) }, function (err, result) {
         if (err) {
-            handleError(res, err.message, "Failed to delete contact");
+            handleError(res, err.message, "Failed to delete blog");
         } else {
             res.status(200).json(req.params.id);
         }
