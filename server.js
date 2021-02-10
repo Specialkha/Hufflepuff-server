@@ -40,6 +40,10 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI || "mongodb://localhost:2701
     });
 });
 
+app.get(/^(?!\/api).+/, function (req, res) {
+    res.redirect('/');
+});
+
 // users API ROUTES BELOW
 
 // Generic error handler used by all endpoints.

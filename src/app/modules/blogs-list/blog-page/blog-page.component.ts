@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Blog } from 'src/app/core/model/blog';
-import { BlogService } from '../../core/services/blog.service';
+import { BlogService } from '../../../core/services/blog.service';
 
 @Component({
   selector: 'app-blog-page',
