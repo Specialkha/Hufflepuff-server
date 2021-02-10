@@ -13,11 +13,7 @@ export class BlogPageComponent {
 
   constructor(private blogService: BlogService) { }
 
-  createNewBlog(blog: Blog) {
-    // this.blogService.createBlog(blog).then((newBlog: Blog) => {
-    //   this.createHandler(newBlog);
-    // });
-  }
+
 
   updateBlog(blog: Blog) {
     // this.blogService.createBlog(blog).then((newBlog: Blog) => {

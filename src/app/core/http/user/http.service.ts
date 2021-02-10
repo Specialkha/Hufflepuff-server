@@ -11,14 +11,9 @@ export class HttpService {
 
   constructor(private http: HttpClient) { }
 
-
-  
   // get("/api/users")
-  getUsers(): Promise<void | User[]> {
-    return this.http.get(this.API_URL + "/users")
-      .toPromise()
-      .then(response => response as User[])
-      .catch(this.handleError);
+  getUsers(): Promise<User[]> {
+    return this.http.get<User[]>(this.API_URL + "/users").toPromise();
   }
 
   // post("/api/users")

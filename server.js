@@ -68,12 +68,12 @@ app.get("/api/" + USERS_COLLECTION, function (req, res) {
 });
 
 app.post("/api/" + USERS_COLLECTION, function (req, res) {
-    var newContact = req.body;
+    let newContact = req.body;
     newContact.createDate = new Date();
 
-    // if (!req.body.name) {
-    //     handleError(res, "Invalid user input", "Must provide a name.", 400);
-    // } else {
+    if (!req.body.lastName) {
+        handleError(res, "Invalid user input", "Must provide a name.", 400);
+    } else {
         db.collection(USERS_COLLECTION).insertOne(newContact, function (err, doc) {
             if (err) {
                 handleError(res, err.message, "Failed to create new contact.");
@@ -81,7 +81,7 @@ app.post("/api/" + USERS_COLLECTION, function (req, res) {
                 res.status(201).json(doc.ops[0]);
             }
         });
-    // }
+    }
 });
 
 /*  "/api/users/:id"
