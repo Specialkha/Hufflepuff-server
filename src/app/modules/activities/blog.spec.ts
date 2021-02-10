@@ -1,4 +1,4 @@
-import { Blog } from './blog';
+import { Blog } from '../../core/model/blog';
 
 describe('Blog', () => {
   it('should create an instance', () => {

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Blog } from '../blog';
+import { Blog } from '../../../core/model/blog';
 import { BlogService } from '../services/blog.service';
 
 @Component({

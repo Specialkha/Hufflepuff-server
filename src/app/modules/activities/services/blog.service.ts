@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import { BlogPageComponent } from '../../blog-page/blog-page.component';
-import { Blog } from '../blog';
+import { Blog } from '../../../core/model/blog';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +20,7 @@ export class BlogService {
   }
 
   // post("/api/blogs")
-  createBlog(newBlog: BlogPageComponent): Promise<void | Blog> {
+  createBlog(newBlog: Blog): Promise<void | Blog> {
     return this.http.post(this.blogsUrl, newBlog)
       .toPromise()
       .then(response => response.json() as Blog)

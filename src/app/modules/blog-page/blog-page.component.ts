@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Blog } from 'src/app/core/model/blog';
 import { BlogService } from '../activities/services/blog.service';
 
 @Component({
@@ -6,36 +7,28 @@ import { BlogService } from '../activities/services/blog.service';
   templateUrl: './blog-page.component.html',
   styleUrls: ['./blog-page.component.scss']
 })
-export class Blog {
+export class BlogPageComponent {
 
-  @Input()
-  blog: Blog;
-
-  @Input()
-  createHandler: Function;
-  @Input()
-  updateHandler: Function;
-  @Input()
-  deleteHandler: Function;
+  blog: any;
 
   constructor(private blogService: BlogService) { }
 
-  createBlog(blog: Blog) {
-    this.blogService.createBlog(blog).then((newBlog: Blog) => {
-      this.createHandler(newBlog);
-    });
+  createNewBlog(blog: Blog) {
+    // this.blogService.createBlog(blog).then((newBlog: Blog) => {
+    //   this.createHandler(newBlog);
+    // });
   }
 
   updateBlog(blog: Blog) {
-    this.blogService.createBlog(blog).then((newBlog: Blog) => {
-      this.updateHandler(newBlog);
-    });
+    // this.blogService.createBlog(blog).then((newBlog: Blog) => {
+    //   this.updateHandler(newBlog);
+    // });
   }
 
   deleteBlog(blogId: String): void {
-    this.blogService.deleteBlog(blogId).then((deletedblogId: String) => {
-      this.deleteHandler(deletedblogId);
-    });
+    // this.blogService.deleteBlog(blogId).then((deletedblogId: String) => {
+    //   this.deleteHandler(deletedblogId);
+    // });
   }
 
 }

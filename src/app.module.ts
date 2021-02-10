@@ -4,8 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
-import { ContactDetailsComponent } from './app/contacts/contact-details/contact-details.component';
-import { ContactListComponent } from './app/contacts/contact-list/contact-list.component';
 import { TosComponent } from './app/modules/tos/tos.component';
 import { MainPageComponent } from './app/modules/main-page/main-page.component';
 import { ContactComponent } from './app/modules/contact/contact.component';
@@ -18,8 +16,6 @@ import { BlogsListComponent } from './app/modules/activities/blogs-list/blogs-li
 @NgModule({
   declarations: [
     AppComponent,
-    ContactDetailsComponent,
-    ContactListComponent,
     TosComponent,
     MainPageComponent,
     ContactComponent,
