@@ -3,8 +3,8 @@ var bodyParser = require("body-parser");
 var mongodb = require("mongodb");
 var ObjectID = mongodb.ObjectID;
 
-var USERS_COLLECTION = "users";
-var BLOG_COLLECTION = "blog";
+const USERS_COLLECTION = "users";
+const BLOGS_COLLECTION = "blogs";
 const NEWS_COLLECTION = "news";
 const RESSOURCES_COLLECTION = "ressources";
 
@@ -125,8 +125,8 @@ app.delete("/api/" + USERS_COLLECTION + "/:id", function (req, res) {
  *    POST: creates a new blog
  */
 
-app.get("/api/" + BLOG_COLLECTION, function (req, res) {
-    db.collection(BLOG_COLLECTION).find({}).toArray(function (err, docs) {
+app.get("/api/" + BLOGS_COLLECTION, function (req, res) {
+    db.collection(BLOGS_COLLECTION).find({}).toArray(function (err, docs) {
         if (err) {
             handleError(res, err.message, "Failed to get blogs.");
         } else {
@@ -135,14 +135,14 @@ app.get("/api/" + BLOG_COLLECTION, function (req, res) {
     });
 });
 
-app.post("/api/" + BLOG_COLLECTION, function (req, res) {
+app.post("/api/" + BLOGS_COLLECTION, function (req, res) {
     var newBlog = req.body;
     newContact.createDate = new Date();
 
     if (!req.body.name) {
         handleError(res, "Invalid blog input", "Must provide a name.", 400);
     } else {
-        db.collection(BLOG_COLLECTION).insertOne(newContact, function (err, doc) {
+        db.collection(BLOGS_COLLECTION).insertOne(newContact, function (err, doc) {
             if (err) {
                 handleError(res, err.message, "Failed to create new blog.");
             } else {
@@ -158,8 +158,8 @@ app.post("/api/" + BLOG_COLLECTION, function (req, res) {
  *    DELETE: deletes contact by id
  */
 
-app.get("/api/" + BLOG_COLLECTION + "/:id", function (req, res) {
-    db.collection(BLOG_COLLECTION).findOne({ _id: new ObjectID(req.params.id) }, function (err, doc) {
+app.get("/api/" + BLOGS_COLLECTION + "/:id", function (req, res) {
+    db.collection(BLOGS_COLLECTION).findOne({ _id: new ObjectID(req.params.id) }, function (err, doc) {
         if (err) {
             handleError(res, err.message, "Failed to get contact");
         } else {
@@ -168,11 +168,11 @@ app.get("/api/" + BLOG_COLLECTION + "/:id", function (req, res) {
     });
 });
 
-app.put("/api/" + BLOG_COLLECTION + "/:id", function (req, res) {
+app.put("/api/" + BLOGS_COLLECTION + "/:id", function (req, res) {
     var updateBlog = req.body;
     delete updateDoc._id;
 
-    db.collection(BLOG_COLLECTION).updateOne({ _id: new ObjectID(req.params.id) }, updateDoc, function (err, doc) {
+    db.collection(BLOGS_COLLECTION).updateOne({ _id: new ObjectID(req.params.id) }, updateDoc, function (err, doc) {
         if (err) {
             handleError(res, err.message, "Failed to update blog");
         } else {
@@ -182,8 +182,8 @@ app.put("/api/" + BLOG_COLLECTION + "/:id", function (req, res) {
     });
 });
 
-app.delete("/api/" + BLOG_COLLECTION + "/:id", function (req, res) {
-    db.collection(BLOG_COLLECTION).deleteOne({ _id: new ObjectID(req.params.id) }, function (err, result) {
+app.delete("/api/" + BLOGS_COLLECTION + "/:id", function (req, res) {
+    db.collection(BLOGS_COLLECTION).deleteOne({ _id: new ObjectID(req.params.id) }, function (err, result) {
         if (err) {
             handleError(res, err.message, "Failed to delete blog");
         } else {

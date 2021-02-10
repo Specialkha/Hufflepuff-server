@@ -12,6 +12,7 @@ import { ActivitiesComponent } from './app/modules/activities/activities.compone
 import { NavMenuComponent } from './app/core/components/nav-menu/nav-menu.component';
 import { AppRoutingModule } from './app-routing.module';
 import { BlogsListComponent } from './app/modules/activities/blogs-list/blogs-list.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { BlogsListComponent } from './app/modules/activities/blogs-list/blogs-li
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

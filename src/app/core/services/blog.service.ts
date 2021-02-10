@@ -1,6 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import { Blog } from '../../../core/model/blog';
+import { Blog } from '../model/blog';
 
 @Injectable({
   providedIn: 'root'
@@ -9,13 +9,13 @@ export class BlogService {
 
   private blogsUrl = '/api/blogs';
 
-  constructor(private http: Http) { }
+  constructor(private http: HttpClient) { }
 
   // get("/api/blogs")
   getBlogs(): Promise<void | Blog[]> {
     return this.http.get(this.blogsUrl)
       .toPromise()
-      .then(response => response.json() as Blog[])
+      .then(response => response as Blog[])
       .catch(this.handleError);
   }
 
@@ -23,7 +23,7 @@ export class BlogService {
   createBlog(newBlog: Blog): Promise<void | Blog> {
     return this.http.post(this.blogsUrl, newBlog)
       .toPromise()
-      .then(response => response.json() as Blog)
+      .then(response => response as Blog)
       .catch(this.handleError);
   }
 
@@ -33,7 +33,7 @@ export class BlogService {
   deleteBlog(delBlogId: String): Promise<void | String> {
     return this.http.delete(this.blogsUrl + '/' + delBlogId)
       .toPromise()
-      .then(response => response.json() as String)
+      .then(response => response as String)
       .catch(this.handleError);
   }
 
@@ -42,7 +42,7 @@ export class BlogService {
     var putUrl = this.blogsUrl + '/' + putBlog._id;
     return this.http.put(putUrl, putBlog)
       .toPromise()
-      .then(response => response.json() as Blog)
+      .then(response => response as Blog)
       .catch(this.handleError);
   }
 
