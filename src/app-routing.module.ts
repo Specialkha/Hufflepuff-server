@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AccountCreationComponent } from './app/modules/account-creation/account-creation.component';
 import { ActivitiesComponent } from './app/modules/activities/activities.component';
 import { BlogsListComponent } from './app/modules/blogs-list/blogs-list.component';
 import { ContactComponent } from './app/modules/contact/contact.component';
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'blog', component: BlogsListComponent },
   { path: 'activites', component: ActivitiesComponent },
   { path: 'tos', component: TosComponent },
+  { path: 'accountCreation', component: AccountCreationComponent },
   { path: '**', redirectTo: 'accueil' }
 ];
 

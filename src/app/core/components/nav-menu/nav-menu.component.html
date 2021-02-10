@@ -3,31 +3,21 @@
     <button routerLink="/blog">Blog</button>
     <button routerLink="/activites">Activités et jeux</button>
     <button routerLink="/contact">Contact</button>
-    <button (click)="open(content)">Se connecter / Créer un compte</button>
+    <button (click)="loginOpen = !loginOpen">Se connecter / Créer un compte</button>
 
-    <ng-template #content let-modal>
-        <div class="modal-header">
-          <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
-          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form>
+    <div *ngIf="loginOpen">
+        <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
             <div class="form-group">
-              <label for="dateOfBirth">Date of birth</label>
-              <div class="input-group">
-                <input id="dateOfBirth" class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #dp="ngbDatepicker">
-                <div class="input-group-append">
-                  <button class="btn btn-outline-secondary calendar" (click)="dp.toggle()" type="button"></button>
-                </div>
-              </div>
+                <label for="login">Votre identifiant</label>
+                <input formControlName="login" class="form-control">
             </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
-        </div>
-      </ng-template>
+            <div class="form-group">
+                <label for="password">Votre mot de passe</label>
+                <input formControlName="password" class="form-control">
+            </div>
+            <button type="submit">Se connecter</button>
+        </form>
+        <hr>
+        <button routerLink="/accountCreation">Ou si vous souhaitez créer un compte</button>
+    </div>
 </div>
-

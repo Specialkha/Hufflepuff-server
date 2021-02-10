@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-nav-menu',
@@ -9,28 +9,25 @@ import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class NavMenuComponent implements OnInit {
 
   closeResult = '';
+  loginOpen:boolean = false;
 
-  constructor(private modalService: NgbModal) { }
+  loginForm: FormGroup;
+
+  constructor() { }
 
   ngOnInit(): void {
+    this.loginForm = this.createNewFormGroupLogIn();
   }
 
-  open(content) {
-    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+  createNewFormGroupLogIn() {
+    return new FormGroup({
+      login: new FormControl('', Validators.required),
+      password: new FormControl('', Validators.required)
     });
   }
 
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return `with: ${reason}`;
-    }
+  onLogin() {
+    console.log(this.loginForm);
   }
 
 }

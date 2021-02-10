@@ -1,11 +1,14 @@
 export class User {
     _id?: string;
-    name: string;
+    genre: string;
+    lastName: string;
     firstName: string;
     email: string;
-    phone: {
-        mobile?: string;
-        work?: string;
-    }
-    adminLevel:string;
+    mobile?: string;
+    phone?: string;
+    password: string;
+    adress?: string;
+    zipCode?: number;
+    city?: string;
+    adminLevel: string;
 }
