@@ -1,5 +1,6 @@
 <div *ngIf="blog" class="row">
     <form class="col-md-12">
+        <button class="btn btn-warning" (click)="createNewBlog()">New blog</button>
         <div class="form-group">
             <label for="blog-name">Title</label>
             <textarea class="form-control" name="blog-title">{{blog.title}}</textarea> />

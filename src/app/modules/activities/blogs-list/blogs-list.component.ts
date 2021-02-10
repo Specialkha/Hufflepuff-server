@@ -9,8 +9,6 @@ import { BlogService } from '../services/blog.service';
 })
 export class BlogsListComponent implements OnInit {
 
-
-
   blogs: Blog[];
   selectedBlog: Blog;
 
