@@ -1,8 +1,17 @@
-<div>
-    <button routerLink="/accueil">Accueil</button>
-    <button routerLink="/blog">Blog</button>
-    <button routerLink="/activites">Activités et jeux</button>
-    <button routerLink="/contact">Contact</button>
+<ul class="nav nav-pills">
+    <li class="nav-item">
+        <button routerLink="/accueil" routerLinkActive="active" class="nav-link">Accueil</button>
+    </li>
+    <li class="nav-item">
+        <button routerLink="/blog" routerLinkActive="active" class="nav-link">Blog</button>
+    </li>
+    <li class="nav-item">
+        <button routerLink="/activites" routerLinkActive="active" class="nav-link">Activités et jeux</button>
+    </li>
+    <li class="nav-item">
+        <button routerLink="/contact" routerLinkActive="active" class="nav-link">Contact</button>
+    </li>
+    
     <button (click)="loginOpen = !loginOpen">Se connecter / Créer un compte</button>
 
     <div *ngIf="loginOpen">
@@ -20,4 +29,4 @@
         <hr>
         <button routerLink="/accountCreation">Ou si vous souhaitez créer un compte</button>
     </div>
-</div>
+</ul>
