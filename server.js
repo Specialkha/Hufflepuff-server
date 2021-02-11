@@ -101,11 +101,9 @@ app.post("/api/login", function (req, res) {
     } else {
         isConnected = false;
     }
-    console.log(isConnected, 'isconnected');
     if (isConnected === true) {
         // Generate an access token
         const accessToken = jwt.sign({ email: username, password: password }, accessTokenSecret);
-        console.log(accessToken, 'accessToken');
         res.json({
             accessToken
         });

@@ -8,8 +8,18 @@ import { User } from '../model/user';
 })
 export class AuthService {
 
-  user: BehaviorSubject<User>;
+  private user$ = new BehaviorSubject<string>('');
 
-  constructor(private userHttp: HttpService) {
+  dataFromObservable = this.user$.asObservable();
+
+  authToken:string;
+
+  constructor() {
+  }
+
+  public notifyObservable(data: string) {
+    if (data) {
+      this.user$.next(data);
+    };
   }
 }
