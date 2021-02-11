@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { HttpService } from '../../http/user/http.service';
 
 @Component({
   selector: 'app-nav-menu',
@@ -13,7 +14,7 @@ export class NavMenuComponent implements OnInit {
 
   loginForm: FormGroup;
 
-  constructor() { }
+  constructor(private http:HttpService) { }
 
   ngOnInit(): void {
     this.loginForm = this.createNewFormGroupLogIn();
@@ -28,6 +29,14 @@ export class NavMenuComponent implements OnInit {
 
   onLogin() {
     console.log(this.loginForm);
+    const payload = {
+      username: this.loginForm.value.login,
+      password: this.loginForm.value.password
+    }
+
+    this.http.userLogin(payload).subscribe((e:any)=> {
+      console.log(e);
+    })
   }
 
 }

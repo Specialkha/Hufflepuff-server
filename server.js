@@ -97,14 +97,15 @@ app.post("/api/login", function (req, res) {
 
     if (db.collection(USERS_COLLECTION).findOne({ email: username, password: password }) != undefined) {
         isConnected = true;
+
     } else {
         isConnected = false;
     }
-
+    console.log(isConnected, 'isconnected');
     if (isConnected === true) {
         // Generate an access token
-        const accessToken = jwt.sign({ username: user.username, role: user.role }, accessTokenSecret);
-
+        const accessToken = jwt.sign({ email: username, password: password }, accessTokenSecret);
+        console.log(accessToken, 'accessToken');
         res.json({
             accessToken
         });

@@ -48,4 +48,8 @@ export class HttpService {
       error.status ? `${error.status} - ${error.statusText}` : 'Server error';
     console.error(errMsg); // log to console instead
   }
+
+  userLogin(requestedPayload: any) {
+    return this.http.post(this.API_URL + '/login', requestedPayload);
+  }
 }
