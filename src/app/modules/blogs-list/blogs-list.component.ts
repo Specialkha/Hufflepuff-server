@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpService } from 'src/app/core/http/user/http.service';
 import { Blog } from '../../core/model/blog';
 import { BlogService } from '../../core/services/blog.service';
 
@@ -12,16 +13,16 @@ export class BlogsListComponent implements OnInit {
   blogs: Blog[];
   selectedBlog: Blog;
 
-  constructor(private blogService: BlogService) { }
+  constructor(private blogService: BlogService, private httpUser: HttpService) { }
 
   ngOnInit() {
-    this.blogService
-      .getBlogs()
-      .then((blogs: Blog[]) => {
-        this.blogs = blogs.map((blog) => {
-          return blog;
-        });
-      });
+    // this.blogService
+    //   .getBlogs()
+    //   .then((blogs: Blog[]) => {
+    //     this.blogs = blogs.map((blog) => {
+    //       return blog;
+    //     });
+    //   });
   }
 
   private getIndexOfBlog = (blogId: String) => {
@@ -35,15 +36,21 @@ export class BlogsListComponent implements OnInit {
   }
 
   createNewBlog() {
-    var blog: Blog = {
-      _id: '0',
-      title: '',
-      content: ''
-    };
-
-    // By default, a newly-created blog will have the selected state.
-    this.selectBlog(blog);
+    // this.blogService.createBlog(blog).then((newBlog: Blog) => {
+    //   this.createHandler(newBlog);
+    // });
   }
+
+  // createNewBlog() {
+  //   var blog: Blog = {
+  //     _id: '0',
+  //     title: '',
+  //     content: ''
+  //   };
+
+  //   // By default, a newly-created blog will have the selected state.
+  //   this.selectBlog(blog);
+  // }
 
   deleteBlog = (blogId: String) => {
     var idx = this.getIndexOfBlog(blogId);
