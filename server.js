@@ -88,7 +88,29 @@ app.post("/api/" + USERS_COLLECTION, function (req, res) {
 });
 
 app.post("/api/login", function (req, res) {
+    const username = req.body.username;
+    const password = req.body.password;
+    let isConnected;
 
+    // Filter user from the users array by username and password
+    // const user = users.find(u => { return u.username === username && u.password === password });
+
+    if (db.collection(USERS_COLLECTION).findOne({ email: username, password: password }) != undefined) {
+        isConnected = true;
+    } else {
+        isConnected = false;
+    }
+
+    if (isConnected === true) {
+        // Generate an access token
+        const accessToken = jwt.sign({ username: user.username, role: user.role }, accessTokenSecret);
+
+        res.json({
+            accessToken
+        });
+    } else {
+        res.send('Username or password incorrect');
+    }
 });
 
 /*  "/api/users/:id"
