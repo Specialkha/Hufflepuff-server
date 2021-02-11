@@ -44,7 +44,7 @@ import { PostComponent } from './app/modules/blogs-list/post/post/post.component
     NgbModule,
     ReactiveFormsModule
   ],
-  providers: [httpInterceptorProviders],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

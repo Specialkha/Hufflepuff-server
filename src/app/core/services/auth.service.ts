@@ -15,9 +15,12 @@ export class AuthService {
   authToken: any;
 
   constructor() {
+    if (localStorage.getItem('token')) {
+      this.authToken = localStorage.getItem('token');
+    }
   }
 
-  public notifyObservable(data: any) {
+  public notifyObservable(data: string) {
     if (data) {
       this.user$.next(data);
     };

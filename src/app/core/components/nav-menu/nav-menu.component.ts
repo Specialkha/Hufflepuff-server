@@ -35,9 +35,10 @@ export class NavMenuComponent implements OnInit {
     }
 
     this.http.userLogin(payload).subscribe((e: any) => {
-      this.auth.notifyObservable(e);
+      this.auth.notifyObservable(e.accessToken);
       this.auth.dataFromObservable.subscribe((authToken: string) => {
         this.auth.authToken = authToken;
+        localStorage.setItem('token', authToken);
       });
     }, err => {
       console.log(err)
@@ -46,6 +47,9 @@ export class NavMenuComponent implements OnInit {
 
   onLogout() {
     localStorage.removeItem('token');
+    this.auth.dataFromObservable.subscribe(() => {
+      this.auth.authToken = null;
+    });
   }
 
 }
