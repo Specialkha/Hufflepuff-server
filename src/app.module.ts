@@ -15,6 +15,7 @@ import { BlogsListComponent } from './app/modules/blogs-list/blogs-list.componen
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
 import { AccountCreationComponent } from './app/modules/account-creation/account-creation.component';
+import { httpInterceptorProviders } from './app/core/http/interceptor';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,7 @@ import { AccountCreationComponent } from './app/modules/account-creation/account
     NgbModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

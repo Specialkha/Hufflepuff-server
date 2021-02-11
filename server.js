@@ -148,7 +148,7 @@ app.get("/api/" + USERS_COLLECTION + "/:id", function (req, res) {
     });
 });
 
-app.put("/api/" + USERS_COLLECTION + "/:id", function (req, res) {
+app.put("/api/" + USERS_COLLECTION + "/:id", authenticateJWT, function (req, res) {
     let updateDoc = req.body;
     delete updateDoc._id;
 
@@ -162,7 +162,7 @@ app.put("/api/" + USERS_COLLECTION + "/:id", function (req, res) {
     });
 });
 
-app.delete("/api/" + USERS_COLLECTION + "/:id", function (req, res) {
+app.delete("/api/" + USERS_COLLECTION + "/:id", authenticateJWT, function (req, res) {
     db.collection(USERS_COLLECTION).deleteOne({ _id: new ObjectID(req.params.id) }, function (err, result) {
         if (err) {
             handleError(res, err.message, "Failed to delete contact");
@@ -187,7 +187,7 @@ app.get("/api/" + BLOGS_COLLECTION, function (req, res) {
     });
 });
 
-app.post("/api/" + BLOGS_COLLECTION, function (req, res) {
+app.post("/api/" + BLOGS_COLLECTION, authenticateJWT, function (req, res) {
     let newBlog = req.body;
     newContact.createDate = new Date();
 
@@ -220,7 +220,7 @@ app.get("/api/" + BLOGS_COLLECTION + "/:id", function (req, res) {
     });
 });
 
-app.put("/api/" + BLOGS_COLLECTION + "/:id", function (req, res) {
+app.put("/api/" + BLOGS_COLLECTION + "/:id", authenticateJWT, function (req, res) {
     let updateBlog = req.body;
     delete updateDoc._id;
 
@@ -234,7 +234,7 @@ app.put("/api/" + BLOGS_COLLECTION + "/:id", function (req, res) {
     });
 });
 
-app.delete("/api/" + BLOGS_COLLECTION + "/:id", function (req, res) {
+app.delete("/api/" + BLOGS_COLLECTION + "/:id", authenticateJWT, function (req, res) {
     db.collection(BLOGS_COLLECTION).deleteOne({ _id: new ObjectID(req.params.id) }, function (err, result) {
         if (err) {
             handleError(res, err.message, "Failed to delete blog");
