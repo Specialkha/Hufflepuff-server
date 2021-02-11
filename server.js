@@ -1,14 +1,17 @@
-var express = require("express");
-var bodyParser = require("body-parser");
-var mongodb = require("mongodb");
-var ObjectID = mongodb.ObjectID;
+const express = require("express");
+const bodyParser = require("body-parser");
+const mongodb = require("mongodb");
+const ObjectID = mongodb.ObjectID;
+const jwt = require('jsonwebtoken');
 
 const USERS_COLLECTION = "users";
 const BLOGS_COLLECTION = "blogs";
 const NEWS_COLLECTION = "news";
 const RESSOURCES_COLLECTION = "ressources";
 
-var app = express();
+const accessTokenSecret = 'youraccesstokensecret';
+
+const app = express();
 app.use(bodyParser.json());
 
 // Create link to Angular build directory
@@ -18,7 +21,7 @@ app.use(express.static(distDir));
 // Rest of server.js code below
 
 // Create a database variable outside of the database connection callback to reuse the connection pool in your app.
-var db;
+let db;
 
 // Connect to the database before starting the application server.
 mongodb.MongoClient.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/CUBES", {
@@ -84,6 +87,10 @@ app.post("/api/" + USERS_COLLECTION, function (req, res) {
     }
 });
 
+app.post("/api/login", function(req,res) {
+
+});
+
 /*  "/api/users/:id"
  *    GET: find contact by id
  *    PUT: update contact by id
@@ -101,7 +108,7 @@ app.get("/api/" + USERS_COLLECTION + "/:id", function (req, res) {
 });
 
 app.put("/api/" + USERS_COLLECTION + "/:id", function (req, res) {
-    var updateDoc = req.body;
+    let updateDoc = req.body;
     delete updateDoc._id;
 
     db.collection(USERS_COLLECTION).updateOne({ _id: new ObjectID(req.params.id) }, updateDoc, function (err, doc) {
@@ -140,10 +147,10 @@ app.get("/api/" + BLOGS_COLLECTION, function (req, res) {
 });
 
 app.post("/api/" + BLOGS_COLLECTION, function (req, res) {
-    var newBlog = req.body;
+    let newBlog = req.body;
     newContact.createDate = new Date();
 
-    if (!req.body.name) {
+    if (!req.body.lastName) {
         handleError(res, "Invalid blog input", "Must provide a name.", 400);
     } else {
         db.collection(BLOGS_COLLECTION).insertOne(newContact, function (err, doc) {
@@ -173,7 +180,7 @@ app.get("/api/" + BLOGS_COLLECTION + "/:id", function (req, res) {
 });
 
 app.put("/api/" + BLOGS_COLLECTION + "/:id", function (req, res) {
-    var updateBlog = req.body;
+    let updateBlog = req.body;
     delete updateDoc._id;
 
     db.collection(BLOGS_COLLECTION).updateOne({ _id: new ObjectID(req.params.id) }, updateDoc, function (err, doc) {
