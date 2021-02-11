@@ -11,8 +11,8 @@
     <li class="nav-item">
         <button routerLink="/contact" routerLinkActive="active" class="nav-link">Contact</button>
     </li>
-    
-    <div>
+
+    <div *ngIf="!this.auth.authToken">
         <button (click)="loginOpen = !loginOpen">Se connecter / Créer un compte</button>
 
         <div *ngIf="loginOpen">
@@ -31,5 +31,9 @@
             <button routerLink="/accountCreation">Ou si vous souhaitez créer un compte</button>
         </div>
     </div>
-  
+
+    <div *ngIf="this.auth.authToken">
+        <div>Profil du compte</div>
+    </div>
+
 </ul>

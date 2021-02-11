@@ -15,7 +15,7 @@ export class NavMenuComponent implements OnInit {
 
   loginForm: FormGroup;
 
-  constructor(private http: HttpService, private auth: AuthService) { }
+  constructor(private http: HttpService, public auth: AuthService) { }
 
   ngOnInit(): void {
     this.loginForm = this.createNewFormGroupLogIn();
