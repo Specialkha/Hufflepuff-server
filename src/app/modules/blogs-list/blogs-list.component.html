@@ -2,7 +2,7 @@
 
 <div class="row">
     <div class="col-md-5">
-        <button class="btn btn-warning" routerLink="/blog-creation">Créez votre blog</button>
+        <button *ngIf="auth.authToken" class="btn btn-warning" routerLink="/blog-creation">Créez votre blog</button>
         <h2>Liste des blogs</h2>
         <ul class="list-group">
             <li class="list-group-item" *ngFor="let blog of blogs" (click)="selectBlog(blog)"
@@ -10,7 +10,7 @@
                 {{blog.title}}
             </li>
         </ul>
-        
+
     </div>
     <div class="col-md-5 col-md-offset-2">
     </div>

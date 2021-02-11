@@ -12,12 +12,12 @@ export class AuthService {
 
   dataFromObservable = this.user$.asObservable();
 
-  authToken:string;
+  authToken: any;
 
   constructor() {
   }
 
-  public notifyObservable(data: string) {
+  public notifyObservable(data: any) {
     if (data) {
       this.user$.next(data);
     };

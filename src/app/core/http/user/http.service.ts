@@ -50,6 +50,7 @@ export class HttpService {
   }
 
   userLogin(requestedPayload: any) {
+    console.log(requestedPayload)
     return this.http.post(this.API_URL + '/login', requestedPayload);
   }
 }

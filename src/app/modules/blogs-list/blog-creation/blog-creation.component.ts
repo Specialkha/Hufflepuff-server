@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { HttpService } from 'src/app/core/http/blog/http.service';
 
 @Component({
   selector: 'app-blog-creation',
@@ -10,7 +11,7 @@ export class BlogCreationComponent implements OnInit {
 
   blogCreationForm: FormGroup;
 
-  constructor() { }
+  constructor(private http: HttpService) { }
 
   ngOnInit(): void {
     this.blogCreationForm = this.createNewBlogFormGroup();
@@ -25,8 +26,10 @@ export class BlogCreationComponent implements OnInit {
 
   createNewBlog() {
     const payload = {
-
+      title: this.blogCreationForm.value.title,
+      content: this.blogCreationForm.value.content
     }
+    this.http.createNewBlog(payload);
   }
 
 }
