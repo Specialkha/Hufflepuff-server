@@ -16,6 +16,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
 import { AccountCreationComponent } from './app/modules/account-creation/account-creation.component';
 import { httpInterceptorProviders } from './app/core/http/interceptor';
+import { BlogCreationComponent } from './app/modules/blogs-list/blog-creation/blog-creation.component';
+import { PostCreationComponent } from './app/modules/blogs-list/post/post-creation/post-creation.component';
+import { PostsListComponent } from './app/modules/blogs-list/post/posts-list/posts-list.component';
+import { PostComponent } from './app/modules/blogs-list/post/post/post.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +31,11 @@ import { httpInterceptorProviders } from './app/core/http/interceptor';
     ActivitiesComponent,
     NavMenuComponent,
     BlogsListComponent,
-    AccountCreationComponent
+    AccountCreationComponent,
+    BlogCreationComponent,
+    PostCreationComponent,
+    PostsListComponent,
+    PostComponent
   ],
   imports: [
     BrowserModule,

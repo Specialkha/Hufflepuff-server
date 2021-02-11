@@ -35,11 +35,11 @@ export class BlogsListComponent implements OnInit {
     this.selectedBlog = blog
   }
 
-  createNewBlog() {
-    // this.blogService.createBlog(blog).then((newBlog: Blog) => {
-    //   this.createHandler(newBlog);
-    // });
-  }
+  // createNewBlog() {
+  // this.blogService.createBlog(blog).then((newBlog: Blog) => {
+  //   this.createHandler(newBlog);
+  // });
+  // }
 
   // createNewBlog() {
   //   var blog: Blog = {

@@ -16,7 +16,6 @@ export class HttpService {
     return this.http.get<Blog[]>(this.API_URL + "/Blogs").toPromise();
   }
 
-
   // post("/api/Blogs")
   createNewBlog(newBlog: Blog): Promise<void | Blog> {
     return this.http.post(this.API_URL + "/Blogs", newBlog)
