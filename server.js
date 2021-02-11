@@ -9,7 +9,7 @@ const BLOGS_COLLECTION = "blogs";
 const NEWS_COLLECTION = "news";
 const RESSOURCES_COLLECTION = "ressources";
 
-const accessTokenSecret = 'youraccesstokensecret';
+const accessTokenSecret = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
 
 const app = express();
 app.use(bodyParser.json());
@@ -87,7 +87,7 @@ app.post("/api/" + USERS_COLLECTION, function (req, res) {
     }
 });
 
-app.post("/api/login", function(req,res) {
+app.post("/api/login", function (req, res) {
 
 });
 
