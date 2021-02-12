@@ -1,8 +1,11 @@
+require('dotenv').config();
 const express = require("express");
 const bodyParser = require("body-parser");
+const cookieParser = require('cookie-parser');
 const mongodb = require("mongodb");
 const ObjectID = mongodb.ObjectID;
 const jwt = require('jsonwebtoken');
+const { verify } = require('./middleware');
 
 const USERS_COLLECTION = "users";
 const BLOGS_COLLECTION = "blogs";
@@ -10,9 +13,12 @@ const NEWS_COLLECTION = "news";
 const RESSOURCES_COLLECTION = "ressources";
 
 const accessTokenSecret = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+const refreshTokenSecret = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+let refreshTokens = [];
 
 const app = express();
 app.use(bodyParser.json());
+app.use(cookieParser());
 
 // Create link to Angular build directory
 const distDir = __dirname + "/dist/";
@@ -100,16 +106,29 @@ app.post("/api/login", function (req, res) {
 
     } else {
         isConnected = false;
+        return res.status(401).send()
     }
     if (isConnected === true) {
         // Generate an access token
-        const accessToken = jwt.sign({ email: username, password: password }, accessTokenSecret);
+        const accessToken = jwt.sign({ email: username, password: password }, process.env.ACCESS_TOKEN_SECRET, { algorithm: "HS256", expiresIn: process.env.ACCESS_TOKEN_LIFE });
+        const refreshToken = jwt.sign({ email: username, password: password }, process.env.REFRESH_TOKEN_SECRET, { algorithm: "HS256", expiresIn: process.env.REFRESH_TOKEN_LIFE });
+
+        refreshTokens.push(refreshToken);
+
         res.json({
-            accessToken
+            accessToken,
+            refreshToken
         });
     } else {
         res.send('Username or password incorrect');
     }
+});
+
+app.post('/logout', (req, res) => {
+    const token = req.body;
+    refreshTokens = refreshTokens.filter(token => t !== token);
+
+    res.send("Logout successful");
 });
 
 // Verify authenticity of authToken
@@ -148,7 +167,7 @@ app.get("/api/" + USERS_COLLECTION + "/:id", function (req, res) {
     });
 });
 
-app.put("/api/" + USERS_COLLECTION + "/:id", authenticateJWT, function (req, res) {
+app.put("/api/" + USERS_COLLECTION + "/:id", verify, function (req, res) {
     let updateDoc = req.body;
     delete updateDoc._id;
 
@@ -162,7 +181,7 @@ app.put("/api/" + USERS_COLLECTION + "/:id", authenticateJWT, function (req, res
     });
 });
 
-app.delete("/api/" + USERS_COLLECTION + "/:id", authenticateJWT, function (req, res) {
+app.delete("/api/" + USERS_COLLECTION + "/:id", verify, function (req, res) {
     db.collection(USERS_COLLECTION).deleteOne({ _id: new ObjectID(req.params.id) }, function (err, result) {
         if (err) {
             handleError(res, err.message, "Failed to delete contact");
@@ -187,7 +206,7 @@ app.get("/api/" + BLOGS_COLLECTION, function (req, res) {
     });
 });
 
-app.post("/api/" + BLOGS_COLLECTION, authenticateJWT, function (req, res) {
+app.post("/api/" + BLOGS_COLLECTION, verify, function (req, res) {
     let newBlog = req.body;
     newContact.createDate = new Date();
 
@@ -220,7 +239,7 @@ app.get("/api/" + BLOGS_COLLECTION + "/:id", function (req, res) {
     });
 });
 
-app.put("/api/" + BLOGS_COLLECTION + "/:id", authenticateJWT, function (req, res) {
+app.put("/api/" + BLOGS_COLLECTION + "/:id", verify, function (req, res) {
     let updateBlog = req.body;
     delete updateDoc._id;
 
@@ -234,7 +253,7 @@ app.put("/api/" + BLOGS_COLLECTION + "/:id", authenticateJWT, function (req, res
     });
 });
 
-app.delete("/api/" + BLOGS_COLLECTION + "/:id", authenticateJWT, function (req, res) {
+app.delete("/api/" + BLOGS_COLLECTION + "/:id", verify, function (req, res) {
     db.collection(BLOGS_COLLECTION).deleteOne({ _id: new ObjectID(req.params.id) }, function (err, result) {
         if (err) {
             handleError(res, err.message, "Failed to delete blog");
