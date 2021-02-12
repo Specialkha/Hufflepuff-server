@@ -7,18 +7,18 @@ import { Blog } from '../../model/blog';
 })
 export class HttpService {
 
-  private API_URL = '/api';
+  private API_URL = '/api/blogs';
 
   constructor(private http: HttpClient) { }
 
   // get("/api/Blogs")
   getBlogs(): Promise<Blog[]> {
-    return this.http.get<Blog[]>(this.API_URL + "/Blogs").toPromise();
+    return this.http.get<Blog[]>(this.API_URL).toPromise();
   }
 
   // post("/api/Blogs")
   createNewBlog(newBlog: Blog): Promise<void | Blog> {
-    return this.http.post(this.API_URL + "/Blogs", newBlog)
+    return this.http.post(this.API_URL, newBlog)
       .toPromise()
       .then(response => response as Blog)
       .catch(this.handleError);
@@ -26,7 +26,7 @@ export class HttpService {
 
   // delete("/api/Blogs/:id")
   deleteBlog(delBlogId: String): Promise<void | String> {
-    return this.http.delete(this.API_URL + "/Blogs" + '/' + delBlogId)
+    return this.http.delete(this.API_URL + '/' + delBlogId)
       .toPromise()
       .then(response => response as String)
       .catch(this.handleError);
@@ -34,7 +34,7 @@ export class HttpService {
 
   // put("/api/Blogs/:id")
   updateBlog(putBlog: Blog): Promise<void | Blog> {
-    var putUrl = this.API_URL + "/Blogs" + '/' + putBlog._id;
+    var putUrl = this.API_URL + '/' + putBlog._id;
     return this.http.put(putUrl, putBlog)
       .toPromise()
       .then(response => response as Blog)

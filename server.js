@@ -12,8 +12,6 @@ const BLOGS_COLLECTION = "blogs";
 const NEWS_COLLECTION = "news";
 const RESSOURCES_COLLECTION = "ressources";
 
-const accessTokenSecret = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
-const refreshTokenSecret = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
 let refreshTokens = [];
 
 const app = express();
@@ -103,7 +101,6 @@ app.post("/api/login", function (req, res) {
 
     if (db.collection(USERS_COLLECTION).findOne({ email: username, password: password }) != undefined) {
         isConnected = true;
-
     } else {
         isConnected = false;
         return res.status(401).send()
@@ -124,6 +121,30 @@ app.post("/api/login", function (req, res) {
     }
 });
 
+app.post('/token', (req, res) => {
+    const { token } = req.body;
+
+    if (!token) {
+        return res.sendStatus(401);
+    }
+
+    if (!refreshTokens.includes(token)) {
+        return res.sendStatus(403);
+    }
+
+    jwt.verify(token, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
+        if (err) {
+            return res.sendStatus(403);
+        }
+
+        const accessToken = jwt.sign({ username: user.username, role: user.role }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '20m' });
+
+        res.json({
+            accessToken
+        });
+    });
+});
+
 app.post('/logout', (req, res) => {
     const token = req.body;
     refreshTokens = refreshTokens.filter(token => t !== token);
@@ -136,10 +157,10 @@ const authenticateJWT = (req, res, next) => {
     const authHeader = req.headers.authorization;
 
     if (authHeader) {
-        const token = authHeader.split(' ')[1];
-
-        jwt.verify(token, accessTokenSecret, (err, user) => {
+        const token = authHeader.split(' ')[0];
+        jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
             if (err) {
+                console.log(err)
                 return res.sendStatus(403);
             }
 
@@ -206,14 +227,15 @@ app.get("/api/" + BLOGS_COLLECTION, function (req, res) {
     });
 });
 
-app.post("/api/" + BLOGS_COLLECTION, verify, function (req, res) {
+app.post("/api/" + BLOGS_COLLECTION, authenticateJWT, function (req, res) {
     let newBlog = req.body;
-    newContact.createDate = new Date();
 
-    if (!req.body.lastName) {
+    newBlog.createDate = new Date();
+    console.log(req.body, 'req.body');
+    if (!req.body.title) {
         handleError(res, "Invalid blog input", "Must provide a name.", 400);
     } else {
-        db.collection(BLOGS_COLLECTION).insertOne(newContact, function (err, doc) {
+        db.collection(BLOGS_COLLECTION).insertOne(newBlog, function (err, doc) {
             if (err) {
                 handleError(res, err.message, "Failed to create new blog.");
             } else {
