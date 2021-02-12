@@ -5,7 +5,7 @@ import { User } from '../../model/user';
 @Injectable({
   providedIn: 'root'
 })
-export class HttpService {
+export class HttpUserService {
 
   private API_URL = '/api';
 
@@ -25,6 +25,9 @@ export class HttpService {
   }
 
   // get("/api/users/:id") endpoint not used by Angular app
+  getSingleUser(username: string) {
+    return this.http.get(this.API_URL + '/users/' + username);
+  }
 
   // delete("/api/users/:id")
   deleteUser(delUserId: String): Promise<void | String> {

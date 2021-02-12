@@ -179,7 +179,8 @@ const authenticateJWT = (req, res, next) => {
  */
 
 app.get("/api/" + USERS_COLLECTION + "/:id", function (req, res) {
-    db.collection(USERS_COLLECTION).findOne({ _id: new ObjectID(req.params.id) }, function (err, doc) {
+    console.log(req.headers, req.body);
+    db.collection(USERS_COLLECTION).findOne({ email: req.headers.id }, function (err, doc) {
         if (err) {
             handleError(res, err.message, "Failed to get contact");
         } else {

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpService } from 'src/app/core/http/user/http.service';
+import { HttpUserService } from 'src/app/core/http/user/httpUser.service';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { Blog } from '../../core/model/blog';
 import { BlogService } from '../../core/services/blog.service';
@@ -14,7 +14,7 @@ export class BlogsListComponent implements OnInit {
   blogs: Blog[];
   selectedBlog: Blog;
 
-  constructor(private blogService: BlogService, private httpUser: HttpService, public auth:AuthService) { }
+  constructor(private blogService: BlogService, private httpUser: HttpUserService, public auth:AuthService) { }
 
   ngOnInit() {
     // this.blogService

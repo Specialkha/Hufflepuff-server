@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { HttpService } from '../../http/user/http.service';
+import { HttpUserService } from '../../http/user/httpUser.service';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -15,7 +15,7 @@ export class NavMenuComponent implements OnInit {
 
   loginForm: FormGroup;
 
-  constructor(private http: HttpService, public auth: AuthService) { }
+  constructor(private httpUser: HttpUserService, public auth: AuthService) { }
 
   ngOnInit(): void {
     this.loginForm = this.createNewFormGroupLogIn();
@@ -34,11 +34,12 @@ export class NavMenuComponent implements OnInit {
       password: this.loginForm.value.password
     }
 
-    this.http.userLogin(payload).subscribe((e: any) => {
+    this.httpUser.userLogin(payload).subscribe((e: any) => {
       this.auth.notifyObservable(e.accessToken);
       this.auth.dataFromObservable.subscribe((authToken: string) => {
         this.auth.authToken = authToken;
         localStorage.setItem('token', authToken);
+        this.auth.notifyUserObservable(payload.username);
       });
     }, err => {
       console.log(err)
@@ -46,7 +47,7 @@ export class NavMenuComponent implements OnInit {
   }
 
   onLogout() {
-    this.http.userLogout(localStorage.getItem('token')).subscribe((data: string) => {
+    this.httpUser.userLogout(localStorage.getItem('token')).subscribe((data: string) => {
       console.log(data);
     })
     localStorage.removeItem('token');

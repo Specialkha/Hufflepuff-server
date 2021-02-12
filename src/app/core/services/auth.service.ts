@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { HttpService } from '../http/user/http.service';
+import { HttpUserService } from '../http/user/httpUser.service';
 import { User } from '../model/user';
 
 @Injectable({
@@ -8,11 +8,20 @@ import { User } from '../model/user';
 })
 export class AuthService {
 
-  private user$ = new BehaviorSubject<string>('');
-
-  dataFromObservable = this.user$.asObservable();
-
+  private authToken$ = new BehaviorSubject<string>('');
+  dataFromObservable = this.authToken$.asObservable();
   authToken: any;
+
+  private user$ = new BehaviorSubject<User>({
+    genre: "",
+    lastName: "",
+    firstName: "",
+    email: "",
+    password: "",
+    adminLevel: ""
+  });
+  dataFromUserObservable = this.user$.asObservable();
+  user: any;
 
   constructor() {
     if (localStorage.getItem('token')) {
@@ -21,6 +30,12 @@ export class AuthService {
   }
 
   public notifyObservable(data: string) {
+    if (data) {
+      this.authToken$.next(data);
+    };
+  }
+
+  public notifyUserObservable(data: any) {
     if (data) {
       this.user$.next(data);
     };

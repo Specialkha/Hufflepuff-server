@@ -5,7 +5,7 @@ import { Blog } from '../../model/blog';
 @Injectable({
   providedIn: 'root'
 })
-export class HttpService {
+export class HttpBlogService {
 
   private API_URL = '/api/blogs';
 
@@ -17,11 +17,8 @@ export class HttpService {
   }
 
   // post("/api/Blogs")
-  createNewBlog(newBlog: Blog): Promise<void | Blog> {
-    return this.http.post(this.API_URL, newBlog)
-      .toPromise()
-      .then(response => response as Blog)
-      .catch(this.handleError);
+  createNewBlog(newBlog: Blog) {
+    return this.http.post(this.API_URL, newBlog);
   }
 
   // delete("/api/Blogs/:id")
