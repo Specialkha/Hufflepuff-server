@@ -27,15 +27,19 @@ export class BlogCreationComponent implements OnInit {
   }
 
   createNewBlog() {
-    const payload = {
+    let payload = {
       title: this.blogCreationForm.value.title,
-      content: this.blogCreationForm.value.content
+      content: this.blogCreationForm.value.content,
+      id: ""
     }
 
-    this.auth.dataFromUserObservable.subscribe((username: any) => {
-      console.log(username, 'username');
-    });
+    let username: string;
 
+    this.auth.dataFromUserObservable.subscribe((user: any) => {
+      username = user;
+    });
+    
+    payload.id = username;
     this.httpBlog.createNewBlog(payload).subscribe((data: any) => {
       console.log(data);
     });

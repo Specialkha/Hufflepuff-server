@@ -13,6 +13,7 @@ const NEWS_COLLECTION = "news";
 const RESSOURCES_COLLECTION = "ressources";
 
 let refreshTokens = [];
+let connectedUsers = [];
 
 const app = express();
 app.use(bodyParser.json());
@@ -111,7 +112,7 @@ app.post("/api/login", function (req, res) {
         const refreshToken = jwt.sign({ email: username, password: password }, process.env.REFRESH_TOKEN_SECRET, { algorithm: "HS256", expiresIn: process.env.REFRESH_TOKEN_LIFE });
 
         refreshTokens.push(refreshToken);
-
+        connectedUsers.push(username);
         res.json({
             accessToken,
             refreshToken
@@ -121,7 +122,7 @@ app.post("/api/login", function (req, res) {
     }
 });
 
-app.post('/token', (req, res) => {
+app.post('/api/token', (req, res) => {
     const { token } = req.body;
 
     if (!token) {
@@ -137,7 +138,7 @@ app.post('/token', (req, res) => {
             return res.sendStatus(403);
         }
 
-        const accessToken = jwt.sign({ username: user.username, role: user.role }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '20m' });
+        const accessToken = jwt.sign({ email: username, password: password }, process.env.ACCESS_TOKEN_SECRET, { algorithm: "HS256", expiresIn: process.env.ACCESS_TOKEN_LIFE });
 
         res.json({
             accessToken
@@ -145,11 +146,10 @@ app.post('/token', (req, res) => {
     });
 });
 
-app.post('/logout', (req, res) => {
-    const token = req.body;
-    refreshTokens = refreshTokens.filter(token => t !== token);
-
-    res.send("Logout successful");
+app.post('/api/logout', (req, res) => {
+    refreshTokens = refreshTokens.filter(token => token !== req.body.token);
+    connectedUsers = connectedUsers.filter(connectedUser => connectedUser !== req.body.email);
+    res.status(200).send("Logout successful");
 });
 
 // Verify authenticity of authToken

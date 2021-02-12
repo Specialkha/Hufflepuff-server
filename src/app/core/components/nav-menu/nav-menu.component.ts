@@ -47,9 +47,14 @@ export class NavMenuComponent implements OnInit {
   }
 
   onLogout() {
-    this.httpUser.userLogout(localStorage.getItem('token')).subscribe((data: string) => {
-      console.log(data);
-    })
+    let userCredential: any = {};
+    this.auth.dataFromUserObservable.subscribe((user: any) => {
+      console.log(user)
+      userCredential.user = user;
+    });
+    userCredential.token = localStorage.getItem('token');
+    this.httpUser.userLogout(userCredential).subscribe((data: string) => {
+    });
     localStorage.removeItem('token');
     this.auth.dataFromObservable.subscribe(() => {
       this.auth.authToken = null;

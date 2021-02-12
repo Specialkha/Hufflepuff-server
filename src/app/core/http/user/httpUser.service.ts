@@ -24,7 +24,7 @@ export class HttpUserService {
       .catch(this.handleError);
   }
 
-  // get("/api/users/:id") endpoint not used by Angular app
+  // get("/api/users/:id")to get a single user from database
   getSingleUser(username: string) {
     return this.http.get(this.API_URL + '/users/' + username);
   }
@@ -57,6 +57,6 @@ export class HttpUserService {
   }
 
   userLogout(payload: any) {
-    return this.http.post(this.API_URL + '/logout', payload);
+    return this.http.post(this.API_URL + '/logout', payload, { responseType: 'text' });
   }
 }
