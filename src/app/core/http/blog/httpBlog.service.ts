@@ -12,8 +12,8 @@ export class HttpBlogService {
   constructor(private http: HttpClient) { }
 
   // get("/api/Blogs")
-  getBlogs(): Promise<Blog[]> {
-    return this.http.get<Blog[]>(this.API_URL).toPromise();
+  getBlogs() {
+    return this.http.get<Blog[]>(this.API_URL);
   }
 
   // post("/api/Blogs")

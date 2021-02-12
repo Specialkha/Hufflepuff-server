@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpBlogService } from 'src/app/core/http/blog/httpBlog.service';
 import { HttpUserService } from 'src/app/core/http/user/httpUser.service';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { Blog } from '../../core/model/blog';
@@ -14,16 +15,14 @@ export class BlogsListComponent implements OnInit {
   blogs: Blog[];
   selectedBlog: Blog;
 
-  constructor(private blogService: BlogService, private httpUser: HttpUserService, public auth:AuthService) { }
+  constructor(private httpBlog: HttpBlogService, private httpUser: HttpUserService, public auth: AuthService) { }
 
   ngOnInit() {
-    // this.blogService
-    //   .getBlogs()
-    //   .then((blogs: Blog[]) => {
-    //     this.blogs = blogs.map((blog) => {
-    //       return blog;
-    //     });
-    //   });
+    this.httpBlog.getBlogs().subscribe((data) => {
+      console.log(data, 'data')
+      this.blogs = data;
+    });
+
   }
 
   private getIndexOfBlog = (blogId: String) => {
