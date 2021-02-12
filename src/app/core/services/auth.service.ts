@@ -21,7 +21,6 @@ export class AuthService {
     adminLevel: ""
   });
   dataFromUserObservable = this.user$.asObservable();
-  user: any;
 
   constructor() {
     if (localStorage.getItem('token')) {

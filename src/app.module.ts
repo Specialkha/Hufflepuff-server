@@ -24,6 +24,8 @@ import { SearchboxComponent } from './app/core/searchbox/searchbox.component';
 // MDB Angular Free
 import { WavesModule, InputsModule, ButtonsModule } from 'angular-bootstrap-md';
 import { FilterPipe } from './app/core/pipes/filter.pipe'
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 
 @NgModule({
   declarations: [
@@ -53,7 +55,8 @@ import { FilterPipe } from './app/core/pipes/filter.pipe'
     MDBBootstrapModule.forRoot(),
     WavesModule,
     InputsModule,
-    ButtonsModule
+    ButtonsModule,
+    FontAwesomeModule
   ],
   providers: [httpInterceptorProviders],
 
