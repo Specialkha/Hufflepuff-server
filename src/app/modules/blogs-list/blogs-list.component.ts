@@ -14,6 +14,7 @@ export class BlogsListComponent implements OnInit {
 
   blogs: Blog[];
   selectedBlog: Blog;
+  searchText: string;
 
   constructor(private httpBlog: HttpBlogService, private httpUser: HttpUserService, public auth: AuthService) { }
 

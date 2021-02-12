@@ -1,15 +1,25 @@
 <app-nav-menu></app-nav-menu>
-<app-searchbox></app-searchbox>
+
 <div class="row">
     <div class="col-md-5">
+        <div class="md-form">
+            <input type="search" [(ngModel)]="searchText" placeholder="Search text">
+        </div>
         <button *ngIf="auth.authToken" class="btn btn-warning" routerLink="/blog-creation">Créez votre blog</button>
         <h2>Liste des blogs</h2>
-        <ul class="list-group">
-            <li class="list-group-item" *ngFor="let blog of blogs" (click)="selectBlog(blog)"
-                [class.active]="blog === selectedBlog">
-                {{blog.title}}
-            </li>
-        </ul>
+        <div class="row">
+            <ul class="list-group" *ngFor="let blog of (blogs | filter: searchText)">
+                <li class="list-group-item" (click)="selectBlog(blog)" [class.active]="blog === selectedBlog">
+                    <div>
+                        {{blog.title}}
+                    </div>
+                    <div>
+                        {{blog.content}}
+                    </div>
+                </li>
+            </ul>
+
+        </div>
 
     </div>
     <div class="col-md-5 col-md-offset-2">
