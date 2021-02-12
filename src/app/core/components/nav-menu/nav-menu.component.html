@@ -33,6 +33,7 @@
     </div>
 
     <div *ngIf="this.auth.authToken">
+        <fa-icon [icon]="faUser"></fa-icon>
         <div>Profil du compte</div>
         <button (click)="onLogout()">Se déconnecter</button>
     </div>

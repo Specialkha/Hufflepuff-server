@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { faUser } from '@fortawesome/free-regular-svg-icons';
 import { HttpUserService } from '../../http/user/httpUser.service';
 import { AuthService } from '../../services/auth.service';
 
@@ -9,6 +10,8 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./nav-menu.component.scss']
 })
 export class NavMenuComponent implements OnInit {
+
+  faUser = faUser;
 
   closeResult = '';
   loginOpen: boolean = false;

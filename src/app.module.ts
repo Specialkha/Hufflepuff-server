@@ -19,6 +19,7 @@ import { httpInterceptorProviders } from './app/core/http/interceptor';
 import { BlogCreationComponent } from './app/modules/blogs-list/blog-creation/blog-creation.component';
 import { PostCreationComponent } from './app/modules/blogs-list/post/post-creation/post-creation.component';
 import { PostComponent } from './app/modules/blogs-list/post/post/post.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { PostComponent } from './app/modules/blogs-list/post/post/post.component
     HttpClientModule,
     AppRoutingModule,
     NgbModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FontAwesomeModule
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]
