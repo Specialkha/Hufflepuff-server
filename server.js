@@ -253,7 +253,7 @@ app.post("/api/" + BLOGS_COLLECTION, authenticateJWT, function (req, res) {
  */
 
 app.get("/api/" + BLOGS_COLLECTION + "/:id", function (req, res) {
-    db.collection(BLOGS_COLLECTION).findOne({ _id: new ObjectID(req.params.id) }, function (err, doc) {
+    db.collection(BLOGS_COLLECTION).findOne({ author: req.params.id }, function (err, doc) {
         if (err) {
             handleError(res, err.message, "Failed to get contact");
         } else {
@@ -262,7 +262,7 @@ app.get("/api/" + BLOGS_COLLECTION + "/:id", function (req, res) {
     });
 });
 
-app.put("/api/" + BLOGS_COLLECTION + "/:id", verify, function (req, res) {
+app.put("/api/" + BLOGS_COLLECTION + "/:id", authenticateJWT, function (req, res) {
     let updateBlog = req.body;
     delete updateDoc._id;
 
@@ -276,12 +276,22 @@ app.put("/api/" + BLOGS_COLLECTION + "/:id", verify, function (req, res) {
     });
 });
 
-app.delete("/api/" + BLOGS_COLLECTION + "/:id", verify, function (req, res) {
+app.delete("/api/" + BLOGS_COLLECTION + "/:id", authenticateJWT, function (req, res) {
     db.collection(BLOGS_COLLECTION).deleteOne({ _id: new ObjectID(req.params.id) }, function (err, result) {
         if (err) {
             handleError(res, err.message, "Failed to delete blog");
         } else {
             res.status(200).json(req.params.id);
+        }
+    });
+});
+
+api.post("/api" + BLOGS_COLLECTION + "/:id" + "/post", authenticateJWT, function (req, res) {
+    db.collection(BLOGS_COLLECTION).update(req.params.id, { posts: req.body }, function (err, result) {
+        if (err) {
+            handleError(res, err.message, "Votre post n'a pas été créé");
+        } else if (result) {
+            res.status(200);
         }
     });
 });

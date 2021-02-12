@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Blog } from '../../model/blog';
 
@@ -19,6 +19,12 @@ export class HttpBlogService {
   // post("/api/Blogs")
   createNewBlog(newBlog: Blog) {
     return this.http.post(this.API_URL, newBlog);
+  }
+
+  // get a blog from userId
+  getSingleBlog(userId: string) {
+    let params = new HttpParams().set('id', userId);
+    return this.http.get(this.API_URL + '/' + userId, { params: params });
   }
 
   // delete("/api/Blogs/:id")
@@ -42,5 +48,10 @@ export class HttpBlogService {
     let errMsg = (error.message) ? error.message :
       error.status ? `${error.status} - ${error.statusText}` : 'Server error';
     console.error(errMsg); // log to console instead
+  }
+
+  createPostInBlog(blogId: string, payload: any) {
+    let params = new HttpParams().set('id', blogId);
+    return this.http.post(this.API_URL + "/" + blogId + '/post', payload, { params: params });
   }
 }
