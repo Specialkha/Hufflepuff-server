@@ -19,6 +19,11 @@ import { httpInterceptorProviders } from './app/core/http/interceptor';
 import { BlogCreationComponent } from './app/modules/blogs-list/blog-creation/blog-creation.component';
 import { PostCreationComponent } from './app/modules/blogs-list/post/post-creation/post-creation.component';
 import { PostComponent } from './app/modules/blogs-list/post/post/post.component';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { SearchboxComponent } from './app/core/searchbox/searchbox.component';
+// MDB Angular Free
+import { WavesModule, InputsModule, ButtonsModule } from 'angular-bootstrap-md';
+import { FilterPipe } from './app/core/pipes/filter.pipe'
 
 @NgModule({
   declarations: [
@@ -33,7 +38,9 @@ import { PostComponent } from './app/modules/blogs-list/post/post/post.component
     AccountCreationComponent,
     BlogCreationComponent,
     PostCreationComponent,
-    PostComponent
+    PostComponent,
+    SearchboxComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,
@@ -42,9 +49,14 @@ import { PostComponent } from './app/modules/blogs-list/post/post/post.component
     HttpClientModule,
     AppRoutingModule,
     NgbModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MDBBootstrapModule.forRoot(),
+    WavesModule,
+    InputsModule,
+    ButtonsModule
   ],
   providers: [httpInterceptorProviders],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }
