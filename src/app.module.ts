@@ -23,6 +23,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FilterPipe } from './app/core/pipes/filter.pipe';
 import { QuillModule } from 'ngx-quill';
 import { FooterComponent } from './app/core/components/footer/footer.component';
+import { CommentsComponent } from './app/modules/blogs-list/post/comments/comments.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { FooterComponent } from './app/core/components/footer/footer.component';
     PostCreationComponent,
     PostComponent,
     FilterPipe,
-    FooterComponent
+    FooterComponent,
+    CommentsComponent
   ],
   imports: [
     BrowserModule,
