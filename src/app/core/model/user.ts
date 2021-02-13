@@ -11,4 +11,7 @@ export class User {
     zipCode?: number;
     city?: string;
     adminLevel: string;
+    blogsId?: string[];
+    postsId?: string[];
+    commentsId: string[];
 }
