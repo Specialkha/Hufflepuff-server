@@ -286,7 +286,7 @@ app.delete("/api/" + BLOGS_COLLECTION + "/:id", authenticateJWT, function (req, 
     });
 });
 
-api.post("/api" + BLOGS_COLLECTION + "/:id" + "/post", authenticateJWT, function (req, res) {
+app.post("/api" + BLOGS_COLLECTION + "/:id" + "/post", authenticateJWT, function (req, res) {
     db.collection(BLOGS_COLLECTION).update(req.params.id, { posts: req.body }, function (err, result) {
         if (err) {
             handleError(res, err.message, "Votre post n'a pas été créé");
