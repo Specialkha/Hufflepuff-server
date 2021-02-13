@@ -21,6 +21,7 @@ import { PostCreationComponent } from './app/modules/blogs-list/post/post-creati
 import { PostComponent } from './app/modules/blogs-list/post/post/post.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FilterPipe } from './app/core/pipes/filter.pipe';
+import { QuillModule } from 'ngx-quill';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { FilterPipe } from './app/core/pipes/filter.pipe';
     AppRoutingModule,
     NgbModule,
     ReactiveFormsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    QuillModule.forRoot()
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]

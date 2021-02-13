@@ -3,11 +3,11 @@
 <form [formGroup]="blogCreationForm" (ngSubmit)="createNewBlog()">
     <div>
         <label for="title">Titre du blog</label>
-        <input type="text" formControlName="title">
+        <quill-editor type="text" formControlName="title"></quill-editor>
     </div>
     <div>
         <label for="content"></label>
-        <input type="text" formControlName="content">
+        <quill-editor type="text" formControlName="content"></quill-editor>
     </div>
     <button type="submit">Créer votre blog</button>
 </form>

@@ -13,5 +13,5 @@ export class User {
     adminLevel: string;
     blogsId?: string[];
     postsId?: string[];
-    commentsId: string[];
+    commentsId?: string[];
 }
