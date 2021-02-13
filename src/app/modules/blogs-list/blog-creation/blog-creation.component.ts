@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { HttpBlogService } from 'src/app/core/http/blog/httpBlog.service';
 import { HttpUserService } from 'src/app/core/http/user/httpUser.service';
 import { AuthService } from 'src/app/core/services/auth.service';
@@ -13,7 +14,7 @@ export class BlogCreationComponent implements OnInit {
 
   blogCreationForm: FormGroup;
 
-  constructor(private httpBlog: HttpBlogService, private httpUser: HttpUserService, private auth: AuthService) { }
+  constructor(private httpBlog: HttpBlogService, private httpUser: HttpUserService, private auth: AuthService, private router:Router) { }
 
   ngOnInit(): void {
     this.blogCreationForm = this.createNewBlogFormGroup();
@@ -42,6 +43,9 @@ export class BlogCreationComponent implements OnInit {
     payload.id = username;
     this.httpBlog.createNewBlog(payload).subscribe((data: any) => {
       console.log(data);
+      if (data) {
+        this.router.navigate(['/votre-blog']);
+      }
     });
   }
 
