@@ -10,11 +10,9 @@
         <div class="row">
             <ul class="list-group" *ngFor="let blog of (blogs | filter: searchText)">
                 <li class="list-group-item" (click)="selectBlog(blog)" [class.active]="blog === selectedBlog">
-                    <div>
-                        {{blog.title}}
+                    <div [innerHTML]="blog.title">
                     </div>
-                    <div>
-                        {{blog.content}}
+                    <div [innerHTML]="blog.content">
                     </div>
                 </li>
             </ul>

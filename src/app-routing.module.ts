@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './app/core/auth-guard/auth.guard';
 import { AccountCreationComponent } from './app/modules/account-creation/account-creation.component';
 import { ActivitiesComponent } from './app/modules/activities/activities.component';
 import { BlogCreationComponent } from './app/modules/blogs-list/blog-creation/blog-creation.component';
@@ -12,7 +13,7 @@ const routes: Routes = [
   { path: 'accueil', component: MainPageComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'blog', component: BlogsListComponent },
-  { path: 'blog-creation', component: BlogCreationComponent },
+  { path: 'blog-creation', component: BlogCreationComponent, canActivate: [AuthGuard] },
   { path: 'activites', component: ActivitiesComponent },
   { path: 'tos', component: TosComponent },
   { path: 'accountCreation', component: AccountCreationComponent },

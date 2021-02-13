@@ -28,6 +28,10 @@ export class AuthService {
     }
   }
 
+  public get currentUserValue() {
+    return this.authToken$.value;
+  }
+
   public notifyObservable(data: string) {
     if (data) {
       this.authToken$.next(data);
