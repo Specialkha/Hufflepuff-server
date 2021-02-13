@@ -9,7 +9,7 @@
         <h2>Liste des blogs</h2>
         <div class="row">
             <ul class="list-group" *ngFor="let blog of (blogs | filter: searchText)">
-                <li class="list-group-item" (click)="selectBlog(blog)" [class.active]="blog === selectedBlog">
+                <li class="list-group-item blog-list" (click)="selectBlog(blog)" [class.active]="blog === selectedBlog">
                     <div [innerHTML]="blog.title">
                     </div>
                     <div [innerHTML]="blog.content">
