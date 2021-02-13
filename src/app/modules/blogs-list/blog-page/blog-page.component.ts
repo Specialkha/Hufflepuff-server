@@ -1,6 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Blog } from 'src/app/core/model/blog';
-import { BlogService } from '../../../core/services/blog.service';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-blog-page',
@@ -9,22 +7,10 @@ import { BlogService } from '../../../core/services/blog.service';
 })
 export class BlogPageComponent {
 
-  blog: any;
+  constructor() { }
 
-  constructor(private blogService: BlogService) { }
+  ngOnInit() {
 
-
-
-  updateBlog(blog: Blog) {
-    // this.blogService.createBlog(blog).then((newBlog: Blog) => {
-    //   this.updateHandler(newBlog);
-    // });
-  }
-
-  deleteBlog(blogId: String): void {
-    // this.blogService.deleteBlog(blogId).then((deletedblogId: String) => {
-    //   this.deleteHandler(deletedblogId);
-    // });
   }
 
 }
