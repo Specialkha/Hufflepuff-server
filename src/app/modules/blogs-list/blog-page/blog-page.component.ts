@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpBlogService } from 'src/app/core/http/blog/httpBlog.service';
 import { Blog } from 'src/app/core/model/blog';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-blog-page',
@@ -12,7 +13,7 @@ export class BlogPageComponent {
 
   blog: Blog;
 
-  constructor(private route: ActivatedRoute, private blogHttp: HttpBlogService) { }
+  constructor(private route: ActivatedRoute, private blogHttp: HttpBlogService, public auth: AuthService) { }
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
