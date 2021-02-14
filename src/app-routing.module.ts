@@ -17,7 +17,7 @@ const routes: Routes = [
   { path: 'accueil', component: MainPageComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'liste-des-blogs', component: BlogsListComponent },
-  { path: 'blog/:blogId', component: BlogPageComponent },
+  { path: 'blog/:blog_Id', component: BlogPageComponent },
   { path: 'blog-creation', component: BlogCreationComponent, canActivate: [AuthGuard] },
   { path: 'post-creation', component: PostCreationComponent, canActivate: [AuthGuard] },
   { path: 'news-creation', component: NewsCreationComponent, canActivate: [AuthGuard] },

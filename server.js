@@ -182,7 +182,7 @@ app.get("/api/" + USERS_COLLECTION + "/:id", function (req, res) {
     console.log(req.headers, req.body);
     db.collection(USERS_COLLECTION).findOne({ email: req.headers.id }, function (err, doc) {
         if (err) {
-            handleError(res, err.message, "Failed to get contact");
+            handleError(res, err.message, "Failed to get user");
         } else {
             res.status(200).json(doc);
         }
@@ -195,7 +195,7 @@ app.put("/api/" + USERS_COLLECTION + "/:id", authenticateJWT, function (req, res
 
     db.collection(USERS_COLLECTION).updateOne({ _id: new ObjectID(req.params.id) }, updateDoc, function (err, doc) {
         if (err) {
-            handleError(res, err.message, "Failed to update contact");
+            handleError(res, err.message, "Failed to update user");
         } else {
             updateDoc._id = req.params.id;
             res.status(200).json(updateDoc);
