@@ -22,9 +22,9 @@ export class HttpBlogService {
   }
 
   // get a blog from userId
-  getSingleBlog(userId: string) {
-    let params = new HttpParams().set('id', userId);
-    return this.http.get(this.API_URL + '/' + userId, { params: params });
+  getSingleBlog(blogId: string) {
+    let params = new HttpParams().set('blogId', blogId);
+    return this.http.get(this.API_URL + '/' + blogId, { params: params });
   }
 
   // delete("/api/Blogs/:id")
