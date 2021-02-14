@@ -24,6 +24,7 @@ import { FilterPipe } from './app/core/pipes/filter.pipe';
 import { QuillModule } from 'ngx-quill';
 import { FooterComponent } from './app/core/components/footer/footer.component';
 import { CommentsComponent } from './app/modules/blogs-list/post/comments/comments.component';
+import { NewsCreationComponent } from './app/modules/main-page/news-creation/news-creation.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { CommentsComponent } from './app/modules/blogs-list/post/comments/commen
     PostComponent,
     FilterPipe,
     FooterComponent,
-    CommentsComponent
+    CommentsComponent,
+    NewsCreationComponent
   ],
   imports: [
     BrowserModule,
