@@ -10,14 +10,15 @@ import { Blog } from 'src/app/core/model/blog';
 })
 export class BlogPageComponent {
 
+  blog: Blog;
+
   constructor(private route: ActivatedRoute, private blogHttp: HttpBlogService) { }
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
-      console.log(params, 'params')
       if (params) {
-        this.blogHttp.getSingleBlog(params.blogId).subscribe((data:Blog) => {
-          console.log(data);
+        this.blogHttp.getSingleBlog(params.blogId).subscribe((data: Blog) => {
+          this.blog = data;
         })
       }
     })

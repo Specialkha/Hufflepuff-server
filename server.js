@@ -253,8 +253,7 @@ app.post("/api/" + BLOGS_COLLECTION, authenticateJWT, function (req, res) {
  */
 
 app.get("/api/" + BLOGS_COLLECTION + "/:id", function (req, res) {
-    console.log(req, req.params);
-    db.collection(BLOGS_COLLECTION).findOne({ author: req.params.id }, function (err, doc) {
+    db.collection(BLOGS_COLLECTION).findOne({ _id: new ObjectID(req.params.id)  }, function (err, doc) {
         if (err) {
             handleError(res, err.message, "Failed to get contact");
         } else {

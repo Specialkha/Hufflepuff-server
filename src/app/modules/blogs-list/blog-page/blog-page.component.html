@@ -1,5 +1,11 @@
 <app-nav-menu></app-nav-menu>
 
+<button *ngIf="auth.authToken" class="btn btn-warning" routerLink="/post-creation">Ecrivez un post dans votre blog</button>
+
 <div class="row">
-<app-post></app-post>
+    <div [innerHTML]="blog.title"></div>
+    <div [innerHTML]="blog.content"></div>
+    <div *ngFor="let post of blog.posts">
+        <app-post></app-post>
+    </div>
 </div>
