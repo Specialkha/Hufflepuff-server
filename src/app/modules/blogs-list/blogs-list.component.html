@@ -7,19 +7,22 @@
         </div>
         <button *ngIf="auth.authToken" class="btn btn-warning" routerLink="/blog-creation">Créez votre blog</button>
         <h2>Liste des blogs</h2>
-        <div class="row">
-            <ul class="list-group" *ngFor="let blog of (blogs | filter: searchText)">
-                <li class="list-group-item blog-list" (click)="selectBlog(blog)" [class.active]="blog === selectedBlog">
-                    <div [innerHTML]="blog.title">
-                    </div>
-                    <div [innerHTML]="blog.content">
-                    </div>
-                </li>
-            </ul>
+        <ul class="list-group" *ngFor="let blog of (blogs | filter: searchText)">
 
-        </div>
-
-    </div>
-    <div class="col-md-5 col-md-offset-2">
+            <div class="card" style="width: 50%;">
+                <div class="card-body">
+                    <h5 class="card-title" [innerHTML]="blog.title"></h5>
+                    <p class="card-text" [innerHTML]="blog.content"></p>
+                    <a href="#" class="btn btn-primary">Voir le blog</a>
+                </div>
+            </div>
+        </ul>
     </div>
 </div>
+
+<!-- <li class="list-group-item blog-list" (click)="selectBlog(blog)" [class.active]="blog === selectedBlog">
+    <div [innerHTML]="blog.title">
+    </div>
+    <div [innerHTML]="blog.content">
+    </div>
+</li> -->
