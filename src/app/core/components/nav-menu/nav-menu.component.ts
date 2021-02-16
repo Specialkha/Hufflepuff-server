@@ -38,6 +38,7 @@ export class NavMenuComponent implements OnInit {
     }
 
     this.httpUser.userLogin(payload).subscribe((e: any) => {
+      console.log(e)
       this.auth.notifyObservable(e.accessToken);
       this.auth.dataFromObservable.subscribe((authToken: string) => {
         this.auth.authToken = authToken;
