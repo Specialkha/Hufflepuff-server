@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HttpBlogService } from 'src/app/core/http/blog/httpBlog.service';
 import { Blog } from 'src/app/core/model/blog';
 import { AuthService } from 'src/app/core/services/auth.service';
@@ -12,17 +12,23 @@ import { AuthService } from 'src/app/core/services/auth.service';
 export class BlogPageComponent {
 
   blog: Blog;
+  blogId: string;
 
-  constructor(private route: ActivatedRoute, private blogHttp: HttpBlogService, public auth: AuthService) { }
+  constructor(private route: ActivatedRoute, private blogHttp: HttpBlogService, public auth: AuthService, private router: Router) { }
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
       if (params) {
-        this.blogHttp.getSingleBlog(params.blogId).subscribe((data: Blog) => {
+        this.blogId = params.blogId;
+        this.blogHttp.getSingleBlog(this.blogId).subscribe((data: Blog) => {
           this.blog = data;
-        })
+        });
       }
-    })
+    });
+  }
+
+  onCreatePost() {
+    this.router.navigate(['/post-creation', this.blogId]);
   }
 
 }

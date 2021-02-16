@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HttpBlogService } from 'src/app/core/http/blog/httpBlog.service';
+import { HttpUserService } from 'src/app/core/http/user/httpUser.service';
+import { User } from 'src/app/core/model/user';
 import { BlogService } from 'src/app/core/services/blog.service';
 
 @Component({
@@ -15,10 +17,13 @@ export class PostCreationComponent implements OnInit {
 
   idBlog: string;
 
-  constructor(private httpBlog: HttpBlogService, private blog: BlogService, private router:Router) { }
+  constructor(private httpBlog: HttpBlogService, private httpUser: HttpUserService, private router: Router) { }
 
   ngOnInit(): void {
     this.postCreationForm = this.newFormGroupForPostCreation();
+    this.httpUser.getSingleUser('Voir Observable pour stocker user data').subscribe((data: User) => {
+      console.log(data);
+    });
   }
 
   newFormGroupForPostCreation() {
@@ -29,10 +34,13 @@ export class PostCreationComponent implements OnInit {
   }
 
   onCreate() {
-    console.log(this.postCreationForm);
-
+    const postToCreate = {
+      title: this.postCreationForm.value.title,
+      content: this.postCreationForm.value.content,
+      date: new Date
+    }
     this.httpBlog.getSingleBlog(this.idBlog).subscribe((data: any) => {
-      this.httpBlog.createPostInBlog(data._id, this.postCreationForm).subscribe((data: any) => {
+      this.httpBlog.createPostInBlog(data._id, postToCreate).subscribe((data: any) => {
         console.log(data);
         if (data) {
           this.router.navigate(['/post']);

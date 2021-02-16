@@ -1,6 +1,6 @@
 <app-nav-menu></app-nav-menu>
 
-<button *ngIf="auth.authToken" class="btn btn-warning" routerLink="/post-creation">Ecrivez un post dans votre
+<button *ngIf="auth.authToken" class="btn btn-warning" (click)="onCreatePost()">Ecrivez un post dans votre
     blog</button>
 
 <div class="row">
