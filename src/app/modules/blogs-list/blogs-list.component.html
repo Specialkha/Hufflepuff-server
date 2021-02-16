@@ -15,7 +15,7 @@
                     <div class="card-body">
                         <h5 class="card-title" [innerHTML]="blog.title"></h5>
                         <p class="card-text" [innerHTML]="blog.content"></p>
-                        <a href="" class="btn btn-primary">Voir le blog</a>
+                        <a (click)="onNavigate(blog)" class="btn btn-primary">Voir le blog</a>
                     </div>
                 </div>
             </ul>

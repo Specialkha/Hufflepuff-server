@@ -26,7 +26,6 @@ export class BlogsListComponent implements OnInit {
   }
 
   onNavigate(blog) {
-    console.log(blog);
     this.router.navigate(['/blog', blog._id]);
   }
 
