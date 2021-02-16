@@ -173,14 +173,27 @@ const authenticateJWT = (req, res, next) => {
 };
 
 /*  "/api/users/:id"
+ *    GET: find contact by username
+ */
+
+app.get("/api/" + USERS_COLLECTION + "/:id", function (req, res) {
+    db.collection(USERS_COLLECTION).findOne({ email: req.params.id }, function (err, doc) {
+        if (err) {
+            handleError(res, err.message, "Failed to get user");
+        } else {
+            res.status(200).json(doc._id);
+        }
+    });
+});
+
+/*  "/api/users/:id"
  *    GET: find contact by id
  *    PUT: update contact by id
  *    DELETE: deletes contact by id
  */
 
-app.get("/api/" + USERS_COLLECTION + "/:id", function (req, res) {
-    console.log(req.headers, req.body);
-    db.collection(USERS_COLLECTION).findOne({ email: req.headers.id }, function (err, doc) {
+app.get("/api/" + 'single' + USERS_COLLECTION + "/:id", function (req, res) {
+    db.collection(USERS_COLLECTION).findOne({ _id: new ObjectID(req.params.id) }, function (err, doc) {
         if (err) {
             handleError(res, err.message, "Failed to get user");
         } else {
@@ -232,7 +245,7 @@ app.post("/api/" + BLOGS_COLLECTION, authenticateJWT, function (req, res) {
     let newBlog = req.body;
 
     newBlog.createDate = new Date();
-    console.log(req.body, 'req.body');
+
     if (!req.body.title) {
         handleError(res, "Invalid blog input", "Must provide a name.", 400);
     } else {
@@ -253,7 +266,7 @@ app.post("/api/" + BLOGS_COLLECTION, authenticateJWT, function (req, res) {
  */
 
 app.get("/api/" + BLOGS_COLLECTION + "/:id", function (req, res) {
-    db.collection(BLOGS_COLLECTION).findOne({ _id: new ObjectID(req.params.id)  }, function (err, doc) {
+    db.collection(BLOGS_COLLECTION).findOne({ _id: new ObjectID(req.params.id) }, function (err, doc) {
         if (err) {
             handleError(res, err.message, "Failed to get contact");
         } else {

@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HttpBlogService } from 'src/app/core/http/blog/httpBlog.service';
 import { HttpUserService } from 'src/app/core/http/user/httpUser.service';
+import { User } from 'src/app/core/model/user';
 import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
@@ -14,7 +15,7 @@ export class BlogCreationComponent implements OnInit {
 
   blogCreationForm: FormGroup;
 
-  constructor(private httpBlog: HttpBlogService, private httpUser: HttpUserService, private auth: AuthService, private router:Router) { }
+  constructor(private httpBlog: HttpBlogService, private httpUser: HttpUserService, private auth: AuthService, private router: Router) { }
 
   ngOnInit(): void {
     this.blogCreationForm = this.createNewBlogFormGroup();
@@ -28,19 +29,24 @@ export class BlogCreationComponent implements OnInit {
   }
 
   createNewBlog() {
+
+
+    let username: User;
+
+    this.httpUser.getSingleUserWithId(localStorage.getItem('userId')).subscribe((user: User) => {
+      username = user;
+    })
+
+    // this.auth.dataFromUserObservable.subscribe((user: any) => {
+    //   username = user;
+    // });
+
     let payload = {
       title: this.blogCreationForm.value.title,
       content: this.blogCreationForm.value.content,
-      id: ""
+      id: username
     }
 
-    let username: string;
-
-    this.auth.dataFromUserObservable.subscribe((user: any) => {
-      username = user;
-    });
-    
-    payload.id = username;
     this.httpBlog.createNewBlog(payload).subscribe((data: any) => {
       console.log(data);
       if (data) {
