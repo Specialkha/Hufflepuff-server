@@ -26,16 +26,15 @@ export class BlogPageComponent {
       if (params) {
         this.blogId = params.blogId;
         this.blogHttp.getSingleBlog(this.blogId).subscribe((data: Blog) => {
-          console.log(data, 'data')
           this.blog = data;
-          this.userHttp.getSingleUserWithId(localStorage.getItem('userId')).subscribe((user:User) => {
-            console.log(user._id, 'user')
-          })
+          this.userHttp.getSingleUserWithId(localStorage.getItem('userId')).subscribe((user: User) => {
+            if (data.authorId === user._id) {
+              this.isBlogOwner = true;
+            }
+          });
         });
       }
     });
-
-
   }
 
   onCreatePost() {

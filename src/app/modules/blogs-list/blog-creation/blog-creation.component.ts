@@ -28,31 +28,23 @@ export class BlogCreationComponent implements OnInit {
     });
   }
 
-  createNewBlog() {
-
-
-    let username: User;
-
-    this.httpUser.getSingleUserWithId(localStorage.getItem('userId')).subscribe((user: User) => {
-      username = user;
-    })
+  async createNewBlog() {
+    let payload = {
+      title: this.blogCreationForm.value.title,
+      content: this.blogCreationForm.value.content,
+      authorId: localStorage.getItem('userId')
+    }
+    this.httpBlog.createNewBlog(payload).subscribe((data: any) => {
+      if (data) {
+        this.router.navigate(['/votre-blog']);
+      }
+    });
 
     // this.auth.dataFromUserObservable.subscribe((user: any) => {
     //   username = user;
     // });
 
-    let payload = {
-      title: this.blogCreationForm.value.title,
-      content: this.blogCreationForm.value.content,
-      id: username
-    }
 
-    this.httpBlog.createNewBlog(payload).subscribe((data: any) => {
-      console.log(data);
-      if (data) {
-        this.router.navigate(['/votre-blog']);
-      }
-    });
   }
 
 }
