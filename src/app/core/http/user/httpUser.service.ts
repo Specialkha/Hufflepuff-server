@@ -29,6 +29,11 @@ export class HttpUserService {
     return this.http.get(this.API_URL + '/users/' + username);
   }
 
+  // get("/api/users/:id")to get a single user from database
+  getSingleUserWithId(id: string) {
+    return this.http.get(this.API_URL + '/singleusers/' + id);
+  }
+
   // delete("/api/users/:id")
   deleteUser(delUserId: String): Promise<void | String> {
     return this.http.delete(this.API_URL + "/users" + '/' + delUserId)

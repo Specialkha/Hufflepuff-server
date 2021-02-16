@@ -36,13 +36,16 @@ export class NavMenuComponent implements OnInit {
       username: this.loginForm.value.login,
       password: this.loginForm.value.password
     }
-
     this.httpUser.userLogin(payload).subscribe((e: any) => {
+      console.log(e,'e')
       this.auth.notifyObservable(e.accessToken);
       this.auth.dataFromObservable.subscribe((authToken: string) => {
         this.auth.authToken = authToken;
         localStorage.setItem('token', authToken);
         this.auth.notifyUserObservable(payload.username);
+        this.httpUser.getSingleUser(this.loginForm.value.login).subscribe((userId: string) => {
+          localStorage.setItem('userId', userId);
+        });
       });
     }, err => {
       console.log(err)
