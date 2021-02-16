@@ -14,10 +14,12 @@ export class BlogPageComponent {
   blog: Blog;
   blogId: string;
 
-  constructor(private route: ActivatedRoute, private blogHttp: HttpBlogService, public auth: AuthService, private router: Router) { }
+  constructor(private route: ActivatedRoute, private blogHttp: HttpBlogService, public auth: AuthService, private router: Router) {
 
-  ngOnInit() {
-    this.route.params.subscribe((params) => {
+  }
+
+  async ngOnInit() {
+    await this.route.params.subscribe((params) => {
       if (params) {
         this.blogId = params.blogId;
         this.blogHttp.getSingleBlog(this.blogId).subscribe((data: Blog) => {
