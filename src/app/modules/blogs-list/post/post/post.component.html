@@ -1,5 +1,7 @@
 <p>{{post.title}}</p>
 <p>{{post.content}}</p>
+<p>Ecrit par {{post.author}}</p>
+<p>Le {{post.date}}</p>
 
 <div *ngFor="let comment of post.comments">
     <app-comments [comment]="comment"></app-comments>
