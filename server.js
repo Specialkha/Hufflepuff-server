@@ -301,11 +301,11 @@ app.delete("/api/" + BLOGS_COLLECTION + "/:id", authenticateJWT, function (req, 
 
 app.post("/api" + "/post" + "/:id", authenticateJWT, function (req, res) {
     let updatedBlog = req.body;
-    db.collection(BLOGS_COLLECTION).updateOne({ _id: new ObjectID(req.params.id) }, { $push: { posts: updatedBlog } }, function (err, result) {
+    db.collection(BLOGS_COLLECTION).findOneAndUpdate({ _id: new ObjectID(req.params.id) }, { $push: { posts: updatedBlog } }, function (err, result) {
         if (err) {
             handleError(res, err.message, "Votre post n'a pas été créé");
         } else if (result) {
-            res.status(200);
+            res.status(200).json(updatedBlog);
         }
     });
 });

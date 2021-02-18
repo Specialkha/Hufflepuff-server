@@ -1,5 +1,5 @@
-<p>post works!</p>
-
+<p>{{post.title}}</p>
+<p>{{post.content}}</p>
 
 <div *ngFor="let comment of post.comments">
     <app-comments [comment]="comment"></app-comments>

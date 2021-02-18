@@ -44,11 +44,9 @@ export class PostCreationComponent implements OnInit {
       date: new Date
     }
     this.httpBlog.getSingleBlog(this.idBlog).subscribe((data: any) => {
-      console.log(data,'data');
       this.httpBlog.createPostInBlog(data._id, postToCreate).subscribe((data: any) => {
-        console.log(data,'data2');
         if (data) {
-          this.router.navigate(['/post']);
+          this.router.navigate(['/blog', this.idBlog]);
         }
       });
     });
