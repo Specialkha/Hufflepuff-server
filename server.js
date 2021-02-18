@@ -299,8 +299,9 @@ app.delete("/api/" + BLOGS_COLLECTION + "/:id", authenticateJWT, function (req, 
     });
 });
 
-app.post("/api" + BLOGS_COLLECTION + "/:id" + "/post", authenticateJWT, function (req, res) {
-    db.collection(BLOGS_COLLECTION).update(req.params.id, { posts: req.body }, function (err, result) {
+app.post("/api" + "/post" + "/:id", authenticateJWT, function (req, res) {
+    let updatedBlog = req.body;
+    db.collection(BLOGS_COLLECTION).updateOne({ _id: new ObjectID(req.params.id) }, { $push: { posts: updatedBlog } }, function (err, result) {
         if (err) {
             handleError(res, err.message, "Votre post n'a pas été créé");
         } else if (result) {

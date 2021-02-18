@@ -21,12 +21,13 @@ export class PostCreationComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      this.idBlog = params.id;
+      this.idBlog = params.blogId;
+      console.log(this.idBlog, 'idBlog')
     });
     this.postCreationForm = this.newFormGroupForPostCreation();
-    this.httpUser.getSingleUser('Voir Observable pour stocker user data').subscribe((data: User) => {
-      console.log(data);
-    });
+    // this.httpUser.getSingleUser('Voir Observable pour stocker user data').subscribe((data: User) => {
+    //   console.log(data);
+    // });
   }
 
   newFormGroupForPostCreation() {
@@ -43,8 +44,9 @@ export class PostCreationComponent implements OnInit {
       date: new Date
     }
     this.httpBlog.getSingleBlog(this.idBlog).subscribe((data: any) => {
+      console.log(data,'data');
       this.httpBlog.createPostInBlog(data._id, postToCreate).subscribe((data: any) => {
-        console.log(data);
+        console.log(data,'data2');
         if (data) {
           this.router.navigate(['/post']);
         }

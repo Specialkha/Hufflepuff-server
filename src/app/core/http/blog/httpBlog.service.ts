@@ -50,7 +50,6 @@ export class HttpBlogService {
   }
 
   createPostInBlog(blogId: string, payload: any) {
-    let params = new HttpParams().set('id', blogId);
-    return this.http.post(this.API_URL + "/" + blogId + '/post', payload, { params: params });
+    return this.http.post('/api/post' + "/" + blogId , payload);
   }
 }
