@@ -13,7 +13,11 @@
     </div>
     <div *ngIf="blog.posts">
         <div *ngFor="let post of blog.posts">
-            <app-post [post]="post"></app-post>
+            <p [innerHTML]="post.title"></p>
+            <p [innerHTML]="post.content"></p>
+            <p>Ecrit par {{post.author}}</p>
+            <p>Le {{post.date}}</p>
+            <button (click)="onNavigate(post)">Voir ce post</button>
         </div>
     </div>
 </div>

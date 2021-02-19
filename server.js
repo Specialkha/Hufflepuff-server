@@ -309,3 +309,14 @@ app.post("/api" + "/post" + "/:id", authenticateJWT, function (req, res) {
         }
     });
 });
+
+app.get("/api/" + "/post" + "/:id", function (req, res) {
+    console.log(req.params)
+    db.collection(BLOGS_COLLECTION).findOne({ posts: { title: req.params.id } }, function (err, doc) {
+        if (err) {
+            handleError(res, err.message, "Failed to get post");
+        } else {
+            res.status(200).json(doc);
+        }
+    });
+});

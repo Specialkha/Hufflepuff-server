@@ -49,7 +49,5 @@ export class HttpBlogService {
     console.error(errMsg); // log to console instead
   }
 
-  createPostInBlog(blogId: string, payload: any) {
-    return this.http.post('/api/post' + "/" + blogId , payload);
-  }
+ 
 }
