@@ -31,7 +31,7 @@ export class BlogCreationComponent implements OnInit {
   async createNewBlog() {
     let payload = {
       title: this.blogCreationForm.value.title,
-      content: this.blogCreationForm.value.content,
+      description: this.blogCreationForm.value.content,
       authorId: localStorage.getItem('userId')
     }
     this.httpBlog.createNewBlog(payload).subscribe((data: any) => {

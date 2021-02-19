@@ -5,6 +5,6 @@ export class Blog {
     _id?: string;
     authorId: string;
     title: string;
-    content: string;
+    description: string;
     posts?: Post[];
 }

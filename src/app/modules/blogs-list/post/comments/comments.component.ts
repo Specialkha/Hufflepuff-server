@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { HttpCommentService } from 'src/app/core/http/comment/httpComment.service';
 import { Comment } from 'src/app/core/model/comment';
 import { AuthService } from 'src/app/core/services/auth.service';
 
@@ -14,7 +15,7 @@ export class CommentsComponent implements OnInit {
 
   postCreationForm:FormGroup;
 
-  constructor(public auth:AuthService) { }
+  constructor(public auth:AuthService, private commentHttp: HttpCommentService) { }
 
   ngOnInit(): void {
     this.postCreationForm = this.createNewFormGroup();

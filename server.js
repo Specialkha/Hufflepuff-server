@@ -310,9 +310,20 @@ app.post("/api" + "/post" + "/:id", authenticateJWT, function (req, res) {
     });
 });
 
-app.get("/api/" + BLOGS_COLLECTION + "/:blogId"+"/post"+"/:postId", function (req, res) {
+app.get("/api/" + BLOGS_COLLECTION + "/:blogId" + "/post" + "/:postId", function (req, res) {
     console.log(req.params)
     db.collection(BLOGS_COLLECTION).findOne({ posts: { $elemMatch: { _id: req.params.postId } } }, function (err, doc) {
+        if (err) {
+            handleError(res, err.message, "Failed to get post");
+        } else {
+            res.status(200).json(doc);
+        }
+    });
+});
+
+app.get("/api/" + BLOGS_COLLECTION + "/:blogId" + "/post" + "/:postId" + "/comment" + "/:commentId", function (req, res) {
+    console.log(req.params)
+    db.collection(BLOGS_COLLECTION).findOne({ comment: { $elemMatch: { _id: req.params.commentId } } }, function (err, doc) {
         if (err) {
             handleError(res, err.message, "Failed to get post");
         } else {
