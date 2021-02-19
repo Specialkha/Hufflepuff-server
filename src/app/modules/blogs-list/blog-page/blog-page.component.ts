@@ -41,4 +41,8 @@ export class BlogPageComponent {
     this.router.navigate(['/post-creation', this.blogId]);
   }
 
+  onNavigate(post){
+    this.router.navigate(['/post', post._id]);
+  }
+
 }

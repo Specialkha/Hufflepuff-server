@@ -15,15 +15,15 @@ export class BlogsListComponent implements OnInit {
   selectedBlog: Blog;
   searchText: string;
 
-  constructor(private httpBlog: HttpBlogService, public auth: AuthService, private router: Router) { }
-
-  ngOnInit() {
+  constructor(private httpBlog: HttpBlogService, public auth: AuthService, private router: Router) { 
     this.httpBlog.getBlogs().subscribe((data) => {
       console.log(data, 'data');
       this.blogs = data;
     });
-
   }
+
+  ngOnInit() {
+   }
 
   onNavigate(blog) {
     this.router.navigate(['/blog', blog._id]);
