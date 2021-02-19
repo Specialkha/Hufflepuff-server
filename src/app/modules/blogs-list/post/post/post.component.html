@@ -12,7 +12,8 @@
         <button type="submit">Réagir</button>
     </form>
 </div>
-
-<div *ngFor="let comment of post.comments">
-    <app-comments [comment]="comment"></app-comments>
+<div *ngIf="post.comments">
+    <div *ngFor="let comment of post.comments">
+        <app-comments [comment]="comment"></app-comments>
+    </div>
 </div>

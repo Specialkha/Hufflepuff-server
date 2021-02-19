@@ -12,11 +12,11 @@ export class HttpPostService {
 
   //create a post in a blog
   createPostInBlog(blogId: string, payload: any) {
-    return this.http.post(this.API_URL + blogId , payload);
+    return this.http.post(this.API_URL + blogId, payload);
   }
 
   // get a post from userId
-  getSinglePost(postId: string) {
-    return this.http.get(this.API_URL + postId);
+  getSinglePost(blogId: string, postId: string) {
+    return this.http.get('/api/blogs/' + blogId + "/post/" + postId);
   }
 }
