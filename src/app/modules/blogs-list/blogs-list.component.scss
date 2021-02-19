@@ -1,3 +1,18 @@
 .blog-list{
     cursor: pointer;
 }
+h1 {
+    text-align: center; 
+    margin: 25px;
+}
+h2 {
+    font-weight: bold;
+}
+p{
+    max-height: 100px;
+    overflow: hidden;
+}
+
+button{
+    background-color: #0053a3;  
+}
