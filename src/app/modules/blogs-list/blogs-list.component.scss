@@ -2,15 +2,15 @@
     cursor: pointer;
 }
 h1 {
-    font-weight: bold; 
     text-align: center; 
-    margin: 20px;
+    margin: 25px;
 }
 h2 {
     font-weight: bold;
 }
 p{
     max-height: 100px;
+    overflow: hidden;
 }
 
 button{
