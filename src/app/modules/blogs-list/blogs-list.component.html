@@ -3,10 +3,14 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <button *ngIf="auth.authToken" class="btn btn-warning" routerLink="/blog-creation"
-                style=" margin: 5px;">Créez votre blog</button>
-            <div class="md-form">
-                <input style=" margin: 5px;" type="search" [(ngModel)]="searchText" placeholder="Search text">
+            <div style="width: 30%; margin: auto;">
+                <button *ngIf="auth.authToken" class="btn btn-primary" routerLink="/blog-creation"
+                    style="background-color: #0053a3; margin:auto; font-size: 15px; width:100%;">Créez votre
+                    blog</button>
+            </div>
+            <div style="width: 30%; margin: auto;">
+                <input style="width: 100%; margin: 10px;" type="search" [(ngModel)]="searchText"
+                    placeholder="Rechercher un blog">
             </div>
             <h1 style="font-weight: bold; text-align: center; margin: 15px;">Liste des blogs</h1>
         </div>
@@ -18,7 +22,7 @@
             <div class="card bg-default" style="margin: 10px;">
                 <h2 style="font-weight: bold;" class="card-header" [innerHTML]="blog.title"></h2>
                 <div class="card-body">
-                    <p class="card-text" [innerHTML]="blog.content"></p>
+                    <p style="max-height: 100px;" class="card-text" [innerHTML]="blog.content"></p>
                 </div>
                 <button (click)="onNavigate(blog)"
                     style="background-color: #0053a3; margin:10px; font-size: 15px; width: 30%;"
