@@ -113,9 +113,7 @@ app.post("/api/auth/signin", async function (req, res) {
     if (!user) {
         return res.status(401).send();
     } else {
-        console.log(password, user.password)
         await bcrypt.compare(password, user.password).then((result) => {
-            console.log(result)
             if (result == true) {
                 const accessToken = jwt.sign({ email: username, password: user.password }, process.env.ACCESS_TOKEN_SECRET, { algorithm: "HS256", expiresIn: process.env.ACCESS_TOKEN_LIFE });
                 const refreshToken = jwt.sign({ email: username, password: user.password }, process.env.REFRESH_TOKEN_SECRET, { algorithm: "HS256", expiresIn: process.env.REFRESH_TOKEN_LIFE });
