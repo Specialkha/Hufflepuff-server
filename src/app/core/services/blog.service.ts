@@ -12,6 +12,7 @@ export class BlogService {
   dataFromBlogObservable = this.idBlog$.asObservable();
 
   blogId: string;
+  postId: string;
 
   constructor() { }
 
@@ -21,12 +22,20 @@ export class BlogService {
     };
   }
 
-  set setblogId(value: string) {
+  set setBlogId(value: string) {
     this.blogId = value;
   }
 
   get getBlogId() {
     return this.blogId;
+  }
+
+  set setPostId(value: string) {
+    this.postId = value;
+  }
+
+  get getPostId() {
+    return this.postId;
   }
 
   // // get("/api/blogs")
