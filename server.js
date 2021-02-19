@@ -7,6 +7,11 @@ const ObjectID = mongodb.ObjectID;
 const jwt = require('jsonwebtoken');
 const { verify } = require('./middleware');
 
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
+const myPlaintextPassword = 's0/\/\P4$$w0rD';
+const someOtherPlaintextPassword = 'not_bacon';
+
 const USERS_COLLECTION = "users";
 const BLOGS_COLLECTION = "blogs";
 const NEWS_COLLECTION = "news";
@@ -75,51 +80,76 @@ app.get("/api/" + USERS_COLLECTION, function (req, res) {
     });
 });
 
-app.post("/api/" + USERS_COLLECTION, function (req, res) {
+app.post("/api/auth/signup", function (req, res) {
     let newContact = req.body;
     newContact.createDate = new Date();
 
     if (!req.body.lastName) {
         handleError(res, "Invalid user input", "Must provide a name.", 400);
     } else {
-        db.collection(USERS_COLLECTION).insertOne(newContact, function (err, doc) {
-            if (err) {
-                handleError(res, err.message, "Failed to create new contact.");
-            } else {
-                res.status(201).json(doc.ops[0]);
-            }
+        bcrypt.hash(req.body.password, saltRounds, function (err, hash) {
+            req.body.password = hash;
+            db.collection(USERS_COLLECTION).insertOne(newContact, function (err, doc) {
+                if (err) {
+                    handleError(res, err.message, "Failed to create new user.");
+                } else {
+                    res.status(201).json(doc.ops[0]);
+                }
+            });
         });
+
     }
 });
 
-app.post("/api/login", function (req, res) {
+app.post("/api/auth/signin", async function (req, res) {
+    console.log(req.body)
     const username = req.body.username;
     const password = req.body.password;
-    let isConnected;
 
     // Filter user from the users array by username and password
     // const user = users.find(u => { return u.username === username && u.password === password });
 
-    if (db.collection(USERS_COLLECTION).findOne({ email: username, password: password }) != undefined) {
-        isConnected = true;
-    } else {
-        isConnected = false;
-        return res.status(401).send()
-    }
-    if (isConnected === true) {
-        // Generate an access token
-        const accessToken = jwt.sign({ email: username, password: password }, process.env.ACCESS_TOKEN_SECRET, { algorithm: "HS256", expiresIn: process.env.ACCESS_TOKEN_LIFE });
-        const refreshToken = jwt.sign({ email: username, password: password }, process.env.REFRESH_TOKEN_SECRET, { algorithm: "HS256", expiresIn: process.env.REFRESH_TOKEN_LIFE });
+    const user = await db.collection(USERS_COLLECTION).findOne({ email: username });
 
-        refreshTokens.push(refreshToken);
-        connectedUsers.push(username);
-        res.json({
-            accessToken,
-            refreshToken
-        });
+    console.log(user);
+    if (!user) {
+        return res.status(401).send();
     } else {
-        res.send('Username or password incorrect');
+        console.log(password, user)
+        bcrypt.compare(password, user.password, function (err, result) {
+            if (result === true) {
+                const accessToken = jwt.sign({ email: username, password: password }, process.env.ACCESS_TOKEN_SECRET, { algorithm: "HS256", expiresIn: process.env.ACCESS_TOKEN_LIFE });
+                const refreshToken = jwt.sign({ email: username, password: password }, process.env.REFRESH_TOKEN_SECRET, { algorithm: "HS256", expiresIn: process.env.REFRESH_TOKEN_LIFE });
+
+                refreshTokens.push(refreshToken);
+                connectedUsers.push(username);
+                res.json({
+                    accessToken,
+                    refreshToken
+                });
+            } else {
+                res.send('Username or password incorrect');
+            }
+        });
     }
+
+
+
+
+    // if (isConnected === true) {
+    //     // Generate an access token
+    //     const accessToken = jwt.sign({ email: username, password: password }, process.env.ACCESS_TOKEN_SECRET, { algorithm: "HS256", expiresIn: process.env.ACCESS_TOKEN_LIFE });
+    //     const refreshToken = jwt.sign({ email: username, password: password }, process.env.REFRESH_TOKEN_SECRET, { algorithm: "HS256", expiresIn: process.env.REFRESH_TOKEN_LIFE });
+
+    //     refreshTokens.push(refreshToken);
+    //     connectedUsers.push(username);
+    //     res.json({
+    //         accessToken,
+    //         refreshToken
+    //     });
+    // } else {
+
+    // }
 });
 
 app.post('/api/token', (req, res) => {
@@ -146,7 +176,7 @@ app.post('/api/token', (req, res) => {
     });
 });
 
-app.post('/api/logout', (req, res) => {
+app.post('/api/auth/logout', (req, res) => {
     refreshTokens = refreshTokens.filter(token => token !== req.body.token);
     connectedUsers = connectedUsers.filter(connectedUser => connectedUser !== req.body.email);
     res.status(200).send("Logout successful");

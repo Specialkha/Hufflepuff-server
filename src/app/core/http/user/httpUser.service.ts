@@ -17,11 +17,8 @@ export class HttpUserService {
   }
 
   // post("/api/users")
-  createUser(newUser: User): Promise<void | User> {
-    return this.http.post(this.API_URL + "/users", newUser)
-      .toPromise()
-      .then(response => response as User)
-      .catch(this.handleError);
+  createUser(newUser: User) {
+    return this.http.post(this.API_URL + "/auth/signup", newUser);
   }
 
   // get("/api/users/:id")to get a single user from database
@@ -58,10 +55,10 @@ export class HttpUserService {
   }
 
   userLogin(requestedPayload: any) {
-    return this.http.post(this.API_URL + '/login', requestedPayload);
+    return this.http.post(this.API_URL + '/auth/signin', requestedPayload);
   }
 
   userLogout(payload: any) {
-    return this.http.post(this.API_URL + '/logout', payload, { responseType: 'text' });
+    return this.http.post(this.API_URL + '/auth/logout', payload, { responseType: 'text' });
   }
 }
