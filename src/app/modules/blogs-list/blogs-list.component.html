@@ -1,24 +1,30 @@
 <app-nav-menu></app-nav-menu>
 
 <div class="container">
-    <div class="row align-items-center">
-        <div class="col-md">
+    <div class="row">
+        <div class="col-md-12">
+            <button *ngIf="auth.authToken" class="btn btn-warning" routerLink="/blog-creation"
+                style=" margin: 5px;">Créez votre blog</button>
             <div class="md-form">
                 <input style=" margin: 5px;" type="search" [(ngModel)]="searchText" placeholder="Search text">
             </div>
-            <button *ngIf="auth.authToken" class="btn btn-warning" routerLink="/blog-creation"
-                style=" margin: 5px;">Créez votre blog</button>
-            <h3 style="text-align: center; margin: 15px;">Liste des blogs</h3>
-            <ul class="list-group" *ngFor="let blog of (blogs | filter: searchText)">
-
-                <div class="card col-md align-self-center" style="width: 50%;">
-                    <div class="card-body">
-                        <h5 class="card-title" [innerHTML]="blog.title"></h5>
-                        <p class="card-text" [innerHTML]="blog.content"></p>
-                        <a (click)="onNavigate(blog)" class="btn btn-primary">Voir le blog</a>
-                    </div>
+            <h1 style="font-weight: bold; text-align: center; margin: 15px;">Liste des blogs</h1>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6" *ngFor="let blog of (blogs | filter: searchText)">
+            <div class="card bg-default" style="margin: 10px;">
+                <h2 style="font-weight: bold;" class="card-header" [innerHTML]="blog.title"></h2>
+                <div class="card-body">
+                    <p class="card-text" [innerHTML]="blog.content"></p>
                 </div>
-            </ul>
+                <button (click)="onNavigate(blog)"
+                    style="background-color: #0053a3; margin:10px; font-size: 15px; width: 30%;"
+                    class="btn btn-primary">Voir le
+                    blog</button>
+            </div>
         </div>
     </div>
 </div>
