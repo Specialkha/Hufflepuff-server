@@ -102,7 +102,6 @@ app.post("/api/auth/signup", function (req, res) {
 });
 
 app.post("/api/auth/signin", async function (req, res) {
-    console.log(req.body)
     const username = req.body.username;
     const password = req.body.password;
 
@@ -111,15 +110,15 @@ app.post("/api/auth/signin", async function (req, res) {
 
     const user = await db.collection(USERS_COLLECTION).findOne({ email: username });
 
-    console.log(user);
     if (!user) {
         return res.status(401).send();
     } else {
-        console.log(password, user)
-        bcrypt.compare(password, user.password, function (err, result) {
-            if (result === true) {
-                const accessToken = jwt.sign({ email: username, password: password }, process.env.ACCESS_TOKEN_SECRET, { algorithm: "HS256", expiresIn: process.env.ACCESS_TOKEN_LIFE });
-                const refreshToken = jwt.sign({ email: username, password: password }, process.env.REFRESH_TOKEN_SECRET, { algorithm: "HS256", expiresIn: process.env.REFRESH_TOKEN_LIFE });
+        console.log(password, user.password)
+        await bcrypt.compare(password, user.password).then((result) => {
+            console.log(result)
+            if (result == true) {
+                const accessToken = jwt.sign({ email: username, password: user.password }, process.env.ACCESS_TOKEN_SECRET, { algorithm: "HS256", expiresIn: process.env.ACCESS_TOKEN_LIFE });
+                const refreshToken = jwt.sign({ email: username, password: user.password }, process.env.REFRESH_TOKEN_SECRET, { algorithm: "HS256", expiresIn: process.env.REFRESH_TOKEN_LIFE });
 
                 refreshTokens.push(refreshToken);
                 connectedUsers.push(username);
@@ -130,7 +129,7 @@ app.post("/api/auth/signin", async function (req, res) {
             } else {
                 res.send('Username or password incorrect');
             }
-        });
+        }).catch((err) => console.error(err));
     }
 
 
