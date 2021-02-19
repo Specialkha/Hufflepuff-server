@@ -4,7 +4,7 @@
     votre
     blog</button>
 
-<div class="row">
+<div class="row" *ngIf="blog">
     <div>
         <h1 [innerHTML]="blog.title"></h1>
     </div>

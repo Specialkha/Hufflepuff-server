@@ -1,6 +1,8 @@
-<p>comments works!</p>
-<p>{{comment.content}}</p>
-<p>Ecrit par {{comment.author}} à {{comment.date | date : 'HH:mm'}} le {{comment.date | date: 'd:m:y'}}</p>
+<div *ngIf="comment">
+    <p>comments works!</p>
+    <p>{{comment.content}}</p>
+    <p>Ecrit par {{comment.author}} à {{comment.date | date : 'HH:mm'}} le {{comment.date | date: 'd:m:y'}}</p>  
+</div>
 
 <div *ngIf="auth.authToken">
     <form [formGroup]="postCreationForm" (ngSubmit)="onCreateComment()">
