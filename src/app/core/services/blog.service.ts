@@ -11,12 +11,22 @@ export class BlogService {
   idBlog$: any = new BehaviorSubject<string>('');
   dataFromBlogObservable = this.idBlog$.asObservable();
 
-  constructor() {}
+  blogId: string;
+
+  constructor() { }
 
   public notifyBlogObservable(data: any) {
     if (data) {
       this.idBlog$.next(data);
     };
+  }
+
+  set setblogId(value: string) {
+    this.blogId = value;
+  }
+
+  get getBlogId() {
+    return this.blogId;
   }
 
   // // get("/api/blogs")

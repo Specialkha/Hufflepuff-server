@@ -3,8 +3,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { HttpBlogService } from 'src/app/core/http/blog/httpBlog.service';
 import { HttpUserService } from 'src/app/core/http/user/httpUser.service';
 import { Blog } from 'src/app/core/model/blog';
+import { Post } from 'src/app/core/model/post';
 import { User } from 'src/app/core/model/user';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { BlogService } from 'src/app/core/services/blog.service';
 
 @Component({
   selector: 'app-blog-page',
@@ -17,7 +19,7 @@ export class BlogPageComponent {
   blogId: string;
   isBlogOwner: boolean = false;
 
-  constructor(private route: ActivatedRoute, private blogHttp: HttpBlogService, public auth: AuthService, private router: Router, private userHttp: HttpUserService) {
+  constructor(private blogService: BlogService, private route: ActivatedRoute, private blogHttp: HttpBlogService, public auth: AuthService, private router: Router, private userHttp: HttpUserService) {
 
   }
 
@@ -41,7 +43,8 @@ export class BlogPageComponent {
     this.router.navigate(['/post-creation', this.blogId]);
   }
 
-  onNavigate(post){
+  onNavigate(blogId: string, post: Post) {
+    this.blogService.blogId = blogId;
     this.router.navigate(['/post', post._id]);
   }
 

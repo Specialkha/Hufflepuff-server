@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Post } from 'src/app/core/model/post';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { HttpPostService } from 'src/app/core/http/post/http-post.service';
+import { BlogService } from 'src/app/core/services/blog.service';
 
 
 @Component({
@@ -18,13 +19,13 @@ export class PostComponent implements OnInit {
   post: Post;
   postId: string;
 
-  constructor(public auth: AuthService, private route: ActivatedRoute, private postHttp: HttpPostService) { }
+  constructor(private blogService: BlogService, public auth: AuthService, private route: ActivatedRoute, private postHttp: HttpPostService) { }
 
   ngOnInit(): void {
     this.postCreationForm = this.createNewFormGroup();
     this.route.params.subscribe((params) => {
       this.postId = params.postId;
-      this.postHttp.getSinglePost(this.postId).subscribe((data: Post) => {
+      this.postHttp.getSinglePost(this.blogService.getBlogId, this.postId).subscribe((data: Post) => {
         this.post = data;
       });
     });
