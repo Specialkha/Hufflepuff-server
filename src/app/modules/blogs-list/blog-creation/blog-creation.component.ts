@@ -30,29 +30,19 @@ export class BlogCreationComponent implements OnInit {
 
   async createNewBlog() {
     let userId: string;
-
     await this.userHttp.getUserWithToken(this.auth.authToken).subscribe((user: User) => {
       userId = user._id;
-      console.log(userId, 'userId')
       const payload = {
         title: this.blogCreationForm.value.title,
         description: this.blogCreationForm.value.description,
         authorId: userId
       }
-      console.log(payload, 'payload')
       this.httpBlog.createNewBlog(payload).subscribe((data: any) => {
         if (data) {
           this.router.navigate(['/blog', data._id]);
         }
       });
     });
-
-
-    // this.auth.dataFromUserObservable.subscribe((user: any) => {
-    //   username = user;
-    // });
-
-
   }
 
 }

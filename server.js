@@ -288,7 +288,7 @@ app.get("/api/" + BLOGS_COLLECTION, function (req, res) {
 
 app.post("/api/" + BLOGS_COLLECTION, authenticateJWT, function (req, res) {
     let newBlog = req.body;
-console.log(newBlog)
+    console.log(newBlog)
     newBlog.createDate = new Date();
 
     if (!req.body.title) {
@@ -322,13 +322,13 @@ app.get("/api/" + BLOGS_COLLECTION + "/:id", function (req, res) {
 
 app.put("/api/" + BLOGS_COLLECTION + "/:id", authenticateJWT, function (req, res) {
     let updateBlog = req.body;
-    delete updateDoc._id;
+    delete updateBlog._id;
 
     db.collection(BLOGS_COLLECTION).updateOne({ _id: new ObjectID(req.params.id) }, { $set: updateBlog }, function (err, doc) {
         if (err) {
             handleError(res, err.message, "Failed to update blog");
         } else {
-            updateDoc._id = req.params.id;
+            updateBlog._id = req.params.id;
             res.status(200).json(doc);
         }
     });

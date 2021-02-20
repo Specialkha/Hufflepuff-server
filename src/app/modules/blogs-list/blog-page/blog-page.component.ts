@@ -34,11 +34,15 @@ export class BlogPageComponent {
         this.blogHttp.getSingleBlog(this.blogId).subscribe((data: Blog) => {
           this.blog = data;
           this.userHttp.getUserWithToken(this.auth.authToken).subscribe((user: User) => {
-            console.log(user,'user')
+            console.log(user, 'user')
             console.log(data, 'data')
             if (data.authorId === user._id) {
               this.isBlogOwner = true;
             }
+            this.editBlogForm.patchValue({
+              title: this.blog.title,
+              description: this.blog.description
+            });
           });
         });
       }

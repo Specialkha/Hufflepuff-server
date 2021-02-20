@@ -46,5 +46,4 @@ export class HttpBlogService {
     console.error(errMsg); // log to console instead
   }
 
- 
 }
