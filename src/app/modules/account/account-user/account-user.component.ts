@@ -58,7 +58,6 @@ export class AccountUserComponent implements OnInit {
   }
 
   onSubmit() {
- 
     const payload = {
       genre: this.f.genre,
       lastName: this.f.lastName,
@@ -71,7 +70,6 @@ export class AccountUserComponent implements OnInit {
       phone: this.f.phone,
       mobile: this.f.mobile
     };
-    console.log(payload)
     this.httpUser.updateUser(this.user._id, payload).subscribe((data) => {
       console.log(data);
     });
