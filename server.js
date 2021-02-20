@@ -251,8 +251,6 @@ app.get("/api/" + 'token/' + USERS_COLLECTION + "/:token", authenticateJWT, func
 app.put("/api/" + USERS_COLLECTION + "/:id", authenticateJWT, function (req, res) {
     let updateDoc = req.body;
     delete updateDoc._id;
-    console.log(updateDoc)
-    console.log(req.params.id)
     db.collection(USERS_COLLECTION).updateOne({ _id: new ObjectID(req.params.id) }, { $set: updateDoc }, function (err, doc) {
         if (err) {
             handleError(res, err.message, "Failed to update user");
@@ -326,12 +324,12 @@ app.put("/api/" + BLOGS_COLLECTION + "/:id", authenticateJWT, function (req, res
     let updateBlog = req.body;
     delete updateDoc._id;
 
-    db.collection(BLOGS_COLLECTION).updateOne({ _id: new ObjectID(req.params.id) }, updateDoc, function (err, doc) {
+    db.collection(BLOGS_COLLECTION).updateOne({ _id: new ObjectID(req.params.id) }, { $set: updateBlog }, function (err, doc) {
         if (err) {
             handleError(res, err.message, "Failed to update blog");
         } else {
             updateDoc._id = req.params.id;
-            res.status(200).json(updateDoc);
+            res.status(200).json(doc);
         }
     });
 });
