@@ -34,8 +34,6 @@ export class BlogPageComponent {
         this.blogHttp.getSingleBlog(this.blogId).subscribe((data: Blog) => {
           this.blog = data;
           this.userHttp.getUserWithToken(this.auth.authToken).subscribe((user: User) => {
-            console.log(user, 'user')
-            console.log(data, 'data')
             if (data.authorId === user._id) {
               this.isBlogOwner = true;
             }
@@ -77,6 +75,12 @@ export class BlogPageComponent {
     }
     this.blogHttp.updateBlog(payload).subscribe((data) => {
       console.log(data, 'data');
+    });
+  }
+
+  onDeleteBlog() {
+    this.blogHttp.deleteBlog(this.blog._id).subscribe(data => {
+      console.log(data);
     });
   }
 
