@@ -24,7 +24,6 @@ export class PostCreationComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.idBlog = params.blogId;
-      console.log(this.idBlog, 'idBlog')
     });
     this.postCreationForm = this.newFormGroupForPostCreation();
   }

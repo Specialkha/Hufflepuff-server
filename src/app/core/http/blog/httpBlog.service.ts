@@ -35,12 +35,9 @@ export class HttpBlogService {
   }
 
   // put("/api/Blogs/:id")
-  updateBlog(putBlog: Blog): Promise<void | Blog> {
+  updateBlog(putBlog: any){
     var putUrl = this.API_URL + '/' + putBlog._id;
-    return this.http.put(putUrl, putBlog)
-      .toPromise()
-      .then(response => response as Blog)
-      .catch(this.handleError);
+    return this.http.put(putUrl, putBlog);
   }
 
   private handleError(error: any) {

@@ -33,7 +33,9 @@ export class BlogPageComponent {
         this.blogId = params.blogId;
         this.blogHttp.getSingleBlog(this.blogId).subscribe((data: Blog) => {
           this.blog = data;
-          this.userHttp.getSingleUserWithId(localStorage.getItem('userId')).subscribe((user: User) => {
+          this.userHttp.getUserWithToken(this.auth.authToken).subscribe((user: User) => {
+            console.log(user,'user')
+            console.log(data, 'data')
             if (data.authorId === user._id) {
               this.isBlogOwner = true;
             }
@@ -59,8 +61,19 @@ export class BlogPageComponent {
     this.router.navigate(['/post', post._id]);
   }
 
+  get f() {
+    return this.editBlogForm.value;
+  }
+
   onEditBlog() {
-    this.onEdit = true;
+    const payload = {
+      _id: this.blog._id,
+      title: this.f.title,
+      description: this.f.description
+    }
+    this.blogHttp.updateBlog(payload).subscribe((data) => {
+      console.log(data, 'data');
+    });
   }
 
 }

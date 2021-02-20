@@ -288,7 +288,7 @@ app.get("/api/" + BLOGS_COLLECTION, function (req, res) {
 
 app.post("/api/" + BLOGS_COLLECTION, authenticateJWT, function (req, res) {
     let newBlog = req.body;
-
+console.log(newBlog)
     newBlog.createDate = new Date();
 
     if (!req.body.title) {
@@ -356,7 +356,6 @@ app.post("/api" + "/post" + "/:id", authenticateJWT, function (req, res) {
 });
 
 app.get("/api/" + BLOGS_COLLECTION + "/:blogId" + "/post" + "/:postId", function (req, res) {
-    console.log(req.params)
     db.collection(BLOGS_COLLECTION).findOne({ posts: { $elemMatch: { _id: req.params.postId } } }, function (err, doc) {
         if (err) {
             handleError(res, err.message, "Failed to get post");
@@ -367,7 +366,6 @@ app.get("/api/" + BLOGS_COLLECTION + "/:blogId" + "/post" + "/:postId", function
 });
 
 app.get("/api/" + BLOGS_COLLECTION + "/:blogId" + "/post" + "/:postId" + "/comment" + "/:commentId", function (req, res) {
-    console.log(req.params)
     db.collection(BLOGS_COLLECTION).findOne({ comment: { $elemMatch: { _id: req.params.commentId } } }, function (err, doc) {
         if (err) {
             handleError(res, err.message, "Failed to get post");

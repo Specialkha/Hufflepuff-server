@@ -38,7 +38,6 @@ export class NavMenuComponent implements OnInit {
       password: this.loginForm.value.password
     }
     this.httpUser.userLogin(payload).subscribe((e: any) => {
-      console.log(e, 'e')
       this.auth.notifyObservable(e.accessToken);
       this.auth.dataFromObservable.subscribe((authToken: string) => {
         this.auth.authToken = authToken;
@@ -56,7 +55,6 @@ export class NavMenuComponent implements OnInit {
   onLogout() {
     let userCredential: any = {};
     this.auth.dataFromUserObservable.subscribe((user: any) => {
-      console.log(user)
       userCredential.user = user;
     });
     userCredential.token = localStorage.getItem('token');

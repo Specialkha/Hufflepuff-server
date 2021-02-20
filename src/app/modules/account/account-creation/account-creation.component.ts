@@ -49,7 +49,6 @@ export class AccountCreationComponent implements OnInit {
       adminLevel: 'citoyen',
     }
     this.httpUser.createUser(userToCreate).subscribe(account => {
-      console.log(account);
     });
   }
 

@@ -2,15 +2,15 @@
 
 <div class="row">
     <div class="col-md-12">
-        <button *ngIf="auth.authToken && isBlogOwner" class="btn btn-warning" (click)="onCreatePost()">Ecrivez un
+        <button *ngIf="isBlogOwner" class="btn btn-warning" (click)="onCreatePost()">Ecrivez un
             post dans
             votre
             blog</button>
 
-        <button *ngIf="auth.authToken && isBlogOwner" class="btn btn-warning" (click)="onEdit = true">Editez le titre et
+        <button *ngIf="isBlogOwner" class="btn btn-warning" (click)="onEdit = true">Editez le titre et
             la description de votre blog</button>
 
-        <div *ngIf="auth.authToken && isBlogOwner && onEdit">
+        <div *ngIf="isBlogOwner && onEdit">
             <form [formGroup]="editBlogForm" (ngSubmit)="onEditBlog()">
                 <div>
                     <label for="title">Titre du blog</label>
@@ -29,7 +29,7 @@
                 <h1 [innerHTML]="blog.title"></h1>
             </div>
             <div style="width: 80%; margin: auto;">
-                <h3 [innerHTML]="blog.content"></h3>
+                <h3 [innerHTML]="blog.description"></h3>
             </div>
             <div *ngIf="blog.posts">
                 <div *ngFor="let post of blog.posts">

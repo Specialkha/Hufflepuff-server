@@ -21,7 +21,6 @@ export class AccountUserComponent implements OnInit {
   async ngOnInit() {
     this.httpUser.getUserWithToken(this.auth.authToken).subscribe((data: User) => {
       this.user = data;
-      console.log(this.user, 'user')
       this.accountForm.patchValue({
         genre:this.user.genre,
         lastName: this.user.lastName,
@@ -71,7 +70,6 @@ export class AccountUserComponent implements OnInit {
       mobile: this.f.mobile
     };
     this.httpUser.updateUser(this.user._id, payload).subscribe((data) => {
-      console.log(data);
     });
   }
 

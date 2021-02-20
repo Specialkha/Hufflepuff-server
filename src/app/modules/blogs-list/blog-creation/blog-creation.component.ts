@@ -15,7 +15,7 @@ export class BlogCreationComponent implements OnInit {
 
   blogCreationForm: FormGroup;
 
-  constructor(private httpBlog: HttpBlogService, private httpUser: HttpUserService, private auth: AuthService, private router: Router) { }
+  constructor(private userHttp: HttpUserService, private httpBlog: HttpBlogService, private httpUser: HttpUserService, private auth: AuthService, private router: Router) { }
 
   ngOnInit(): void {
     this.blogCreationForm = this.createNewBlogFormGroup();
@@ -29,16 +29,24 @@ export class BlogCreationComponent implements OnInit {
   }
 
   async createNewBlog() {
-    let payload = {
-      title: this.blogCreationForm.value.title,
-      description: this.blogCreationForm.value.description,
-      authorId: localStorage.getItem('userId')
-    }
-    this.httpBlog.createNewBlog(payload).subscribe((data: any) => {
-      if (data) {
-        this.router.navigate(['/blog', data._id]);
+    let userId: string;
+
+    await this.userHttp.getUserWithToken(this.auth.authToken).subscribe((user: User) => {
+      userId = user._id;
+      console.log(userId, 'userId')
+      const payload = {
+        title: this.blogCreationForm.value.title,
+        description: this.blogCreationForm.value.description,
+        authorId: userId
       }
+      console.log(payload, 'payload')
+      this.httpBlog.createNewBlog(payload).subscribe((data: any) => {
+        if (data) {
+          this.router.navigate(['/blog', data._id]);
+        }
+      });
     });
+
 
     // this.auth.dataFromUserObservable.subscribe((user: any) => {
     //   username = user;
