@@ -269,7 +269,6 @@ app.get("/api/" + BLOGS_COLLECTION, function (req, res) {
 
 app.post("/api/" + BLOGS_COLLECTION, authenticateJWT, function (req, res) {
     let newBlog = req.body;
-    console.log(newBlog)
     newBlog.createDate = new Date();
 
     if (!req.body.title) {
