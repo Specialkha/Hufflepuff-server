@@ -1,15 +1,17 @@
+<app-nav-menu></app-nav-menu>
+
 <form [formGroup]="accountForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
         <div class="form-check">
-            <input class="form-check-input" type="radio" formControlName="genre" id="male" value="homme">
-            <label class="form-check-label" for="male">
+            <label class="form-check-label" for="genre">
                 Homme
+                <input class="form-check-input" type="radio" formControlName="genre" value="male">
             </label>
         </div>
         <div class="form-check">
-            <input class="form-check-input" type="radio" formControlName="genre" id="female" value="femme">
-            <label class="form-check-label" for="female">
+            <label class="form-check-label" for="genre">
                 Femme
+                <input class="form-check-input" type="radio" formControlName="genre" value="female">
             </label>
         </div>
     </div>

@@ -47,7 +47,7 @@
                         </div>
 
                         <div style="position:absolute; right:0;" *ngIf="this.auth.authToken">
-                            <fa-icon [icon]="faUser" routerLink="/accountUser"></fa-icon>
+                            <fa-icon [icon]="faUser" (click)="onNavigate()"></fa-icon>
                             <div>Profil du compte</div>
                             <button (click)="onLogout()">Se déconnecter</button>
                         </div>

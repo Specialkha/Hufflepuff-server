@@ -31,6 +31,10 @@ export class HttpUserService {
     return this.http.get(this.API_URL + '/singleusers/' + id);
   }
 
+  getUserWithToken(token: string) {
+    return this.http.get(this.API_URL + '/token/users/' + token);
+  }
+
   // delete("/api/users/:id")
   deleteUser(delUserId: String): Promise<void | String> {
     return this.http.delete(this.API_URL + "/users" + '/' + delUserId)
@@ -40,12 +44,9 @@ export class HttpUserService {
   }
 
   // put("/api/users/:id")
-  updateUser(putUser: User): Promise<void | User> {
-    var putUrl = this.API_URL + "/users" + '/' + putUser._id;
-    return this.http.put(putUrl, putUser)
-      .toPromise()
-      .then(response => response as User)
-      .catch(this.handleError);
+  updateUser(putUserId: string, payload: any) {
+    var putUrl = this.API_URL + "/users" + '/' + putUserId;
+    return this.http.put(putUrl, payload);
   }
 
   private handleError(error: any) {

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { faUser } from '@fortawesome/free-regular-svg-icons';
 import { HttpUserService } from '../../http/user/httpUser.service';
 import { AuthService } from '../../services/auth.service';
@@ -18,7 +19,7 @@ export class NavMenuComponent implements OnInit {
 
   loginForm: FormGroup;
 
-  constructor(private httpUser: HttpUserService, public auth: AuthService) { }
+  constructor(private httpUser: HttpUserService, public auth: AuthService, private router: Router) { }
 
   ngOnInit(): void {
     this.loginForm = this.createNewFormGroupLogIn();
@@ -37,7 +38,7 @@ export class NavMenuComponent implements OnInit {
       password: this.loginForm.value.password
     }
     this.httpUser.userLogin(payload).subscribe((e: any) => {
-      console.log(e,'e')
+      console.log(e, 'e')
       this.auth.notifyObservable(e.accessToken);
       this.auth.dataFromObservable.subscribe((authToken: string) => {
         this.auth.authToken = authToken;
@@ -65,6 +66,10 @@ export class NavMenuComponent implements OnInit {
     this.auth.dataFromObservable.subscribe(() => {
       this.auth.authToken = null;
     });
+  }
+
+  onNavigate() {
+    this.router.navigate(['/accountUser']);
   }
 
 }

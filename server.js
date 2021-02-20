@@ -208,7 +208,7 @@ app.get("/api/" + USERS_COLLECTION + "/:id", function (req, res) {
         if (err) {
             handleError(res, err.message, "Failed to get user");
         } else {
-            res.status(200).json(doc._id);
+            res.status(200).json(doc);
         }
     });
 });
@@ -229,11 +229,30 @@ app.get("/api/" + 'single' + USERS_COLLECTION + "/:id", function (req, res) {
     });
 });
 
+app.get("/api/" + 'token/' + USERS_COLLECTION + "/:token", authenticateJWT, function (req, res) {
+    if (req.headers && req.headers.authorization) {
+        var authorization = req.headers.authorization.split(' ')[0],
+            decoded;
+        try {
+            decoded = jwt.verify(authorization, process.env.ACCESS_TOKEN_SECRET);
+        } catch (e) {
+            return res.status(401).send('unauthorized');
+        }
+        var userName = decoded.email;
+        // Fetch the user by id 
+        db.collection(USERS_COLLECTION).findOne({ email: userName }).then(function (user) {
+            // Do something with the user
+            return res.status(200).json(user);
+        });
+    }
+    return res.status(500);
+});
+
 app.put("/api/" + USERS_COLLECTION + "/:id", authenticateJWT, function (req, res) {
     let updateDoc = req.body;
     delete updateDoc._id;
 
-    db.collection(USERS_COLLECTION).updateOne({ _id: new ObjectID(req.params.id) }, updateDoc, function (err, doc) {
+    db.collection(USERS_COLLECTION).updateOne({ email: req.params.id }, updateDoc, function (err, doc) {
         if (err) {
             handleError(res, err.message, "Failed to update user");
         } else {
