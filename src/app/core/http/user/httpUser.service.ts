@@ -36,11 +36,8 @@ export class HttpUserService {
   }
 
   // delete("/api/users/:id")
-  deleteUser(delUserId: String): Promise<void | String> {
+  deleteUser(delUserId: String) {
     return this.http.delete(this.API_URL + "/users" + '/' + delUserId)
-      .toPromise()
-      .then(response => response as String)
-      .catch(this.handleError);
   }
 
   // put("/api/users/:id")

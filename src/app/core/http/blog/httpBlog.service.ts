@@ -27,15 +27,12 @@ export class HttpBlogService {
   }
 
   // delete("/api/Blogs/:id")
-  deleteBlog(delBlogId: String): Promise<void | String> {
-    return this.http.delete(this.API_URL + '/' + delBlogId)
-      .toPromise()
-      .then(response => response as String)
-      .catch(this.handleError);
+  deleteBlog(delBlogId: String) {
+    return this.http.delete(this.API_URL + '/' + delBlogId);
   }
 
   // put("/api/Blogs/:id")
-  updateBlog(putBlog: any){
+  updateBlog(putBlog: any) {
     var putUrl = this.API_URL + '/' + putBlog._id;
     return this.http.put(putUrl, putBlog);
   }

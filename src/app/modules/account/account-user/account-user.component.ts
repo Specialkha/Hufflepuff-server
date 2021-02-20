@@ -22,7 +22,7 @@ export class AccountUserComponent implements OnInit {
     this.httpUser.getUserWithToken(this.auth.authToken).subscribe((data: User) => {
       this.user = data;
       this.accountForm.patchValue({
-        genre:this.user.genre,
+        genre: this.user.genre,
         lastName: this.user.lastName,
         firstName: this.user.firstName,
         password: this.user.password,
@@ -52,7 +52,7 @@ export class AccountUserComponent implements OnInit {
     });
   }
 
-  get f (){
+  get f() {
     return this.accountForm.value;
   }
 
@@ -73,4 +73,9 @@ export class AccountUserComponent implements OnInit {
     });
   }
 
+  onDeleteAccount() {
+    this.httpUser.deleteUser(this.user._id).subscribe(data => {
+      console.log(data);
+    });
+  }
 }
