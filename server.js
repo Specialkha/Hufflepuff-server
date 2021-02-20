@@ -97,7 +97,6 @@ app.post("/api/auth/signup", function (req, res) {
                 }
             });
         });
-
     }
 });
 
@@ -129,24 +128,6 @@ app.post("/api/auth/signin", async function (req, res) {
             }
         }).catch((err) => console.error(err));
     }
-
-
-
-
-    // if (isConnected === true) {
-    //     // Generate an access token
-    //     const accessToken = jwt.sign({ email: username, password: password }, process.env.ACCESS_TOKEN_SECRET, { algorithm: "HS256", expiresIn: process.env.ACCESS_TOKEN_LIFE });
-    //     const refreshToken = jwt.sign({ email: username, password: password }, process.env.REFRESH_TOKEN_SECRET, { algorithm: "HS256", expiresIn: process.env.REFRESH_TOKEN_LIFE });
-
-    //     refreshTokens.push(refreshToken);
-    //     connectedUsers.push(username);
-    //     res.json({
-    //         accessToken,
-    //         refreshToken
-    //     });
-    // } else {
-
-    // }
 });
 
 app.post('/api/token', (req, res) => {
