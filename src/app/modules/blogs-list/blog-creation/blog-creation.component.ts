@@ -24,14 +24,14 @@ export class BlogCreationComponent implements OnInit {
   createNewBlogFormGroup() {
     return new FormGroup({
       title: new FormControl('', Validators.required),
-      content: new FormControl('', Validators.required)
+      description: new FormControl('', Validators.required)
     });
   }
 
   async createNewBlog() {
     let payload = {
       title: this.blogCreationForm.value.title,
-      description: this.blogCreationForm.value.content,
+      description: this.blogCreationForm.value.description,
       authorId: localStorage.getItem('userId')
     }
     this.httpBlog.createNewBlog(payload).subscribe((data: any) => {

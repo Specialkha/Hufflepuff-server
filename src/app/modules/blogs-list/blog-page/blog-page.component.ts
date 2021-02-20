@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpBlogService } from 'src/app/core/http/blog/httpBlog.service';
 import { HttpUserService } from 'src/app/core/http/user/httpUser.service';
@@ -19,8 +20,11 @@ export class BlogPageComponent {
   blogId: string;
   isBlogOwner: boolean = false;
 
-  constructor(private blogService: BlogService, private route: ActivatedRoute, private blogHttp: HttpBlogService, public auth: AuthService, private router: Router, private userHttp: HttpUserService) {
+  onEdit: boolean = false;
+  editBlogForm: FormGroup;
 
+  constructor(private blogService: BlogService, private route: ActivatedRoute, private blogHttp: HttpBlogService, public auth: AuthService, private router: Router, private userHttp: HttpUserService) {
+    this.editBlogForm = this.createNewFormGroupForEditingBlog();
   }
 
   public async ngOnInit() {
@@ -39,6 +43,13 @@ export class BlogPageComponent {
     });
   }
 
+  createNewFormGroupForEditingBlog() {
+    return new FormGroup({
+      title: new FormControl('', Validators.required),
+      description: new FormControl('', Validators.required)
+    });
+  }
+
   onCreatePost() {
     this.router.navigate(['/post-creation', this.blogId]);
   }
@@ -46,6 +57,10 @@ export class BlogPageComponent {
   onNavigate(blogId: string, post: Post) {
     this.blogService.blogId = blogId;
     this.router.navigate(['/post', post._id]);
+  }
+
+  onEditBlog() {
+    this.onEdit = true;
   }
 
 }

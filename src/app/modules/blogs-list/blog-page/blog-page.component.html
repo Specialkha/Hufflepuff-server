@@ -7,6 +7,23 @@
             votre
             blog</button>
 
+        <button *ngIf="auth.authToken && isBlogOwner" class="btn btn-warning" (click)="onEdit = true">Editez le titre et
+            la description de votre blog</button>
+
+        <div *ngIf="auth.authToken && isBlogOwner && onEdit">
+            <form [formGroup]="editBlogForm" (ngSubmit)="onEditBlog()">
+                <div>
+                    <label for="title">Titre du blog</label>
+                    <quill-editor type="text" formControlName="title"></quill-editor>
+                </div>
+                <div>
+                    <label for="content" for="title">Contenu du blog></label>
+                    <quill-editor type="text" formControlName="description"></quill-editor>
+                </div>
+                <button type="submit">Créer votre blog</button>
+            </form>
+        </div>
+
         <div *ngIf="blog">
             <div style="width: 60%; margin: auto;">
                 <h1 [innerHTML]="blog.title"></h1>
