@@ -4,9 +4,25 @@ h1{
     margin: 30px;
     padding: 10px;
 }
+h2{
+    text-align: center;
+    margin: 20px;
+    padding: 10px;
+}
 h3{
     width: 100%; 
     text-align: center;
     margin: 20px;
     padding: 10px;
+}
+
+.card{
+    width: 40%;
+    margin: auto;
+}
+
+button{
+    width: 25%;
+    margin: auto;
+    font-size: 15px;
 }

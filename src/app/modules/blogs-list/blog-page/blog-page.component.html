@@ -30,16 +30,31 @@
             <div style="width: 60%; margin: auto;">
                 <h1 [innerHTML]="blog.title"></h1>
             </div>
+            <div style="width: 60%; margin: auto;">
+                <h2>Auteur : {{blog.authorId}}</h2>
+            </div>
             <div style="width: 80%; margin: auto;">
                 <h3 [innerHTML]="blog.description"></h3>
             </div>
+
             <div *ngIf="blog.posts">
                 <div *ngFor="let post of blog.posts">
-                    <p [innerHTML]="post.title"></p>
-                    <p [innerHTML]="post.content"></p>
-                    <p>Ecrit par {{post.author}}</p>
-                    <p>Le {{post.date}}</p>
-                    <button (click)="onNavigate(blog._id, post)">Voir ce post</button>
+                    <div class="card bg-default" style="margin-bottom: 20px;">
+                        <h2 class="card-header" [innerHTML]="post.title"></h2>
+                        <div class="card-body">
+                            <h3>Auteur : {{post.author}}</h3>
+                            <p>Le {{post.date}}</p>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text" [innerHTML]="post.content"></p>
+                        </div>
+                        <div style="width: 100%; margin: auto;">
+
+                            <button (click)="onNavigate(post)" style="margin:10px; font-size: 15px; width: 30%;"
+                                class="btn btn-primary">Voir le
+                                post</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
