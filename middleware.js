@@ -1,7 +1,6 @@
 const jwt = require('jsonwebtoken');
 
 exports.verify = function(req, res, next){
-    console.log(req.cookies.jwt,'req.cookies.jwt');
     let accessToken = req.cookies.jwt;
 
     //if there is no token stored in cookies, the request is unauthorized

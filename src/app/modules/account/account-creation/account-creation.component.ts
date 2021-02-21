@@ -48,7 +48,8 @@ export class AccountCreationComponent implements OnInit {
       password: this.creationForm.value.password,
       adminLevel: 'citoyen',
     }
-    this.httpUser.createUser(userToCreate);
+    this.httpUser.createUser(userToCreate).subscribe(account => {
+    });
   }
 
 }

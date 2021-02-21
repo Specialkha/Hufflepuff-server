@@ -27,20 +27,14 @@ export class HttpBlogService {
   }
 
   // delete("/api/Blogs/:id")
-  deleteBlog(delBlogId: String): Promise<void | String> {
-    return this.http.delete(this.API_URL + '/' + delBlogId)
-      .toPromise()
-      .then(response => response as String)
-      .catch(this.handleError);
+  deleteBlog(delBlogId: String) {
+    return this.http.delete(this.API_URL + '/' + delBlogId);
   }
 
   // put("/api/Blogs/:id")
-  updateBlog(putBlog: Blog): Promise<void | Blog> {
+  updateBlog(putBlog: any) {
     var putUrl = this.API_URL + '/' + putBlog._id;
-    return this.http.put(putUrl, putBlog)
-      .toPromise()
-      .then(response => response as Blog)
-      .catch(this.handleError);
+    return this.http.put(putUrl, putBlog);
   }
 
   private handleError(error: any) {
@@ -49,5 +43,4 @@ export class HttpBlogService {
     console.error(errMsg); // log to console instead
   }
 
- 
 }

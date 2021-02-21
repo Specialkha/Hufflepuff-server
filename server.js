@@ -7,6 +7,11 @@ const ObjectID = mongodb.ObjectID;
 const jwt = require('jsonwebtoken');
 const { verify } = require('./middleware');
 
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
+const myPlaintextPassword = 's0/\/\P4$$w0rD';
+const someOtherPlaintextPassword = 'not_bacon';
+
 const USERS_COLLECTION = "users";
 const BLOGS_COLLECTION = "blogs";
 const NEWS_COLLECTION = "news";
@@ -75,50 +80,53 @@ app.get("/api/" + USERS_COLLECTION, function (req, res) {
     });
 });
 
-app.post("/api/" + USERS_COLLECTION, function (req, res) {
+app.post("/api/auth/signup", function (req, res) {
     let newContact = req.body;
     newContact.createDate = new Date();
 
     if (!req.body.lastName) {
         handleError(res, "Invalid user input", "Must provide a name.", 400);
     } else {
-        db.collection(USERS_COLLECTION).insertOne(newContact, function (err, doc) {
-            if (err) {
-                handleError(res, err.message, "Failed to create new contact.");
-            } else {
-                res.status(201).json(doc.ops[0]);
-            }
+        bcrypt.hash(req.body.password, saltRounds, function (err, hash) {
+            req.body.password = hash;
+            db.collection(USERS_COLLECTION).insertOne(newContact, function (err, doc) {
+                if (err) {
+                    handleError(res, err.message, "Failed to create new user.");
+                } else {
+                    res.status(201).json(doc.ops[0]);
+                }
+            });
         });
     }
 });
 
-app.post("/api/login", function (req, res) {
+app.post("/api/auth/signin", async function (req, res) {
     const username = req.body.username;
     const password = req.body.password;
-    let isConnected;
 
     // Filter user from the users array by username and password
     // const user = users.find(u => { return u.username === username && u.password === password });
 
-    if (db.collection(USERS_COLLECTION).findOne({ email: username, password: password }) != undefined) {
-        isConnected = true;
-    } else {
-        isConnected = false;
-        return res.status(401).send()
-    }
-    if (isConnected === true) {
-        // Generate an access token
-        const accessToken = jwt.sign({ email: username, password: password }, process.env.ACCESS_TOKEN_SECRET, { algorithm: "HS256", expiresIn: process.env.ACCESS_TOKEN_LIFE });
-        const refreshToken = jwt.sign({ email: username, password: password }, process.env.REFRESH_TOKEN_SECRET, { algorithm: "HS256", expiresIn: process.env.REFRESH_TOKEN_LIFE });
+    const user = await db.collection(USERS_COLLECTION).findOne({ email: username });
 
-        refreshTokens.push(refreshToken);
-        connectedUsers.push(username);
-        res.json({
-            accessToken,
-            refreshToken
-        });
+    if (!user) {
+        return res.status(401).send();
     } else {
-        res.send('Username or password incorrect');
+        await bcrypt.compare(password, user.password).then((result) => {
+            if (result == true) {
+                const accessToken = jwt.sign({ email: username, password: user.password }, process.env.ACCESS_TOKEN_SECRET, { algorithm: "HS256", expiresIn: process.env.ACCESS_TOKEN_LIFE });
+                const refreshToken = jwt.sign({ email: username, password: user.password }, process.env.REFRESH_TOKEN_SECRET, { algorithm: "HS256", expiresIn: process.env.REFRESH_TOKEN_LIFE });
+
+                refreshTokens.push(refreshToken);
+                connectedUsers.push(username);
+                res.json({
+                    accessToken,
+                    refreshToken
+                });
+            } else {
+                res.send('Username or password incorrect');
+            }
+        }).catch((err) => console.error(err));
     }
 });
 
@@ -146,7 +154,7 @@ app.post('/api/token', (req, res) => {
     });
 });
 
-app.post('/api/logout', (req, res) => {
+app.post('/api/auth/logout', (req, res) => {
     refreshTokens = refreshTokens.filter(token => token !== req.body.token);
     connectedUsers = connectedUsers.filter(connectedUser => connectedUser !== req.body.email);
     res.status(200).send("Logout successful");
@@ -181,7 +189,7 @@ app.get("/api/" + USERS_COLLECTION + "/:id", function (req, res) {
         if (err) {
             handleError(res, err.message, "Failed to get user");
         } else {
-            res.status(200).json(doc._id);
+            res.status(200).json(doc);
         }
     });
 });
@@ -202,11 +210,29 @@ app.get("/api/" + 'single' + USERS_COLLECTION + "/:id", function (req, res) {
     });
 });
 
+app.get("/api/" + 'token/' + USERS_COLLECTION + "/:token", authenticateJWT, function (req, res) {
+    if (req.headers && req.headers.authorization) {
+        var authorization = req.headers.authorization.split(' ')[0],
+            decoded;
+        try {
+            decoded = jwt.verify(authorization, process.env.ACCESS_TOKEN_SECRET);
+        } catch (e) {
+            return res.status(401).send('unauthorized');
+        }
+        var userName = decoded.email;
+        // Fetch the user by id 
+        db.collection(USERS_COLLECTION).findOne({ email: userName }).then(function (user) {
+            // Do something with the user
+            return res.status(200).json(user);
+        });
+    }
+    return res.status(500);
+});
+
 app.put("/api/" + USERS_COLLECTION + "/:id", authenticateJWT, function (req, res) {
     let updateDoc = req.body;
     delete updateDoc._id;
-
-    db.collection(USERS_COLLECTION).updateOne({ _id: new ObjectID(req.params.id) }, updateDoc, function (err, doc) {
+    db.collection(USERS_COLLECTION).updateOne({ _id: new ObjectID(req.params.id) }, { $set: updateDoc }, function (err, doc) {
         if (err) {
             handleError(res, err.message, "Failed to update user");
         } else {
@@ -243,7 +269,6 @@ app.get("/api/" + BLOGS_COLLECTION, function (req, res) {
 
 app.post("/api/" + BLOGS_COLLECTION, authenticateJWT, function (req, res) {
     let newBlog = req.body;
-
     newBlog.createDate = new Date();
 
     if (!req.body.title) {
@@ -277,14 +302,14 @@ app.get("/api/" + BLOGS_COLLECTION + "/:id", function (req, res) {
 
 app.put("/api/" + BLOGS_COLLECTION + "/:id", authenticateJWT, function (req, res) {
     let updateBlog = req.body;
-    delete updateDoc._id;
+    delete updateBlog._id;
 
-    db.collection(BLOGS_COLLECTION).updateOne({ _id: new ObjectID(req.params.id) }, updateDoc, function (err, doc) {
+    db.collection(BLOGS_COLLECTION).updateOne({ _id: new ObjectID(req.params.id) }, { $set: updateBlog }, function (err, doc) {
         if (err) {
             handleError(res, err.message, "Failed to update blog");
         } else {
-            updateDoc._id = req.params.id;
-            res.status(200).json(updateDoc);
+            updateBlog._id = req.params.id;
+            res.status(200).json(doc);
         }
     });
 });
@@ -311,7 +336,6 @@ app.post("/api" + "/post" + "/:id", authenticateJWT, function (req, res) {
 });
 
 app.get("/api/" + BLOGS_COLLECTION + "/:blogId" + "/post" + "/:postId", function (req, res) {
-    console.log(req.params)
     db.collection(BLOGS_COLLECTION).findOne({ posts: { $elemMatch: { _id: req.params.postId } } }, function (err, doc) {
         if (err) {
             handleError(res, err.message, "Failed to get post");
@@ -322,7 +346,6 @@ app.get("/api/" + BLOGS_COLLECTION + "/:blogId" + "/post" + "/:postId", function
 });
 
 app.get("/api/" + BLOGS_COLLECTION + "/:blogId" + "/post" + "/:postId" + "/comment" + "/:commentId", function (req, res) {
-    console.log(req.params)
     db.collection(BLOGS_COLLECTION).findOne({ comment: { $elemMatch: { _id: req.params.commentId } } }, function (err, doc) {
         if (err) {
             handleError(res, err.message, "Failed to get post");

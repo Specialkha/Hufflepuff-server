@@ -17,7 +17,6 @@ export class BlogsListComponent implements OnInit {
 
   constructor(private httpBlog: HttpBlogService, public auth: AuthService, private router: Router) { 
     this.httpBlog.getBlogs().subscribe((data) => {
-      console.log(data, 'data');
       this.blogs = data;
     });
   }

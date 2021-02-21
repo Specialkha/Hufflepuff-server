@@ -2,9 +2,35 @@
 
 <div class="row">
     <div class="col-md-12">
+<<<<<<< HEAD
         <div style="width: 30%; margin: auto;">
             <button *ngIf="auth.authToken" class="btn btn-primary" style="margin:auto; width:100%;"
                 (click)="onCreatePost()">Ecrire un post</button>
+        </div>
+=======
+        <button *ngIf="isBlogOwner" class="btn btn-warning" (click)="onCreatePost()">Ecrivez un
+            post dans
+            votre
+            blog</button>
+>>>>>>> 8022061e3032ff5c00021b5cfef2c52e0202c89d
+
+        <button *ngIf="isBlogOwner" class="btn btn-warning" (click)="onEdit = true">Editez le titre et
+            la description de votre blog</button>
+
+        <div *ngIf="isBlogOwner && onEdit">
+            <form [formGroup]="editBlogForm" (ngSubmit)="onEditBlog()">
+                <div>
+                    <label for="title">Titre du blog</label>
+                    <quill-editor type="text" formControlName="title"></quill-editor>
+                </div>
+                <div>
+                    <label for="content" for="title">Contenu du blog></label>
+                    <quill-editor type="text" formControlName="description"></quill-editor>
+                </div>
+                <button type="submit">Sauvegarder</button>
+            </form>
+
+            <button class="btn btn-danger" (click)="onDeleteBlog()">Supprimer ce blog</button>
         </div>
 
         <div *ngIf="blog">
@@ -15,7 +41,7 @@
                 <h2>Auteur : {{blog.authorId}}</h2>
             </div>
             <div style="width: 80%; margin: auto;">
-                <h3 [innerHTML]="blog.content"></h3>
+                <h3 [innerHTML]="blog.description"></h3>
             </div>
 
             <div *ngIf="blog.posts">

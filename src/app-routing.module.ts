@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './app/core/auth-guard/auth.guard';
-import { AccountCreationComponent } from './app/modules/account-creation/account-creation.component';
+import { AccountCreationComponent } from './app/modules/account/account-creation/account-creation.component';
+import { AccountUserComponent } from './app/modules/account/account-user/account-user.component';
 import { ActivitiesComponent } from './app/modules/activities/activities.component';
 import { BlogCreationComponent } from './app/modules/blogs-list/blog-creation/blog-creation.component';
 import { BlogPageComponent } from './app/modules/blogs-list/blog-page/blog-page.component';
@@ -25,6 +26,7 @@ const routes: Routes = [
   { path: 'activites', component: ActivitiesComponent },
   { path: 'tos', component: TosComponent },
   { path: 'accountCreation', component: AccountCreationComponent },
+  { path: 'accountUser', component: AccountUserComponent, canActivate: [AuthGuard] },
   { path: '**', redirectTo: 'accueil' }
 ];
 

@@ -42,12 +42,13 @@
                                     <button type="submit">Se connecter</button>
                                 </form>
                                 <hr>
-                                <button routerLink="/accountCreation">Ou si vous souhaitez créer un compte</button>
+                                <p>Ou</p>
+                                <button routerLink="/accountCreation"> si vous souhaitez créer un compte</button>
                             </div>
                         </div>
 
                         <div style="position:absolute; right:0;" *ngIf="this.auth.authToken">
-                            <fa-icon [icon]="faUser"></fa-icon>
+                            <fa-icon [icon]="faUser" (click)="onNavigate()"></fa-icon>
                             <div>Profil du compte</div>
                             <button (click)="onLogout()">Se déconnecter</button>
                         </div>
