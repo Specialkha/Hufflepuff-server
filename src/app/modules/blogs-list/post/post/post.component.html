@@ -1,3 +1,19 @@
+<app-nav-menu></app-nav-menu>
+
+<div *ngIf="post ">
+    <form [formGroup]="editPostForm" (ngSubmit)="onEditPost()">
+        <div>
+            <label for="title">Titre de votre post</label>
+            <quill-editor type="text" formControlName="title"></quill-editor>
+        </div>
+        <div>
+            <label for="content">Votre contenu</label>
+            <quill-editor type="text" formControlName="content"></quill-editor>
+        </div>
+        <button type="submit">Créer votre post</button>
+    </form>
+</div>
+
 <div *ngIf="post">
     <p [innerHTML]="post.title"></p>
     <p [innerHTML]="post.content"></p>
@@ -7,7 +23,7 @@
 
 <div *ngIf="auth.authToken">
     <p>Réagir :</p>
-    <form [formGroup]="postCreationForm" (ngSubmit)="onCreateComment()">
+    <form [formGroup]="commentCreationForm" (ngSubmit)="onCreateComment()">
         <textarea formControlName="content" cols="30" rows="10"></textarea>
         <button type="submit">Réagir</button>
     </form>

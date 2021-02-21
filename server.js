@@ -336,7 +336,27 @@ app.post("/api" + "/post" + "/:id", authenticateJWT, function (req, res) {
 });
 
 app.get("/api/" + BLOGS_COLLECTION + "/:blogId" + "/post" + "/:postId", function (req, res) {
-    db.collection(BLOGS_COLLECTION).findOne({ posts: { $elemMatch: { _id: req.params.postId } } }, function (err, doc) {
+    db.collection(BLOGS_COLLECTION).aggregate({
+        $project: {
+            posts: {
+                $filter: {
+                    input: "$posts",
+                    as: "post",
+                    cond: { $elemMatch: ["$$post._id", req.params.postId] }
+                }
+            }
+        }
+    }), function (err, doc) {
+        if (err) {
+            handleError(res, err.message, "Failed to get post");
+        } else {
+            res.status(200).json(doc);
+        }
+    };
+});
+
+app.get("/api/" + BLOGS_COLLECTION + "/:blogId" + "/post" + "/:postId" + "/comment" + "/:commentId", function (req, res) {
+    db.collection(BLOGS_COLLECTION).findOne({ comment: { $elemMatch: { _id: req.params.commentId } } }, function (err, doc) {
         if (err) {
             handleError(res, err.message, "Failed to get post");
         } else {
@@ -345,11 +365,15 @@ app.get("/api/" + BLOGS_COLLECTION + "/:blogId" + "/post" + "/:postId", function
     });
 });
 
-app.get("/api/" + BLOGS_COLLECTION + "/:blogId" + "/post" + "/:postId" + "/comment" + "/:commentId", function (req, res) {
-    db.collection(BLOGS_COLLECTION).findOne({ comment: { $elemMatch: { _id: req.params.commentId } } }, function (err, doc) {
+app.put("/api/" + BLOGS_COLLECTION + "/:blogId" + "/post" + "/:postId", authenticateJWT, function (req, res) {
+    let updatePostg = req.body;
+    delete updatePostg._id;
+
+    db.collection(BLOGS_COLLECTION).findOneAndUpdate({ _id: new ObjectID(req.params.id) }, { $set: updatePostg }, function (err, doc) {
         if (err) {
-            handleError(res, err.message, "Failed to get post");
+            handleError(res, err.message, "Failed to update blog");
         } else {
+            updatePostg._id = req.params.id;
             res.status(200).json(doc);
         }
     });

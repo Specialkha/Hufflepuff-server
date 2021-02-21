@@ -39,7 +39,7 @@
                     <p [innerHTML]="post.content"></p>
                     <p>Ecrit par {{post.author}}</p>
                     <p>Le {{post.date}}</p>
-                    <button (click)="onNavigate(post)">Voir ce post</button>
+                    <button (click)="onNavigate(blog._id, post)">Voir ce post</button>
                 </div>
             </div>
         </div>

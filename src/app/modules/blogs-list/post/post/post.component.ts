@@ -14,19 +14,24 @@ import { BlogService } from 'src/app/core/services/blog.service';
 })
 export class PostComponent implements OnInit {
 
-  postCreationForm: FormGroup;
+  editPostForm: FormGroup;
+  commentCreationForm: FormGroup;
 
   post: Post;
   postId: string;
 
+  isPostOwner: boolean = false;
+
   constructor(private blogService: BlogService, public auth: AuthService, private route: ActivatedRoute, private postHttp: HttpPostService) { }
 
   ngOnInit(): void {
-    this.postCreationForm = this.createNewFormGroup();
+    this.commentCreationForm = this.createNewFormGroup();
+    this.editPostForm = this.createNewFormGroupForPostEditing();
     this.route.params.subscribe((params) => {
       this.postId = params.postId;
       this.postHttp.getSinglePost(this.blogService.getBlogId, this.postId).subscribe((data: Post) => {
         this.post = data;
+        console.log(this.post,'post');
       });
     });
   }
@@ -35,6 +40,17 @@ export class PostComponent implements OnInit {
     return new FormGroup({
       content: new FormControl('', Validators.required)
     });
+  }
+
+  createNewFormGroupForPostEditing() {
+    return new FormGroup({
+      title: new FormControl('', Validators.required),
+      content: new FormControl('', Validators.required)
+    });
+  }
+
+  onEditPost() {
+
   }
 
   onCreateComment() {
