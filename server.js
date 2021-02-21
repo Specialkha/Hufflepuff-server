@@ -336,23 +336,27 @@ app.post("/api" + "/post" + "/:id", authenticateJWT, function (req, res) {
 });
 
 app.get("/api/" + BLOGS_COLLECTION + "/:blogId" + "/post" + "/:postId", function (req, res) {
-    db.collection(BLOGS_COLLECTION).aggregate({
-        $project: {
-            posts: {
-                $filter: {
-                    input: "$posts",
-                    as: "post",
-                    cond: { $elemMatch: ["$$post._id", req.params.postId] }
+    console.log(req.params.postId)
+    // db.getCollection('blogs').findOne({_id:new ObjectId("6032c2088dd8c129d02b1c9f")}, {posts:{$elemMatch:{_id:req.params.postId}}});
+    db.collection(BLOGS_COLLECTION).aggregate([
+        { $match: { _id: req.params.postId } }, {
+            $project: {
+                posts: {
+                    $filter: {
+                        input: "$posts",
+                        as: "posts",
+                        cond: { $eq: ["$$posts._id", req.params.postId] }
+                    }
                 }
             }
-        }
-    }), function (err, doc) {
-        if (err) {
-            handleError(res, err.message, "Failed to get post");
-        } else {
-            res.status(200).json(doc);
-        }
-    };
+        }], function (err, doc) {
+            console.log(doc)
+            if (err) {
+                handleError(res, err.message, "Failed to get post");
+            } else {
+                res.status(200).send(doc);
+            }
+        });
 });
 
 app.get("/api/" + BLOGS_COLLECTION + "/:blogId" + "/post" + "/:postId" + "/comment" + "/:commentId", function (req, res) {
