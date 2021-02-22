@@ -29,9 +29,9 @@ export class PostComponent implements OnInit {
     this.editPostForm = this.createNewFormGroupForPostEditing();
     this.route.params.subscribe((params) => {
       this.postId = params.postId;
-      this.postHttp.getSinglePost(this.blogService.getBlogId, this.postId).subscribe((data: Post) => {
-        this.post = data;
-        console.log(this.post,'post');
+      this.postHttp.getSinglePost(this.blogService.getBlogId, this.postId).subscribe((data: any) => {
+        this.post = data[0].posts[0];
+    
       });
     });
   }
