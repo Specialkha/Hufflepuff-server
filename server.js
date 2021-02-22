@@ -220,7 +220,7 @@ app.get("/api/" + 'token/' + USERS_COLLECTION + "/:token", authenticateJWT, func
             return res.status(401).send('unauthorized');
         }
         var userName = decoded.email;
-        // Fetch the user by id 
+        // Fetch the user by id
         db.collection(USERS_COLLECTION).findOne({ email: userName }).then(function (user) {
             // Do something with the user
             return res.status(200).json(user);
@@ -376,15 +376,29 @@ app.get("/api/" + BLOGS_COLLECTION + "/:blogId" + "/post" + "/:postId" + "/comme
 });
 
 app.put("/api/" + BLOGS_COLLECTION + "/:blogId" + "/post" + "/:postId", authenticateJWT, function (req, res) {
-    let updatePostg = req.body;
-    delete updatePostg._id;
+    let updatePost = req.body;
+    delete updatePost._id;
 
-    db.collection(BLOGS_COLLECTION).findOneAndUpdate({ _id: new ObjectID(req.params.id) }, { $set: updatePostg }, function (err, doc) {
+    db.collection(BLOGS_COLLECTION).findOneAndUpdate({ _id: new ObjectID(req.params.id) }, { $set: updatePost }, function (err, doc) {
         if (err) {
             handleError(res, err.message, "Failed to update blog");
         } else {
-            updatePostg._id = req.params.id;
+            updatePost._id = req.params.id;
             res.status(200).json(doc);
         }
     });
+});
+
+app.put("/api/" + BLOGS_COLLECTION + "/:blogId" + "/post" + "/:postId"+"/comment"+"/:commentId", authenticateJWT, function (req, res) {
+  let updateComment = req.body;
+  delete updateComment._id;
+
+  db.collection(BLOGS_COLLECTION).findOneAndUpdate({ _id: new ObjectID(req.params.id) }, { $set: updateComment }, function (err, doc) {
+      if (err) {
+          handleError(res, err.message, "Failed to update blog");
+      } else {
+        updateComment._id = req.params.id;
+          res.status(200).json(doc);
+      }
+  });
 });

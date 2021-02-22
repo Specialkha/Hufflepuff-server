@@ -41,6 +41,7 @@ export class BlogCreationComponent implements OnInit {
       }
       this.httpBlog.createNewBlog(payload).subscribe((data: any) => {
         if (data) {
+          console.log(data,'data')
           this.router.navigate(['/blog', data._id]);
         }
       });
