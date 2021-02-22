@@ -1,13 +1,17 @@
 <app-nav-menu></app-nav-menu>
 
 <form [formGroup]="blogCreationForm" (ngSubmit)="createNewBlog()">
-    <div>
-        <label for="title">Titre du blog</label>
-        <quill-editor type="text" formControlName="title"></quill-editor>
-    </div>
-    <div>
-        <label for="content" for="title">Contenu du blog></label>
-        <quill-editor type="text" formControlName="description"></quill-editor>
-    </div>
-    <button type="submit">Créer votre blog</button>
+  <div>
+    <label for="title">Titre du blog</label>
+    <quill-editor type="text" formControlName="title"></quill-editor>
+  </div>
+  <div>
+    <label for="content" for="title">Présentation rapide de votre blog</label>
+    <quill-editor type="text" formControlName="headline"></quill-editor>
+  </div>
+  <div>
+    <label for="content" for="title">Contenu du blog</label>
+    <quill-editor type="text" formControlName="description"></quill-editor>
+  </div>
+  <button type="submit">Créer votre blog</button>
 </form>

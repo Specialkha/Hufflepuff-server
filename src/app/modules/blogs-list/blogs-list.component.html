@@ -22,7 +22,7 @@
             <div class="card bg-default" style="margin-bottom: 20px;">
                 <h2 class="card-header" [innerHTML]="blog.title"></h2>
                 <div class="card-body">
-                    <h3>Auteur : {{blog.authorId}}</h3>
+                    <h3 [innerHTML]="blog.headline"></h3>
                 </div>
                 <div class="card-body">
                     <p class="card-text" [innerHTML]="blog.content"></p>

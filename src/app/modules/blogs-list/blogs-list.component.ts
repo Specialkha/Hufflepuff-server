@@ -15,7 +15,7 @@ export class BlogsListComponent implements OnInit {
   selectedBlog: Blog;
   searchText: string;
 
-  constructor(private httpBlog: HttpBlogService, public auth: AuthService, private router: Router) { 
+  constructor(private httpBlog: HttpBlogService, public auth: AuthService, private router: Router) {
     this.httpBlog.getBlogs().subscribe((data) => {
       this.blogs = data;
     });

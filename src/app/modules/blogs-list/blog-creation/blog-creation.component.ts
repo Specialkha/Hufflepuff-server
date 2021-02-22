@@ -24,6 +24,7 @@ export class BlogCreationComponent implements OnInit {
   createNewBlogFormGroup() {
     return new FormGroup({
       title: new FormControl('', Validators.required),
+      headline: new FormControl('', Validators.required),
       description: new FormControl('', Validators.required)
     });
   }
@@ -34,6 +35,7 @@ export class BlogCreationComponent implements OnInit {
       userId = user._id;
       const payload = {
         title: this.blogCreationForm.value.title,
+        headline: this.blogCreationForm.value.headline,
         description: this.blogCreationForm.value.description,
         authorId: userId
       }

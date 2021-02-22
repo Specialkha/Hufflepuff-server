@@ -33,13 +33,17 @@ export class BlogPageComponent {
         this.blogId = params.blogId;
         this.blogHttp.getSingleBlog(this.blogId).subscribe((data: Blog) => {
           this.blog = data;
-          this.userHttp.getUserWithToken(this.auth.authToken).subscribe((user: User) => {
-            if (data.authorId === user._id) {
-              this.isBlogOwner = true;
-            }
-            this.editBlogForm.patchValue({
-              title: this.blog.title,
-              description: this.blog.description
+          this.userHttp.getSingleUserWithId(this.blog.authorId).subscribe((e: any) => {
+            this.blog.authorId = e.lastName + '' + e.firstName;
+            this.userHttp.getUserWithToken(this.auth.authToken).subscribe((user: User) => {
+              if (data.authorId === user._id) {
+                this.isBlogOwner = true;
+              }
+              this.editBlogForm.patchValue({
+                title: this.blog.title,
+                headline: this.blog.headline,
+                description: this.blog.description
+              });
             });
           });
         });
@@ -50,6 +54,7 @@ export class BlogPageComponent {
   createNewFormGroupForEditingBlog() {
     return new FormGroup({
       title: new FormControl('', Validators.required),
+      headline: new FormControl('', Validators.required),
       description: new FormControl('', Validators.required)
     });
   }
@@ -71,6 +76,7 @@ export class BlogPageComponent {
     const payload = {
       _id: this.blog._id,
       title: this.f.title,
+      headline: this.f.headline,
       description: this.f.description
     }
     this.blogHttp.updateBlog(payload).subscribe((data) => {

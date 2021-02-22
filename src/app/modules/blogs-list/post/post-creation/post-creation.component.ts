@@ -40,7 +40,8 @@ export class PostCreationComponent implements OnInit {
       _id: this.random.guidGenerator(),
       title: this.postCreationForm.value.title,
       content: this.postCreationForm.value.content,
-      date: new Date
+      date: new Date,
+      comments: []
     }
     this.httpBlog.getSingleBlog(this.idBlog).subscribe((data: any) => {
       this.httpPost.createPostInBlog(data._id, postToCreate).subscribe((data: any) => {
