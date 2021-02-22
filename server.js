@@ -339,7 +339,7 @@ app.get("/api/" + BLOGS_COLLECTION + "/:blogId" + "/post" + "/:postId", function
     console.log(req.params.postId)
     // db.getCollection('blogs').findOne({_id:new ObjectId("6032c2088dd8c129d02b1c9f")}, {posts:{$elemMatch:{_id:req.params.postId}}});
     db.collection(BLOGS_COLLECTION).aggregate([
-        { $match: { _id:new ObjectID( req.params.blogId) } }, {
+        { $match: { _id: new ObjectID(req.params.blogId) } }, {
             $project: {
                 posts: {
                     $filter: {
@@ -349,17 +349,20 @@ app.get("/api/" + BLOGS_COLLECTION + "/:blogId" + "/post" + "/:postId", function
                     }
                 }
             }
-        }], function (err, cursor) {
-            if (err) {
-                handleError(res, err.message, "Failed to get post");
-            } else {
-                cursor.toArray((error, doc) => {
-                    if (error) { return handleError(res, error.message, "Failed to get post"); }
-                    console.log(doc)
-                    res.status(200).send(doc);
-                });
-            }
-        });
+        },
+        { $unwind: "$posts" },
+        { $replaceRoot: { newRoot: "$posts" } }
+    ], function (err, cursor) {
+        if (err) {
+            handleError(res, err.message, "Failed to get post");
+        } else {
+            cursor.toArray((error, doc) => {
+                if (error) { return handleError(res, error.message, "Failed to get post"); }
+                console.log(doc)
+                res.status(200).send(doc);
+            });
+        }
+    });
 });
 
 app.get("/api/" + BLOGS_COLLECTION + "/:blogId" + "/post" + "/:postId" + "/comment" + "/:commentId", function (req, res) {

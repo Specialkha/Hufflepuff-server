@@ -30,8 +30,7 @@ export class PostComponent implements OnInit {
     this.route.params.subscribe((params) => {
       this.postId = params.postId;
       this.postHttp.getSinglePost(this.blogService.getBlogId, this.postId).subscribe((data: any) => {
-        this.post = data[0].posts[0];
-    
+        this.post = data[0];
       });
     });
   }
