@@ -50,9 +50,9 @@ import { AccountUserComponent } from './app/modules/account/account-user/account
   imports: [
     BrowserModule,
     RouterModule,
+    AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    AppRoutingModule,
     NgbModule,
     ReactiveFormsModule,
     FontAwesomeModule,
