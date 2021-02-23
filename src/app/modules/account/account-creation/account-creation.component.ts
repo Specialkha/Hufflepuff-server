@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { HttpUserService } from 'src/app/core/http/user/httpUser.service';
 import { User } from 'src/app/core/model/user';
 
@@ -12,7 +13,7 @@ export class AccountCreationComponent implements OnInit {
 
   creationForm: FormGroup;
 
-  constructor(private httpUser: HttpUserService) { }
+  constructor(private httpUser: HttpUserService, private router: Router) { }
 
   ngOnInit(): void {
     this.creationForm = this.createNewAccount();
@@ -49,6 +50,7 @@ export class AccountCreationComponent implements OnInit {
       adminLevel: 'citoyen',
     }
     this.httpUser.createUser(userToCreate).subscribe(account => {
+      this.router.navigate(['/']);
     });
   }
 

@@ -5,6 +5,10 @@ import { Post } from 'src/app/core/model/post';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { HttpPostService } from 'src/app/core/http/post/http-post.service';
 import { BlogService } from 'src/app/core/services/blog.service';
+import { HttpCommentService } from 'src/app/core/http/comment/httpComment.service';
+import { Comment } from 'src/app/core/model/comment';
+import { HttpUserService } from 'src/app/core/http/user/httpUser.service';
+import { User } from 'src/app/core/model/user';
 
 
 @Component({
@@ -22,7 +26,7 @@ export class PostComponent implements OnInit {
 
   isPostOwner: boolean = false;
 
-  constructor(private blogService: BlogService, public auth: AuthService, private route: ActivatedRoute, private postHttp: HttpPostService) { }
+  constructor(private httpUser: HttpUserService, private httpComment: HttpCommentService, private blogService: BlogService, public auth: AuthService, private route: ActivatedRoute, private postHttp: HttpPostService) { }
 
   ngOnInit(): void {
     this.commentCreationForm = this.createNewFormGroup();
@@ -53,8 +57,22 @@ export class PostComponent implements OnInit {
 
   }
 
-  onCreateComment() {
-
+  async onCreateComment() {
+    let userName: string;
+    let userId:string
+    await this.httpUser.getUserWithToken(this.auth.authToken).subscribe((user: User) => {
+      userName = user.lastName + ' ' + user.firstName;
+      userId = user._id;
+    });
+    const payload: Comment = {
+      author: userName,
+      authorId: userId,
+      content: this.commentCreationForm.value.content,
+      date: new Date
+    }
+    this.httpComment.createComment(this.blogService.getBlogId, this.postId, payload).subscribe((data) => {
+      console.log(data);
+    });
   }
 
 }
