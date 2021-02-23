@@ -1,60 +1,59 @@
 <div class="container-fluid">
-    <div class=" row">
-        <div class="col-md-12">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light flex-nowrap flex-row">
-                <a class="navbar-brand">Hufflepuff</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <button routerLink="/accueil" routerLinkActive="active" class="nav-link">Accueil</button>
-                        </li>
-                        <li class="nav-item">
-                            <button routerLink="/liste-des-blogs" routerLinkActive="active"
-                                class="nav-link">Blog</button>
-                        </li>
-                        <li class="nav-item">
-                            <button routerLink="/activites" routerLinkActive="active" class="nav-link">Activités et
-                                jeux</button>
-                        </li>
-                        <li class="nav-item">
-                            <button routerLink="/contact" routerLinkActive="active" class="nav-link">Contact</button>
-                        </li>
+  <div class=" row">
+    <div class="col-md-12">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light flex-nowrap flex-row">
+        <a class="navbar-brand">Hufflepuff</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <button routerLink="/accueil" routerLinkActive="active" class="nav-link">Accueil</button>
+            </li>
+            <li class="nav-item">
+              <button routerLink="/liste-des-blogs" routerLinkActive="active" class="nav-link">Blog</button>
+            </li>
+            <li class="nav-item">
+              <button routerLink="/activites" routerLinkActive="active" class="nav-link">Activités et
+                jeux</button>
+            </li>
+            <li class="nav-item">
+              <button routerLink="/contact" routerLinkActive="active" class="nav-link">Contact</button>
+            </li>
 
-                        <div style="position:absolute; right:0;" *ngIf="!this.auth.authToken">
-                            <button (click)="loginOpen = !loginOpen">Se connecter /
-                                Créer un
-                                compte</button>
+            <div style="position:absolute; right:0;" *ngIf="!this.auth.authToken">
+              <button (click)="loginOpen = !loginOpen">Se connecter /
+                Créer un
+                compte</button>
 
-                            <div *ngIf="loginOpen">
-                                <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
-                                    <div class="form-group">
-                                        <label for="login">Votre identifiant</label>
-                                        <input type="text" formControlName="login" class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="password">Votre mot de passe</label>
-                                        <input type="password" formControlName="password" class="form-control">
-                                    </div>
-                                    <button type="submit">Se connecter</button>
-                                </form>
-                                <hr>
-                                <p>Ou</p>
-                                <button routerLink="/accountCreation"> si vous souhaitez créer un compte</button>
-                            </div>
-                        </div>
+              <div *ngIf="loginOpen">
+                <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+                  <div class="form-group">
+                    <label for="login">Votre identifiant</label>
+                    <input type="text" formControlName="login" class="form-control">
+                  </div>
+                  <div class="form-group">
+                    <label for="password">Votre mot de passe</label>
+                    <input type="password" formControlName="password" class="form-control">
+                  </div>
+                  <button type="submit">Se connecter</button>
+                </form>
+                <hr>
+                <p>Ou</p>
+                <button routerLink="/accountCreation"> si vous souhaitez créer un compte</button>
+              </div>
+            </div>
 
-                        <div style="position:absolute; right:0;" *ngIf="this.auth.authToken">
-                            <fa-icon [icon]="faUser" (click)="onNavigate()"></fa-icon>
-                            <div>Profil du compte</div>
-                            <button (click)="onLogout()">Se déconnecter</button>
-                        </div>
-                    </ul>
-                </div>
-            </nav>
+            <div style="position:absolute; right:0;" *ngIf="this.auth.authToken">
+              <fa-icon [icon]="faUser" (click)="onNavigate()"></fa-icon>
+              <div>Profil du compte</div>
+              <button (click)="onLogout()">Se déconnecter</button>
+            </div>
+          </ul>
         </div>
+      </nav>
     </div>
+  </div>
 </div>
