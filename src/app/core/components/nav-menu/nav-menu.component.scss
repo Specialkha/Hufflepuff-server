@@ -1,31 +1,26 @@
-.navbar-nav {
-  flex-direction: row;
-  flex-wrap: nowrap;
+.navbar-nav{
+    flex-direction: row;
+    flex-wrap: nowrap;
 }
 
 // space between menu
-.space {
+.space{
   padding-left: 15px;
 }
 
 // css for button connexion/subscribe
-.connect1 {
+.connect{
   position: absolute;
   top: 20px;
   right: 100px;
-  background-color: white;
+  background-color:white;
   border-color: white;
 }
 
 // css for window connexion/subscribe
-.connect2 {
+.connect2{
   position: absolute;
   top: 20px;
-  background-color: white;
+  background-color:white;
   border-color: white;
-}
-
-a,
-li {
-  cursor: pointer;
 }
