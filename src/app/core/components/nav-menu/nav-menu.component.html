@@ -4,60 +4,60 @@
     <a class="navbar-brand" routerlink="/accueil">
       <img src="/img/logo_large.png" width="50" height="50">
     </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-    <!-- All menus -->
+  <!-- All menus -->
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <a class="nav-link" routerlink="/accueil">Accueil</a>
-        </li>
-        <li class="nav-item space">
-          <a class="nav-link" routerlink="/liste-des-blogs">Blog</a>
-        </li>
-        <li class="nav-item space">
-          <a class="nav-link" routerlink="/activites">Activités & jeux</a>
-        </li>
-        <li class="nav-item space">
-          <a class="nav-link" routerlink="/contact">Contact</a>
-        </li>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" routerlink="/accueil">Accueil</a>
+      </li>
+      <li class="nav-item space">
+        <a class="nav-link" routerlink="/liste-des-blogs">Blog</a>
+      </li>
+      <li class="nav-item space">
+        <a class="nav-link" routerlink="/activites">Activités & jeux</a>
+      </li>
+      <li class="nav-item space">
+        <a class="nav-link" routerlink="/contact">Contact</a>
+      </li>
 
-        <!-- Connect/Subscribe button -->
+      <!-- Connect/Subscribe button -->
 
-        <div class="card connect" *ngIf="!this.auth.authToken">
-          <li class="nav-item active" (click)="loginOpen = !loginOpen">Se connecter /
-            Créer un
-            compte
-          </li>
-          <div class="card-body connect2" *ngIf="loginOpen">
-            <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
-              <div class="form-group">
-                <label for="login">Votre identifiant</label>
-                <input type="text" formControlName="login" class="form-control">
-              </div>
-              <div class="form-group">
-                <label for="password">Votre mot de passe</label>
-                <input type="password" formControlName="password" class="form-control">
-              </div>
-              <li class="nav-item">
-                <a class="nav-link clr" href="submit">Se connecter</a>
-              </li>
-            </form>
-            <hr>
-            <a class="nav-link clr" routerLink="/accountCreation">Créer un compte</a>
-          </div>
+      <div class="card connect" *ngIf="!this.auth.authToken">
+        <li class="nav-item active" (click)="loginOpen = !loginOpen">Se connecter /
+          Créer un
+          compte
+        </li>
+        <div class="card-body connect2" *ngIf="loginOpen">
+          <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+            <div class="form-group">
+              <label for="login">Votre identifiant</label>
+              <input type="text" formControlName="login" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="password">Votre mot de passe</label>
+              <input type="password" formControlName="password" class="form-control">
+            </div>
+            <li class="nav-item">
+              <button class="nav-link clr" type="submit">Se connecter</button>
+            </li>
+          </form>
+          <hr>
+          <a class="nav-link clr" routerLink="/accountCreation">Créer un compte</a>
         </div>
-        <div class="col-md-1"></div>
-        <div class="connect" *ngIf="this.auth.authToken">
-          <fa-icon [icon]="faUser" (click)="onNavigate()"></fa-icon>
-          <div>Profil du compte</div>
-          <button (click)="onLogout()">Se déconnecter</button>
-        </div>
-
-      </ul>
-    </div>
+      </div>
+      <div class="col-md-1"></div>
+      <div class="connect" *ngIf="this.auth.authToken">
+        <fa-icon [icon]="faUser" (click)="onNavigate()"></fa-icon>
+        <div>Profil du compte</div>
+        <button (click)="onLogout()">Se déconnecter</button>
+      </div>
+    </ul>
+  </div>
 </nav>
