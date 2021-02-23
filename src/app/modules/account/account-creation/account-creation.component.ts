@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HttpUserService } from 'src/app/core/http/user/httpUser.service';
 import { User } from 'src/app/core/model/user';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-account-creation',
@@ -13,7 +14,7 @@ export class AccountCreationComponent implements OnInit {
 
   creationForm: FormGroup;
 
-  constructor(private httpUser: HttpUserService, private router: Router) { }
+  constructor(private httpUser: HttpUserService, private router: Router, private auth: AuthService) { }
 
   ngOnInit(): void {
     this.creationForm = this.createNewAccount();
@@ -49,9 +50,27 @@ export class AccountCreationComponent implements OnInit {
       password: this.creationForm.value.password,
       adminLevel: 'citoyen',
     }
-    this.httpUser.createUser(userToCreate).subscribe(account => {
-      this.router.navigate(['/']);
+
+    this.httpUser.createUser(userToCreate).subscribe((account: any) => {
+      const payload = {
+        username: account.email,
+        password: account.password
+      };
+      this.httpUser.userLogin(payload).subscribe((data: any) => {
+        this.auth.notifyObservable(data.accessToken);
+        this.auth.dataFromObservable.subscribe((authToken: string) => {
+          this.auth.authToken = authToken;
+          localStorage.setItem('token', authToken);
+          this.auth.notifyUserObservable(payload.username);
+          this.httpUser.getSingleUser(payload.username).subscribe((userId: string) => {
+            localStorage.setItem('userId', userId);
+          });
+        });
+      })
     });
+
+    // this.router.navigate(['/accueil']);
+
   }
 
 }

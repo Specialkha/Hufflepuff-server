@@ -2,3 +2,25 @@
     flex-direction: row;
     flex-wrap: nowrap;
 }
+
+// space between menu
+.space{
+  padding-left: 15px;
+}
+
+// css for button connexion/subscribe
+.connect{
+  position: absolute;
+  top: 20px;
+  right: 100px;
+  background-color:white;
+  border-color: white;
+}
+
+// css for window connexion/subscribe
+.connect2{
+  position: absolute;
+  top: 20px;
+  background-color:white;
+  border-color: white;
+}
