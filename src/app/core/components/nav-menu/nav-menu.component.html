@@ -23,7 +23,7 @@
               <a routerLink="/contact" routerLinkActive="active" class="nav-link">Contact</a>
             </li>
 
-            <div style="position:absolute; right:0;" *ngIf="!this.auth.authToken">
+            <div class="connect1" *ngIf="!this.auth.authToken">
               <a (click)="loginOpen = !loginOpen">Se connecter /
                 Créer un
                 compte</a>
