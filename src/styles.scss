@@ -7,11 +7,14 @@
 @import '~quill/dist/quill.bubble.css';
 @import '~quill/dist/quill.snow.css';
 
-
 body {
   font-size: 15px;
   background-color: #b1bfd8;
   background-image: linear-gradient(315deg, #b1bfd8 0%, #6782b4 74%);
+  min-height: 100%;
+  display: table;
+  width: 100%;
+
 }
 
 

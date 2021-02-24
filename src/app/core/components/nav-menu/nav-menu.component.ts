@@ -70,4 +70,9 @@ export class NavMenuComponent implements OnInit {
     this.router.navigate(['/accountUser']);
   }
 
+  onCreateAccount() {
+    this.loginOpen = false;
+    this.router.navigate(['/accountCreation']);
+  }
+
 }
