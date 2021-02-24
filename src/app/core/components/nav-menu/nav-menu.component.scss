@@ -3,26 +3,76 @@
   flex-wrap: nowrap;
 }
 
+.menu-bar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+ul {
+  width: 500px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
 // space between menu
 .space {
   padding-left: 15px;
 }
 
 // css for button connexion/subscribe
-.connect1 {
+.connect {
   position: absolute;
-  top: 20px;
   right: 100px;
   background-color: white;
   border-color: white;
 }
 
-// css for window connexion/subscribe
-.connect2 {
+.log-in {
   position: absolute;
-  top: 20px;
+  width: 250px;
+  top: 30px;
   background-color: white;
-  border-color: white;
+  padding: 15px;
+  animation: fadeIn ease-in-out 0.4s;
+}
+
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.mat-snack-bar-container {
+  padding: 0 !important;
+}
+
+@media only screen and (max-width: 1450px) {
+
+  #navMenu {
+
+    width: 40%;
+  }
+
 }
 
 a {
@@ -31,4 +81,8 @@ a {
 
 .logo {
   background-image: url('../../../../assets/logo/logo_large.png');
+  cursor: pointer;
+  background-size: contain;
+  width: 70px;
+  height: 70px;
 }
