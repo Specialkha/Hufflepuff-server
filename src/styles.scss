@@ -14,9 +14,7 @@ body {
   min-height: 100%;
   display: table;
   width: 100%;
-
 }
-
 
 h1 {
   font-size: 40px;
@@ -24,4 +22,14 @@ h1 {
 
 h2 {
   font-size: 32px;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
 }

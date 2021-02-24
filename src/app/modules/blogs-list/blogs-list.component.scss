@@ -2,7 +2,7 @@
     cursor: pointer;
 }
 h1 {
-    text-align: center; 
+    text-align: center;
     margin: 25px;
 }
 
@@ -12,6 +12,10 @@ p{
 }
 
 button{
-    background-color: #0053a3;  
+    background-color: #0053a3;
     font-size: 15px;
+}
+
+.main-content{
+  min-height: 100vh;
 }

@@ -26,6 +26,9 @@ import { FooterComponent } from './app/core/components/footer/footer.component';
 import { CommentsComponent } from './app/modules/blogs-list/post/comments/comments.component';
 import { NewsCreationComponent } from './app/modules/main-page/news-creation/news-creation.component';
 import { AccountUserComponent } from './app/modules/account/account-user/account-user.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ErrorPasswordComponent } from './app/core/components/snack-bar/account-creation-confirm/error-password/error-password.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -45,7 +48,8 @@ import { AccountUserComponent } from './app/modules/account/account-user/account
     FooterComponent,
     CommentsComponent,
     NewsCreationComponent,
-    AccountUserComponent
+    AccountUserComponent,
+    ErrorPasswordComponent
   ],
   imports: [
     BrowserModule,
@@ -56,7 +60,9 @@ import { AccountUserComponent } from './app/modules/account/account-user/account
     NgbModule,
     ReactiveFormsModule,
     FontAwesomeModule,
-    QuillModule.forRoot()
+    QuillModule.forRoot(),
+    BrowserAnimationsModule,
+    MatSnackBarModule
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]
