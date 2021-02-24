@@ -13,12 +13,15 @@ export class CommentsComponent implements OnInit {
 
   @Input() comment: Comment;
 
-  postCreationForm:FormGroup;
+  postCreationForm: FormGroup;
 
-  constructor(public auth:AuthService, private commentHttp: HttpCommentService) { }
+  onOpenAnswer: boolean = false;
+
+  constructor(public auth: AuthService, private commentHttp: HttpCommentService) { }
 
   ngOnInit(): void {
     this.postCreationForm = this.createNewFormGroup();
+    console.log(this.comment)
   }
 
   createNewFormGroup() {
@@ -27,8 +30,8 @@ export class CommentsComponent implements OnInit {
     });
   }
 
-  onCreateComment(){
-    
+  onCreateComment() {
+    this.onOpenAnswer = false;
   }
 
 }

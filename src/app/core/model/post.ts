@@ -5,5 +5,5 @@ export class Post {
     title: string;
     content: string;
     date?: Date;
-    comments?: Comment[]
+    comments?: Comment[];
 }

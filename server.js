@@ -380,14 +380,14 @@ app.put("/api/" + BLOGS_COLLECTION + "/:blogId" + "/post" + "/:postId", authenti
 });
 
 app.put("/api/" + BLOGS_COLLECTION + "/:blogId" + "/post" + "/:postId" + "/comment", authenticateJWT, function (req, res) {
-  let updateComment = req.body;
-  delete updateComment._id;
+  let comments = req.body;
+  delete comments._id;
 
-  db.collection(BLOGS_COLLECTION).findOneAndUpdate({ _id: new ObjectID(req.params.blogId), 'posts._id': req.params.postId }, { $push: { "posts.$.comments": { updateComment } } }, function (err, doc) {
+  db.collection(BLOGS_COLLECTION).findOneAndUpdate({ _id: new ObjectID(req.params.blogId), 'posts._id': req.params.postId }, { $push: { "posts.$.comments": { comments } } }, function (err, doc) {
     if (err) {
       handleError(res, err.message, "Failed to update blog");
     } else {
-      updateComment._id = req.params.id;
+      comments._id = req.params.id;
       res.status(200).json(doc);
     }
   });

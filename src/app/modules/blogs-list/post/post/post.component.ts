@@ -9,6 +9,8 @@ import { HttpCommentService } from 'src/app/core/http/comment/httpComment.servic
 import { Comment } from 'src/app/core/model/comment';
 import { HttpUserService } from 'src/app/core/http/user/httpUser.service';
 import { User } from 'src/app/core/model/user';
+import { HttpBlogService } from 'src/app/core/http/blog/httpBlog.service';
+import { Blog } from 'src/app/core/model/blog';
 
 
 @Component({
@@ -25,17 +27,27 @@ export class PostComponent implements OnInit {
   postId: string;
 
   isPostOwner: boolean = false;
+  onEdit: boolean = false;
+  userWriter: User;
 
-  constructor(private httpUser: HttpUserService, private httpComment: HttpCommentService, private blogService: BlogService, public auth: AuthService, private route: ActivatedRoute, private postHttp: HttpPostService) { }
+  constructor(private httpBlog: HttpBlogService, private httpUser: HttpUserService, private httpComment: HttpCommentService, private blogService: BlogService, public auth: AuthService, private route: ActivatedRoute, private postHttp: HttpPostService) { }
 
-  ngOnInit(): void {
+  async ngOnInit() {
     this.commentCreationForm = this.createNewFormGroup();
     this.editPostForm = this.createNewFormGroupForPostEditing();
-    this.route.params.subscribe((params) => {
+    await this.route.params.subscribe((params) => {
       this.postId = params.postId;
       this.postHttp.getSinglePost(this.blogService.getBlogId, this.postId).subscribe((data: any) => {
         this.post = data[0];
-        console.log(this.post)
+        console.log(this.post, 'post')
+        this.httpBlog.getSingleBlog(this.blogService.getBlogId).subscribe((blog: Blog) => {
+          this.httpUser.getUserWithToken(this.auth.authToken).subscribe((user: User) => {
+            this.userWriter = user;
+            if (blog.authorId === user._id) {
+              this.isPostOwner = true;
+            }
+          });
+        });
       });
     });
   }
@@ -59,14 +71,14 @@ export class PostComponent implements OnInit {
 
   async onCreateComment() {
     let userName: string;
-    let userId:string
+    let userId: string
     await this.httpUser.getUserWithToken(this.auth.authToken).subscribe((user: User) => {
       userName = user.lastName + ' ' + user.firstName;
       userId = user._id;
     });
     const payload: Comment = {
-      author: userName,
-      authorId: userId,
+      author: this.userWriter.lastName + ' ' + this.userWriter.firstName,
+      authorId: this.userWriter._id,
       content: this.commentCreationForm.value.content,
       date: new Date
     }
