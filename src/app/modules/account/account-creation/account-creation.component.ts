@@ -54,7 +54,7 @@ export class AccountCreationComponent implements OnInit {
     this.httpUser.createUser(userToCreate).subscribe((account: any) => {
       const payload = {
         username: account.email,
-        password: account.password
+        password: this.creationForm.value.password
       };
       this.httpUser.userLogin(payload).subscribe((data: any) => {
         this.auth.notifyObservable(data.accessToken);
@@ -64,12 +64,13 @@ export class AccountCreationComponent implements OnInit {
           this.auth.notifyUserObservable(payload.username);
           this.httpUser.getSingleUser(payload.username).subscribe((userId: string) => {
             localStorage.setItem('userId', userId);
+            this.router.navigate(['/accueil']);
           });
         });
       })
     });
 
-    // this.router.navigate(['/accueil']);
+
 
   }
 

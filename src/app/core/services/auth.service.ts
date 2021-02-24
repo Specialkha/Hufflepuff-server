@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpUserService } from '../http/user/httpUser.service';
 import { User } from '../model/user';
 
@@ -23,10 +23,19 @@ export class AuthService {
   dataFromUserObservable = this.user$.asObservable();
   user: string;
 
+  private currentUserSubject: BehaviorSubject<any> = new BehaviorSubject<any>(localStorage.getItem('token'));
+  public currentUser: Observable<any>;
+
   constructor() {
     if (localStorage.getItem('token')) {
       this.authToken = localStorage.getItem('token');
     }
+
+    this.currentUser = this.currentUserSubject.asObservable();
+  }
+
+  public get currentUserSubjectValue() {
+    return this.currentUserSubject.value;
   }
 
   public get currentauthTokenValue() {
