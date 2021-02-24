@@ -69,9 +69,6 @@ export class AccountCreationComponent implements OnInit {
         });
       })
     });
-
-
-
   }
 
 }
