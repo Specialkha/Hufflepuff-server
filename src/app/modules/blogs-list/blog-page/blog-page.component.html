@@ -10,7 +10,6 @@
         la description de votre blog</button>
     </div>
 
-
     <div *ngIf="isBlogOwner && onEdit">
       <form [formGroup]="editBlogForm" (ngSubmit)="onEditBlog()">
         <div>
