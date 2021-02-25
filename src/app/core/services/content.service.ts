@@ -8,7 +8,9 @@ export class ContentService {
   constructor() { }
 
   private snackBar: any = {
-    errorPassword: 'Le mot de passe et la confirmation ne sont pas identiques'
+    errorPassword: 'Le mot de passe et la confirmation ne sont pas identiques',
+    errorLogin: 'L\'utilisateur ou le mot de passe n\'est pas correct',
+    successLogin: 'Vous avez été correctement identifié'
   }
 
   getSnackBar() {

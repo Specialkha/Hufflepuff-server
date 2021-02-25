@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { faUser } from '@fortawesome/free-regular-svg-icons';
 import { HttpUserService } from '../../http/user/httpUser.service';
 import { AuthService } from '../../services/auth.service';
+import { ErrorLoginComponent } from '../snack-bar/error-login/error-login.component';
+import { SuccessLoginComponent } from '../snack-bar/success-login/success-login.component';
 
 @Component({
   selector: 'app-nav-menu',
@@ -12,6 +15,8 @@ import { AuthService } from '../../services/auth.service';
 })
 export class NavMenuComponent implements OnInit {
 
+  durationInSeconds: number = 5;
+
   faUser = faUser;
 
   closeResult = '';
@@ -19,7 +24,7 @@ export class NavMenuComponent implements OnInit {
 
   loginForm: FormGroup;
 
-  constructor(private httpUser: HttpUserService, public auth: AuthService, private router: Router) { }
+  constructor(private httpUser: HttpUserService, public auth: AuthService, private router: Router, private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.loginForm = this.createNewFormGroupLogIn();
@@ -47,8 +52,18 @@ export class NavMenuComponent implements OnInit {
           localStorage.setItem('userId', userId);
         });
       });
+      this._snackBar.openFromComponent(SuccessLoginComponent, {
+        duration: this.durationInSeconds * 1000,
+        panelClass: "list-group-item-success",
+        verticalPosition: "top",
+      });
     }, err => {
-      console.log(err)
+      this._snackBar.openFromComponent(ErrorLoginComponent, {
+        duration: this.durationInSeconds * 1000,
+        panelClass: "list-group-item-danger",
+        verticalPosition: "top",
+      });
+      console.log(err);
     });
   }
 
