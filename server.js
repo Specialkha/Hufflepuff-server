@@ -80,23 +80,29 @@ app.get("/api/" + USERS_COLLECTION, function (req, res) {
   });
 });
 
-app.post("/api/auth/signup", function (req, res) {
+app.post("/api/auth/signup", async function (req, res) {
   let newContact = req.body;
   newContact.createDate = new Date();
 
   if (!req.body.lastName) {
     handleError(res, "Invalid user input", "Must provide a name.", 400);
   } else {
-    bcrypt.hash(req.body.password, saltRounds, function (err, hash) {
-      req.body.password = hash;
-      db.collection(USERS_COLLECTION).insertOne(newContact, function (err, doc) {
-        if (err) {
-          handleError(res, err.message, "Failed to create new user.");
-        } else {
-          res.status(201).json(doc.ops[0]);
-        }
+
+    const email = await db.collection(USERS_COLLECTION).findOne({ email: req.body.email });
+    if (email) {
+      return res.status(404).json('Email déjà utilisé');
+    } else {
+      bcrypt.hash(req.body.password, saltRounds, function (err, hash) {
+        req.body.password = hash;
+        db.collection(USERS_COLLECTION).insertOne(newContact, function (err, doc) {
+          if (err) {
+            handleError(res, err.message, "Failed to create new user.");
+          } else {
+            res.status(201).json(doc.ops[0]);
+          }
+        });
       });
-    });
+    }
   }
 });
 

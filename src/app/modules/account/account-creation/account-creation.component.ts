@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { ErrorPasswordComponent } from 'src/app/core/components/snack-bar/account-creation-confirm/error-password/error-password.component';
+import { AccountCreationEmailComponent } from 'src/app/core/components/snack-bar/account-creation-email/account-creation-email.component';
 import { HttpUserService } from 'src/app/core/http/user/httpUser.service';
 import { User } from 'src/app/core/model/user';
 import { AuthService } from 'src/app/core/services/auth.service';
@@ -76,6 +77,17 @@ export class AccountCreationComponent implements OnInit {
             });
           });
         })
+      }, (err: any) => {
+        console.error(err);
+        if (err.error === 'Email déjà utilisé') {
+          this._snackBar.openFromComponent(AccountCreationEmailComponent, {
+            duration: this.durationInSeconds * 1000,
+            panelClass: "list-group-item-danger",
+            verticalPosition: "top",
+          });
+          this.creationForm.get('email').reset();
+          this.creationForm.get('email').invalid;
+        }
       });
     } else {
       this._snackBar.openFromComponent(ErrorPasswordComponent, {

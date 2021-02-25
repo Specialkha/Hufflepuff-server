@@ -31,6 +31,7 @@ import { ErrorPasswordComponent } from './app/core/components/snack-bar/account-
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ErrorLoginComponent } from './app/core/components/snack-bar/error-login/error-login.component';
 import { SuccessLoginComponent } from './app/core/components/snack-bar/success-login/success-login.component';
+import { AccountCreationEmailComponent } from './app/core/components/snack-bar/account-creation-email/account-creation-email.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { SuccessLoginComponent } from './app/core/components/snack-bar/success-l
     AccountUserComponent,
     ErrorPasswordComponent,
     ErrorLoginComponent,
-    SuccessLoginComponent
+    SuccessLoginComponent,
+    AccountCreationEmailComponent
   ],
   imports: [
     BrowserModule,
