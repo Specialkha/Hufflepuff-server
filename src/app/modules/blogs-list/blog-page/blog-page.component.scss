@@ -23,13 +23,16 @@ h3 {
   margin: auto;
 }
 
-button {
-  width: 25%;
-  margin: auto;
-  font-size: 15px;
+.blog-display {
+  width: 100%;
 }
 
 .blog-editing {
-  width: 90%;
+  width: 30%;
   margin: 15px auto;
+}
+
+.button-editing {
+  margin: 5px;
+  font-size: 15px;
 }
