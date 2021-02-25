@@ -66,15 +66,6 @@ ul {
   padding: 0 !important;
 }
 
-@media only screen and (max-width: 1450px) {
-
-  #navMenu {
-
-    width: 40%;
-  }
-
-}
-
 a {
   cursor: pointer;
 }
@@ -85,4 +76,31 @@ a {
   background-size: contain;
   width: 70px;
   height: 70px;
+}
+
+.logout-display {
+  position: absolute;
+  right: 50px;
+  cursor: pointer;
+}
+
+.logout {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.logout-button {
+  width: 95%;
+  margin: 5px auto;
+}
+
+@media only screen and (max-width: 1450px) {
+
+  #navMenu {
+
+    width: 40%;
+  }
+
 }

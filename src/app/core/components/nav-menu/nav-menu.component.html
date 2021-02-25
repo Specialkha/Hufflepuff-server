@@ -42,12 +42,13 @@
             </div>
           </div>
 
-          <div style="position:absolute; right:0;" *ngIf="this.auth.authToken">
-            <fa-icon [icon]="faUser" (click)="onNavigate()"></fa-icon>
-            <div>Profil du compte</div>
-            <button (click)="onLogout()" class="btn btn-danger">Se déconnecter</button>
+          <div *ngIf="this.auth.authToken" class="logout-display">
+            <div class="logout">
+              <fa-icon [icon]="faUser" (click)="onNavigate()"></fa-icon>
+              <div>Profil du compte</div>
+            </div>
+            <button (click)="onLogout()" class="btn btn-danger logout-button">Se déconnecter</button>
           </div>
-
         </div>
       </nav>
     </div>
