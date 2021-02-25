@@ -24,8 +24,8 @@ export class BlogCreationComponent implements OnInit {
   createNewBlogFormGroup() {
     return new FormGroup({
       title: new FormControl('', Validators.required),
-      headline: new FormControl('', Validators.required),
-      description: new FormControl('', Validators.required)
+      headline: new FormControl('', [Validators.required, Validators.maxLength(100)]),
+      description: new FormControl('', [Validators.required, Validators.maxLength(500)])
     });
   }
 
@@ -41,7 +41,7 @@ export class BlogCreationComponent implements OnInit {
       }
       this.httpBlog.createNewBlog(payload).subscribe((data: any) => {
         if (data) {
-          console.log(data,'data')
+          console.log(data, 'data')
           this.router.navigate(['/blog', data._id]);
         }
       });

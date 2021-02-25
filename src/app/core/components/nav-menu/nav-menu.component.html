@@ -45,7 +45,7 @@
           <div style="position:absolute; right:0;" *ngIf="this.auth.authToken">
             <fa-icon [icon]="faUser" (click)="onNavigate()"></fa-icon>
             <div>Profil du compte</div>
-            <button (click)="onLogout()">Se déconnecter</button>
+            <button (click)="onLogout()" class="btn btn-danger">Se déconnecter</button>
           </div>
 
         </div>
