@@ -1,25 +1,41 @@
-.blog-list{
-    cursor: pointer;
+.blog-list {
+  cursor: pointer;
 }
+
 h1 {
-    text-align: center;
-    margin: 25px;
+  text-align: center;
+  margin: 25px;
 }
 
-p{
-    max-height: 100px;
-    overflow: hidden;
+p {
+  max-height: 100px;
+  overflow: hidden;
 }
 
-button{
-    background-color: #0053a3;
-    font-size: 15px;
+button {
+  background-color: #0053a3;
+  font-size: 15px;
 }
 
-.main-content{
+.main-content {
   min-height: 100vh;
 }
 
 .card {
+  border-radius: 15px;
+}
+
+.card-header {
+  text-align: center;
+}
+
+.card-body {
+  width: 90%;
+  margin: 5px auto;
+}
+
+.button-blog {
+  margin: 10px auto;
+  width: 30%;
   border-radius: 15px;
 }

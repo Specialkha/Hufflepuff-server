@@ -39,7 +39,7 @@ export class BlogPageComponent {
               if (data.authorId === user._id) {
                 this.isBlogOwner = true;
               }
-              this.blog.authorId = e.lastName + '' + e.firstName;
+              this.blog.authorId = e.lastName + ' ' + e.firstName;
               this.editBlogForm.patchValue({
                 title: this.blog.title,
                 headline: this.blog.headline,
