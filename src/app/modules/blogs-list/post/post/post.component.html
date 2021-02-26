@@ -1,35 +1,37 @@
-<button *ngIf="isPostOwner" class="btn btn-warning" (click)="onEdit = !onEdit">Editez le titre et
-  le contenu de votre post</button>
+<div class="main-content">
+  <button *ngIf="isPostOwner" class="btn btn-warning" (click)="onEdit = !onEdit">Editez le titre et
+    le contenu de votre post</button>
 
-<div *ngIf="onEdit">
-  <form [formGroup]="editPostForm" (ngSubmit)="onEditPost()">
-    <div>
-      <label for="title">Titre de votre post</label>
-      <quill-editor type="text" formControlName="title"></quill-editor>
+  <div *ngIf="onEdit">
+    <form [formGroup]="editPostForm" (ngSubmit)="onEditPost()">
+      <div>
+        <label for="title">Titre de votre post</label>
+        <quill-editor type="text" formControlName="title"></quill-editor>
+      </div>
+      <div>
+        <label for="content">Votre contenu</label>
+        <quill-editor type="text" formControlName="content"></quill-editor>
+      </div>
+      <button type="submit">Créer votre post</button>
+    </form>
+  </div>
+
+  <div *ngIf="post">
+    <p [innerHTML]="post.title"></p>
+    <p [innerHTML]="post.content"></p>
+    <p>Le {{post.date}}</p>
+  </div>
+
+  <div *ngIf="auth.authToken">
+    <p>Réagir :</p>
+    <form [formGroup]="commentCreationForm" (ngSubmit)="onCreateComment()">
+      <textarea formControlName="content" cols="30" rows="10"></textarea>
+      <button type="submit">Réagir</button>
+    </form>
+  </div>
+  <div>
+    <div *ngFor="let comment of post.comments">
+      <app-comments [comment]="comment"></app-comments>
     </div>
-    <div>
-      <label for="content">Votre contenu</label>
-      <quill-editor type="text" formControlName="content"></quill-editor>
-    </div>
-    <button type="submit">Créer votre post</button>
-  </form>
-</div>
-
-<div *ngIf="post">
-  <p [innerHTML]="post.title"></p>
-  <p [innerHTML]="post.content"></p>
-  <p>Le {{post.date}}</p>
-</div>
-
-<div *ngIf="auth.authToken">
-  <p>Réagir :</p>
-  <form [formGroup]="commentCreationForm" (ngSubmit)="onCreateComment()">
-    <textarea formControlName="content" cols="30" rows="10"></textarea>
-    <button type="submit">Réagir</button>
-  </form>
-</div>
-<div>
-  <div *ngFor="let comment of post.comments">
-    <app-comments [comment]="comment"></app-comments>
   </div>
 </div>

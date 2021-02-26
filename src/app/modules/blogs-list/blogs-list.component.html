@@ -7,11 +7,15 @@
             style="margin:auto; width:100%;">Créez votre
             blog</button>
         </div>
-        <div style="width: 30%; margin: auto;">
-          <input style="width: 95%; margin: 10px;" type="search" [(ngModel)]="searchText"
-            placeholder="Rechercher un blog">
-        </div>
         <h1>Liste des blogs</h1>
+      </div>
+      <div class="search-display">
+        <fa-icon [icon]="faSearch" size="2x"></fa-icon>
+        <div class="search-container">
+          <input class="input-search" type="search" [(ngModel)]="searchText" placeholder="Rechercher un blog"
+            name="search" id="search">
+          <label for="search" class="input-search-label">Chercher un blog</label>
+        </div>
       </div>
     </div>
   </div>
