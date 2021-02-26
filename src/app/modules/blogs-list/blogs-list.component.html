@@ -1,12 +1,9 @@
 <div class="main-content">
   <div class="container">
     <div class="row">
-      <div class="col-md-12">
-        <div style="width: 20%; margin: auto;">
-          <button *ngIf="auth.authToken" class="btn btn-primary" routerLink="/blog-creation"
-            style="margin:auto; width:100%;">Créez votre
+      <div class="col-md-12" style="position: relative;">
+          <button class="input-blog-creation" *ngIf="auth.authToken" class="btn btn-primary" routerLink="/blog-creation">Créez votre
             blog</button>
-        </div>
         <h1>Liste des blogs</h1>
       </div>
       <div class="search-display">
