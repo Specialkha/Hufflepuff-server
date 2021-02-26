@@ -1,65 +1,68 @@
-<div class="row">
-  <div class="blog-display">
-    <div class="blog-editing">
-      <button *ngIf="isBlogOwner" class="btn btn-warning button-editing" (click)="onCreatePost()">Ecrivez un
-        post dans
-        votre
-        blog</button>
+<div class="main-content">
+  <div class="row">
+    <div class="blog-display">
+      <div class="blog-editing">
+        <button *ngIf="isBlogOwner" class="btn btn-warning button-editing" (click)="onCreatePost()">Ecrivez un
+          post dans
+          votre
+          blog</button>
 
-      <button *ngIf="isBlogOwner" class="btn btn-warning button-editing" (click)="onEdit = true">Editez le titre et
-        la description de votre blog</button>
-    </div>
-
-    <div *ngIf="isBlogOwner && onEdit">
-      <form [formGroup]="editBlogForm" (ngSubmit)="onEditBlog()">
-        <div>
-          <label for="title">Titre du blog</label>
-          <quill-editor type="text" formControlName="title"></quill-editor>
-        </div>
-        <div>
-          <label for="content" for="title">Présentation rapide de votre blog</label>
-          <quill-editor type="text" formControlName="headline"></quill-editor>
-        </div>
-        <div>
-          <label for="content" for="title">Contenu du blog</label>
-          <quill-editor type="text" formControlName="description"></quill-editor>
-        </div>
-        <button type="submit">Sauvegarder</button>
-      </form>
-
-      <button class="btn btn-danger" (click)="onDeleteBlog()">Supprimer ce blog</button>
-    </div>
-
-    <div *ngIf="blog">
-      <div style="width: 60%; margin: auto;">
-        <h1 [innerHTML]="blog.title"></h1>
-      </div>
-      <div style="width: 60%; margin: auto;">
-        <h2>Auteur : {{blog.authorId}}</h2>
-      </div>
-      <div style="width: 80%; margin: auto;">
-        <h3 [innerHTML]="blog.description"></h3>
+        <button *ngIf="isBlogOwner" class="btn btn-warning button-editing" (click)="onEdit = true">Editez le titre et
+          la description de votre blog</button>
       </div>
 
-      <div *ngIf="blog.posts">
-        <div *ngFor="let post of blog.posts">
-          <div class="card bg-default" style="margin-bottom: 20px;">
-            <h2 class="card-header" [innerHTML]="post.title"></h2>
-            <div class="card-body">
-              <p>Le {{post.date}}</p>
-            </div>
-            <div class="card-body">
-              <p class="card-text" [innerHTML]="post.content"></p>
-            </div>
-            <div style="width: 100%; margin: auto;">
+      <div *ngIf="isBlogOwner && onEdit">
+        <form [formGroup]="editBlogForm" (ngSubmit)="onEditBlog()">
+          <div>
+            <label for="title">Titre du blog</label>
+            <quill-editor type="text" formControlName="title"></quill-editor>
+          </div>
+          <div>
+            <label for="content" for="title">Présentation rapide de votre blog</label>
+            <quill-editor type="text" formControlName="headline"></quill-editor>
+          </div>
+          <div>
+            <label for="content" for="title">Contenu du blog</label>
+            <quill-editor type="text" formControlName="description"></quill-editor>
+          </div>
+          <button type="submit">Sauvegarder</button>
+        </form>
 
-              <button (click)="onNavigate(blog._id, post)" style="margin:10px; font-size: 15px; width: 30%;"
-                class="btn btn-primary">Voir le
-                post</button>
+        <button class="btn btn-danger" (click)="onDeleteBlog()">Supprimer ce blog</button>
+      </div>
+
+      <div *ngIf="blog">
+        <div style="width: 60%; margin: auto;">
+          <h1 [innerHTML]="blog.title"></h1>
+        </div>
+        <div style="width: 60%; margin: auto;">
+          <h2>Auteur : {{blog.authorId}}</h2>
+        </div>
+        <div style="width: 80%; margin: auto;">
+          <h3 [innerHTML]="blog.description"></h3>
+        </div>
+
+        <div *ngIf="blog.posts">
+          <div *ngFor="let post of blog.posts">
+            <div class="card bg-default" style="margin-bottom: 20px;">
+              <h2 class="card-header" [innerHTML]="post.title"></h2>
+              <div class="card-body">
+                <p>Le {{post.date}}</p>
+              </div>
+              <div class="card-body">
+                <p class="card-text" [innerHTML]="post.content"></p>
+              </div>
+              <div style="width: 100%; margin: auto;">
+
+                <button (click)="onNavigate(blog._id, post)" style="margin:10px; font-size: 15px; width: 30%;"
+                  class="btn btn-primary">Voir le
+                  post</button>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+
 </div>
