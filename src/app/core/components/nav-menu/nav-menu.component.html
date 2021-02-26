@@ -1,56 +1,51 @@
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-12">
-      <nav class="navbar navbar-expand-lg navbar-light bg-light flex-nowrap flex-row">
-        <span class="navbar-toggler-icon logo" [routerLink]="['/accueil']" routerLinkActive="router-link-active"></span>
-        <div class="collapse navbar-collapse menu-bar" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a routerLink="/accueil" routerLinkActive="active" class="nav-link">Accueil</a>
-            </li>
-            <li class="nav-item">
-              <a routerLink="/liste-des-blogs" routerLinkActive="active" class="nav-link">Blog</a>
-            </li>
-            <li class="nav-item">
-              <a routerLink="/activites" routerLinkActive="active" class="nav-link">Activités et
-                jeux</a>
-            </li>
-            <li class="nav-item">
-              <a routerLink="/contact" routerLinkActive="active" class="nav-link">Contact</a>
-            </li>
-          </ul>
-          <div class="connect" *ngIf="!this.auth.authToken">
-            <a (click)="loginOpen = !loginOpen">Se connecter /
-              Créer un
-              compte</a>
-
-            <div *ngIf="loginOpen" class="log-in">
-              <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
-                <div class="form-group">
-                  <label for="login">Votre identifiant</label>
-                  <input type="text" formControlName="login" class="form-control">
-                </div>
-                <div class="form-group">
-                  <label for="password">Votre mot de passe</label>
-                  <input type="password" formControlName="password" class="form-control">
-                </div>
-                <button type="submit" class="btn btn-success">Se connecter</button>
-              </form>
-              <hr>
-              <p>Ou</p>
-              <button (click)="onCreateAccount()" class="btn btn-primary">Créer un compte</button>
-            </div>
+<nav class="navbar navbar-expand-lg navbar-light bg-light flex-wrap flex-row">
+  <div class="logo-display">
+    <span class="logo" [routerLink]="['/accueil']" routerLinkActive="router-link-active"></span>
+  </div>
+  <div class="collapse navbar-collapse menu-bar" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a routerLink="/accueil" routerLinkActive="active" class="nav-link">Accueil</a>
+      </li>
+      <li class="nav-item">
+        <a routerLink="/liste-des-blogs" routerLinkActive="active" class="nav-link">Blog</a>
+      </li>
+      <li class="nav-item">
+        <a routerLink="/activites" routerLinkActive="active" class="nav-link">Activités et
+          jeux</a>
+      </li>
+      <li class="nav-item">
+        <a routerLink="/contact" routerLinkActive="active" class="nav-link">Contact</a>
+      </li>
+    </ul>
+    <div class="connect" *ngIf="!this.auth.authToken">
+      <a (click)="loginOpen = !loginOpen">Se connecter /
+        Créer un
+        compte</a>
+      <div *ngIf="loginOpen" class="log-in">
+        <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+          <div class="form-group">
+            <label for="login">Votre identifiant</label>
+            <input type="text" formControlName="login" class="form-control">
           </div>
-
-          <div *ngIf="this.auth.authToken" class="logout-display">
-            <div class="logout">
-              <fa-icon [icon]="faUser" (click)="onNavigate()"></fa-icon>
-              <div>Profil du compte</div>
-            </div>
-            <button (click)="onLogout()" class="btn btn-danger logout-button">Se déconnecter</button>
+          <div class="form-group">
+            <label for="password">Votre mot de passe</label>
+            <input type="password" formControlName="password" class="form-control">
           </div>
-        </div>
-      </nav>
+          <button type="submit" class="btn btn-success">Se connecter</button>
+        </form>
+        <hr>
+        <p>Ou</p>
+        <button (click)="onCreateAccount()" class="btn btn-primary">Créer un compte</button>
+      </div>
+    </div>
+
+    <div *ngIf="this.auth.authToken" class="logout-display">
+      <div class="logout">
+        <fa-icon [icon]="faUser" (click)="onNavigate()"></fa-icon>
+        <div>Profil du compte</div>
+      </div>
+      <button (click)="onLogout()" class="btn btn-danger logout-button">Se déconnecter</button>
     </div>
   </div>
-</div>
+</nav>

@@ -1,12 +1,20 @@
 .navbar-nav {
+  display: flex;
   flex-direction: row;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
+  width: 800px;
+  margin: 5px auto 25px auto;
+}
+
+nav {
+  height: 250px;
 }
 
 .menu-bar {
   display: flex;
   flex-direction: row;
   align-items: center;
+  width: 100%;
 }
 
 ul {
@@ -74,12 +82,19 @@ a {
   background-image: url('../../../../assets/logo/logo_large.png');
   cursor: pointer;
   background-size: contain;
-  width: 70px;
-  height: 70px;
+  width: 325px;
+  height: 175px;
+  margin: 5px auto;
+  display: block;
+}
+
+.logo-display {
+  width: 100%;
 }
 
 .logout-display {
   position: absolute;
+  top: 190px;
   right: 50px;
   cursor: pointer;
 }
