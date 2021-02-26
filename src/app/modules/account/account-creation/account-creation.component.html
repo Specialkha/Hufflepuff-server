@@ -1,76 +1,78 @@
-<form [formGroup]="creationForm" (ngSubmit)="onCreate()">
-  <div class="col-md-4"></div>
-  <div class="container col-md-4">
-    <div class="row">
-      <div class="card clr">
-        <img
-          src="https://humanhist.com/wp-content/uploads/2018/12/Logo_de_la_R%C3%A9publique_fran%C3%A7aise_1999.svg_.png"
-          class="card-img-top">
-        <div class="card-body">
-          <h5 class="card-title">Création de votre compte</h5>
-          <div class="form-group">
-            <span>Vous êtes ? </span>
-            <div class="radio-group">
-              <label for="genre" class="radio-label">Un homme
-                <input type="radio" formControlName="genre" value="male">
-              </label>
-              <label for="genre" class="radio-label">Une femme
-                <input type="radio" formControlName="genre" value="female">
-              </label>
-            </div>
-          </div>
-          <div class="input-group">
-            <div class="form-group input">
-              <label for="lastName">Nom</label>
-              <input type="text" class="form-control" formControlName="lastName">
-            </div>
-            <div class="form-group input">
-              <label for="firstName">Prénom</label>
-              <input type="text" class="form-control" formControlName="firstName">
-            </div>
-          </div>
-          <div class="input-group">
-            <div class="form-group input">
-              <label for="password">Mot de passe</label>
-              <input type="password" class="form-control" formControlName="password">
-            </div>
-            <div class="form-group input">
-              <label for="confirm">Confirmation</label>
-              <input type="password" class="form-control" formControlName="confirm">
-            </div>
-          </div>
-          <div class="form-group input">
-            <label for="email">E-mail</label>
-            <input type="email" class="form-control" formControlName="email">
-          </div>
-          <div class="input-group">
+<div class="main-content">
+  <form [formGroup]="creationForm" (ngSubmit)="onCreate()">
+    <div class="col-md-4"></div>
+    <div class="container col-md-4">
+      <div class="row">
+        <div class="card clr">
+          <img
+            src="https://humanhist.com/wp-content/uploads/2018/12/Logo_de_la_R%C3%A9publique_fran%C3%A7aise_1999.svg_.png"
+            class="card-img-top">
+          <div class="card-body">
+            <h5 class="card-title">Création de votre compte</h5>
             <div class="form-group">
-              <label for="adress">Adresse</label>
-              <input type="text" class="form-control" formControlName="adress">
+              <span>Vous êtes ? </span>
+              <div class="radio-group">
+                <label for="genre" class="radio-label">Un homme
+                  <input type="radio" formControlName="genre" value="male">
+                </label>
+                <label for="genre" class="radio-label">Une femme
+                  <input type="radio" formControlName="genre" value="female">
+                </label>
+              </div>
+            </div>
+            <div class="input-group">
+              <div class="form-group input">
+                <label for="lastName">Nom</label>
+                <input type="text" class="form-control" formControlName="lastName">
+              </div>
+              <div class="form-group input">
+                <label for="firstName">Prénom</label>
+                <input type="text" class="form-control" formControlName="firstName">
+              </div>
+            </div>
+            <div class="input-group">
+              <div class="form-group input">
+                <label for="password">Mot de passe</label>
+                <input type="password" class="form-control" formControlName="password">
+              </div>
+              <div class="form-group input">
+                <label for="confirm">Confirmation</label>
+                <input type="password" class="form-control" formControlName="confirm">
+              </div>
             </div>
             <div class="form-group input">
-              <label for="zipCode">Code postal</label>
-              <input type="number" class="form-control" formControlName="zipCode">
+              <label for="email">E-mail</label>
+              <input type="email" class="form-control" formControlName="email">
             </div>
-            <div class="form-group input">
-              <label for="city">Ville</label>
-              <input type="text" class="form-control" formControlName="city">
+            <div class="input-group">
+              <div class="form-group">
+                <label for="adress">Adresse</label>
+                <input type="text" class="form-control" formControlName="adress">
+              </div>
+              <div class="form-group input">
+                <label for="zipCode">Code postal</label>
+                <input type="number" class="form-control" formControlName="zipCode">
+              </div>
+              <div class="form-group input">
+                <label for="city">Ville</label>
+                <input type="text" class="form-control" formControlName="city">
+              </div>
             </div>
+            <div class="input-group">
+              <div class="form-group input">
+                <label for="phone">Téléphone fixe</label>
+                <input type="tel" class="form-control" formControlName="phone">
+              </div>
+              <div class="form-group input">
+                <label for="mobile">Téléphone mobile</label>
+                <input type="tel" class="form-control" formControlName="mobile">
+              </div>
+            </div>
+            <button type="submit" [disabled]="!creationForm.valid" class="btn btn-primary">Créer votre compte</button>
           </div>
-          <div class="input-group">
-            <div class="form-group input">
-              <label for="phone">Téléphone fixe</label>
-              <input type="tel" class="form-control" formControlName="phone">
-            </div>
-            <div class="form-group input">
-              <label for="mobile">Téléphone mobile</label>
-              <input type="tel" class="form-control" formControlName="mobile">
-            </div>
-          </div>
-          <button type="submit" [disabled]="!creationForm.valid" class="btn btn-primary">Créer votre compte</button>
+          <div class="col-md-4"></div>
         </div>
-        <div class="col-md-4"></div>
       </div>
     </div>
-  </div>
-</form>
+  </form>
+</div>

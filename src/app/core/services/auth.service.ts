@@ -30,7 +30,6 @@ export class AuthService {
     if (localStorage.getItem('token')) {
       this.authToken = localStorage.getItem('token');
     }
-
     this.currentUser = this.currentUserSubject.asObservable();
   }
 

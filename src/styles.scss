@@ -9,11 +9,15 @@
 
 body {
   font-size: 15px;
-  background-color: #b1bfd8;
-  background-image: linear-gradient(315deg, #b1bfd8 0%, #6782b4 74%);
   min-height: 100vh;
   display: table;
   width: 100%;
+}
+
+.main-content {
+  margin: 0 250px 0 250px;
+  background-color: #b1bfd8;
+  background-image: linear-gradient(315deg, #b1bfd8 0%, #6782b4 74%);
 }
 
 h1 {

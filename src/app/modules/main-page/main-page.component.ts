@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from 'src/app/core/model/user';
 import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
@@ -8,7 +9,12 @@ import { AuthService } from 'src/app/core/services/auth.service';
 })
 export class MainPageComponent implements OnInit {
 
-  constructor(public auth:AuthService) { }
+  userLogin: any;
+
+  constructor(public auth: AuthService) {
+    console.log(this.userLogin,'userlogin')
+    this.userLogin = auth.currentUser;
+  }
 
   ngOnInit(): void {
   }
