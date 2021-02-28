@@ -6,6 +6,7 @@ const mongodb = require("mongodb");
 const ObjectID = mongodb.ObjectID;
 const jwt = require('jsonwebtoken');
 const { verify } = require('./middleware');
+const cors = require('cors');
 
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
@@ -23,6 +24,7 @@ let connectedUsers = [];
 const app = express();
 app.use(bodyParser.json());
 app.use(cookieParser());
+app.use(cors());
 
 // Create link to Angular build directory
 const distDir = __dirname + "/dist/";
