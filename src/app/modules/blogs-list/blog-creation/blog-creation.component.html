@@ -1,15 +1,17 @@
-<form [formGroup]="blogCreationForm" (ngSubmit)="createNewBlog()">
-    <div>
-        <label for="title">Titre du blog</label>
-        <quill-editor type="text" formControlName="title"></quill-editor>
-    </div>
-    <div>
-        <label for="content" for="title">Présentation rapide de votre blog</label>
-        <quill-editor type="text" formControlName="headline" maxLength="100"></quill-editor>
-    </div>
-    <div>
-        <label for="content" for="title">Contenu du blog</label>
-        <quill-editor type="text" formControlName="description" maxLength="500"></quill-editor>
-    </div>
-    <button type="submit">Créer votre blog</button>
-</form>
+<div class="main-content">
+    <form [formGroup]="blogCreationForm" (ngSubmit)="createNewBlog()">
+        <div>
+            <label for="title">Titre du blog</label>
+            <quill-editor type="text" formControlName="title"></quill-editor>
+        </div>
+        <div>
+            <label for="content" for="title">Présentation rapide de votre blog</label>
+            <quill-editor type="text" formControlName="headline" maxLength="100"></quill-editor>
+        </div>
+        <div>
+            <label for="content" for="title">Contenu du blog</label>
+            <quill-editor type="text" formControlName="description" maxLength="500"></quill-editor>
+        </div>
+        <button type="submit">Créer votre blog</button>
+    </form>
+</div>

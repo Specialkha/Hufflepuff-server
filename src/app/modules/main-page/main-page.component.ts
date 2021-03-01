@@ -12,8 +12,6 @@ export class MainPageComponent implements OnInit {
   userLogin: any;
 
   constructor(public auth: AuthService) {
-    console.log(this.userLogin,'userlogin')
-    this.userLogin = auth.currentUser;
   }
 
   ngOnInit(): void {

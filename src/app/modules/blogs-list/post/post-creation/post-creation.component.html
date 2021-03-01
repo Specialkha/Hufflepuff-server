@@ -1,11 +1,14 @@
-<form [formGroup]="postCreationForm" (ngSubmit)="onCreate()">
-    <div>
-        <label for="title">Titre de votre post</label>
-        <quill-editor  type="text" formControlName="title"></quill-editor>
-    </div>
-    <div>
-        <label for="content">Votre contenu</label>
-        <quill-editor  type="text" formControlName="content"></quill-editor>
-    </div>
-    <button type="submit">Créer votre post</button>
-</form>
+<div class="main-content">
+    <form [formGroup]="postCreationForm" (ngSubmit)="onCreate()">
+        <div>
+            <label for="title">Titre de votre post</label>
+            <quill-editor  type="text" formControlName="title"></quill-editor>
+        </div>
+        <div>
+            <label for="content">Votre contenu</label>
+            <quill-editor  type="text" formControlName="content"></quill-editor>
+        </div>
+        <button type="submit">Créer votre post</button>
+    </form>
+</div>
+
