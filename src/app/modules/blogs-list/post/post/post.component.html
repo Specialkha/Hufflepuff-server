@@ -27,15 +27,15 @@
       <div *ngIf="auth.authToken">
         <p>Réagir :</p>
         <form [formGroup]="commentCreationForm" (ngSubmit)="onCreateComment()">
-          <textarea formControlName="content" cols="30" rows="10"></textarea>
-          <button type="submit">Réagir</button>
+          <textarea formControlName="content" cols="80" rows="5" class="comment"></textarea>
+          <button type="submit" class="btn btn-primary">Réagir</button>
         </form>
       </div>
       <div>
-        <hr>
         <p>Ils ont réagit :</p>
+        <hr>
         <div *ngFor="let comment of post.comments">
-          <app-comments [comment]="comment"></app-comments>
+          <app-comments [comment]="comment" [postId]="postId"></app-comments>
         </div>
       </div>
     </div>

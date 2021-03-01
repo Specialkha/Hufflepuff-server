@@ -1,8 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { HttpCommentService } from 'src/app/core/http/comment/httpComment.service';
+import { HttpUserService } from 'src/app/core/http/user/httpUser.service';
 import { Comment } from 'src/app/core/model/comment';
+import { User } from 'src/app/core/model/user';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { BlogService } from 'src/app/core/services/blog.service';
 
 @Component({
   selector: 'app-comments',
@@ -12,15 +15,16 @@ import { AuthService } from 'src/app/core/services/auth.service';
 export class CommentsComponent implements OnInit {
 
   @Input() comment: Comment;
+  @Input() postId: string;
 
-  postCreationForm: FormGroup;
+  commentCreationForm: FormGroup;
 
   onOpenAnswer: boolean = false;
 
-  constructor(public auth: AuthService, private commentHttp: HttpCommentService) { }
+  constructor(public auth: AuthService, private httpComment: HttpCommentService, private httpUser: HttpUserService, private blogService: BlogService) { }
 
   ngOnInit(): void {
-    this.postCreationForm = this.createNewFormGroup();
+    this.commentCreationForm = this.createNewFormGroup();
     console.log(this.comment)
   }
 
@@ -30,8 +34,23 @@ export class CommentsComponent implements OnInit {
     });
   }
 
-  onCreateComment() {
+  async onCreateComment() {
     this.onOpenAnswer = false;
+    let userName: string;
+    let userId: string
+    await this.httpUser.getUserWithToken(this.auth.authToken).subscribe((user: User) => {
+      userName = user.lastName + ' ' + user.firstName;
+      userId = user._id;
+    });
+    const payload: Comment = {
+      author: userName,
+      authorId: userId,
+      content: this.commentCreationForm.value.content,
+      date: new Date
+    }
+    this.httpComment.createComment(this.blogService.getBlogId, this.postId, payload).subscribe((data) => {
+      console.log(data);
+    });
   }
 
 }

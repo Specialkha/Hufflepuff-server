@@ -1,14 +1,15 @@
 <div *ngIf="comment">
   <p>{{comment.comments.content}}</p>
-  <p>Ecrit par {{comment.comments.author}} à {{comment.comments.date | date : 'HH:mm'}} le {{comment.comments.date | date:
+  <p>Ecrit par {{comment.comments.author}} à {{comment.comments.date | date : 'HH:mm'}} le {{comment.comments.date |
+    date:
     'd:m:y'}}</p>
-    <!-- <button (click)='onOpenAnswer = !onOpenAnswer'>Répondre</button> -->
-    <hr>
+  <button (click)='onOpenAnswer = !onOpenAnswer' class="btn btn-outline-primary">Répondre</button>
+  <hr>
 </div>
 
-<!-- <div *ngIf="auth.authToken && onOpenAnswer">
-  <form [formGroup]="postCreationForm" (ngSubmit)="onCreateComment()">
+<div *ngIf="auth.authToken && onOpenAnswer">
+  <form [formGroup]="commentCreationForm" (ngSubmit)="onCreateComment()">
     <textarea formControlName="content" cols="30" rows="10"></textarea>
-    <button type="submit">Répondre</button>
+    <button type="submit" class="btn btn-outline-success">Répondre</button>
   </form>
-</div> -->
+</div>
