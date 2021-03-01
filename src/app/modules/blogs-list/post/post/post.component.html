@@ -17,22 +17,24 @@
       </form>
     </div>
 
-    <div *ngIf="post">
-      <h2 [innerHTML]="post.title"></h2>
-      <p [innerHTML]="post.content"></p>
-      <p>Le {{post.date}}</p>
+    <div *ngIf="post" class="post-module">
+      <h2 [innerHTML]="post.title" class="post-title"></h2>
+      <p [innerHTML]="post.content" class="post-content"></p>
+      <p class="post-date">Le {{post.date}}</p>
     </div>
 
-    <div *ngIf="auth.authToken">
-      <p>Réagir :</p>
-      <form [formGroup]="commentCreationForm" (ngSubmit)="onCreateComment()">
-        <textarea formControlName="content" cols="30" rows="10"></textarea>
-        <button type="submit">Réagir</button>
-      </form>
-    </div>
-    <div>
-      <div *ngFor="let comment of post.comments">
-        <app-comments [comment]="comment"></app-comments>
+    <div class="post-comment">
+      <div *ngIf="auth.authToken">
+        <p>Réagir :</p>
+        <form [formGroup]="commentCreationForm" (ngSubmit)="onCreateComment()">
+          <textarea formControlName="content" cols="30" rows="10"></textarea>
+          <button type="submit">Réagir</button>
+        </form>
+      </div>
+      <div>
+        <div *ngFor="let comment of post.comments">
+          <app-comments [comment]="comment"></app-comments>
+        </div>
       </div>
     </div>
   </div>
