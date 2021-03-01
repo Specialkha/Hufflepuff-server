@@ -33,6 +33,7 @@
       </div>
       <div>
         <div *ngFor="let comment of post.comments">
+          <p>Ils ont réagit :</p>
           <app-comments [comment]="comment"></app-comments>
         </div>
       </div>
