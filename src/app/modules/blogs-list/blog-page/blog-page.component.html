@@ -36,7 +36,8 @@
           <h1 [innerHTML]="blog.title"></h1>
         </div>
         <div style="width: 60%; margin: auto;">
-          <h2>Auteur : {{blog.authorId}}</h2>
+          <h2>Auteur : {{blog.lastName}} {{blog.firstName}}
+          </h2>
         </div>
         <div style="width: 60%; margin: auto;">
           <h3 [innerHTML]="blog.description"></h3>
