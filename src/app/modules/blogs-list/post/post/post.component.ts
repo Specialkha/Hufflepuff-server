@@ -39,7 +39,6 @@ export class PostComponent implements OnInit {
       this.postId = params.postId;
       this.postHttp.getSinglePost(this.blogService.getBlogId, this.postId).subscribe((data: any) => {
         this.post = data[0];
-        console.log(this.post, 'post')
         this.httpBlog.getSingleBlog(this.blogService.getBlogId).subscribe((blog: Blog) => {
           this.httpUser.getUserWithToken(this.auth.authToken).subscribe((user: User) => {
             this.userWriter = user;
@@ -83,7 +82,6 @@ export class PostComponent implements OnInit {
       date: new Date
     }
     this.httpComment.createComment(this.blogService.getBlogId, this.postId, payload).subscribe((data) => {
-      console.log(data);
     });
   }
 

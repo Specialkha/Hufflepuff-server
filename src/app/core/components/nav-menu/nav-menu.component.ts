@@ -4,6 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { faUser } from '@fortawesome/free-regular-svg-icons';
 import { HttpUserService } from '../../http/user/httpUser.service';
+import { User } from '../../model/user';
 import { AuthService } from '../../services/auth.service';
 import { ErrorLoginComponent } from '../snack-bar/error-login/error-login.component';
 import { SuccessLoginComponent } from '../snack-bar/success-login/success-login.component';
@@ -28,6 +29,10 @@ export class NavMenuComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginForm = this.createNewFormGroupLogIn();
+    if (this.auth.authToken)
+      this.httpUser.getUserWithToken(this.auth.authToken).subscribe((user: User) => {
+        this.auth.notifyUserObservable(user);
+      });
   }
 
   createNewFormGroupLogIn() {
@@ -63,7 +68,6 @@ export class NavMenuComponent implements OnInit {
         panelClass: "list-group-item-danger",
         verticalPosition: "top",
       });
-      console.log(err);
     });
   }
 
@@ -74,10 +78,11 @@ export class NavMenuComponent implements OnInit {
     });
     userCredential.token = localStorage.getItem('token');
     this.httpUser.userLogout(userCredential).subscribe((data: string) => {
-    });
-    localStorage.removeItem('token');
-    this.auth.dataFromObservable.subscribe(() => {
-      this.auth.authToken = null;
+      localStorage.removeItem('token');
+      localStorage.removeItem('userId');
+      this.auth.dataFromObservable.subscribe(() => {
+        this.auth.authToken = null;
+      });
     });
   }
 

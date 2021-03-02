@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { HttpUserService } from '../http/user/httpUser.service';
 import { User } from '../model/user';
 
 @Injectable({

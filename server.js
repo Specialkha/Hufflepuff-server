@@ -176,7 +176,6 @@ const authenticateJWT = (req, res, next) => {
     const token = authHeader.split(' ')[0];
     jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
       if (err) {
-        console.log(err)
         return res.sendStatus(403);
       }
 
@@ -344,7 +343,6 @@ app.post("/api" + "/post" + "/:id", authenticateJWT, function (req, res) {
 });
 
 app.get("/api/" + BLOGS_COLLECTION + "/:blogId" + "/post" + "/:postId", function (req, res) {
-  console.log(req.params.postId)
   // db.getCollection('blogs').findOne({_id:new ObjectId("6032c2088dd8c129d02b1c9f")}, {posts:{$elemMatch:{_id:req.params.postId}}});
   db.collection(BLOGS_COLLECTION).aggregate([
     { $match: { _id: new ObjectID(req.params.blogId) } }, {
@@ -366,7 +364,6 @@ app.get("/api/" + BLOGS_COLLECTION + "/:blogId" + "/post" + "/:postId", function
     } else {
       cursor.toArray((error, doc) => {
         if (error) { return handleError(res, error.message, "Failed to get post"); }
-        console.log(doc)
         res.status(200).send(doc);
       });
     }

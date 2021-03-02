@@ -25,7 +25,6 @@ export class CommentsComponent implements OnInit {
 
   ngOnInit(): void {
     this.commentCreationForm = this.createNewFormGroup();
-    console.log(this.comment)
   }
 
   createNewFormGroup() {
@@ -49,7 +48,6 @@ export class CommentsComponent implements OnInit {
       date: new Date
     }
     this.httpComment.createComment(this.blogService.getBlogId, this.postId, payload).subscribe((data) => {
-      console.log(data);
     });
   }
 

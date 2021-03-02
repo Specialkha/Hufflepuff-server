@@ -75,7 +75,6 @@ export class AccountUserComponent implements OnInit {
 
   onDeleteAccount() {
     this.httpUser.deleteUser(this.user._id).subscribe(data => {
-      console.log(data);
     });
   }
 }

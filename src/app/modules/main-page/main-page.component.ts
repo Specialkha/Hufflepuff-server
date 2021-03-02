@@ -9,9 +9,12 @@ import { AuthService } from 'src/app/core/services/auth.service';
 })
 export class MainPageComponent implements OnInit {
 
-  userLogin: any;
+  user: User;
 
   constructor(public auth: AuthService) {
+    auth.dataFromUserObservable.subscribe((user: User) => {
+      this.user = user;
+    });
   }
 
   ngOnInit(): void {
