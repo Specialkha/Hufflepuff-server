@@ -30,12 +30,8 @@ export class PostComponent implements OnInit {
   onEdit: boolean = false;
   userWriter: User;
 
-  constructor(private httpBlog: HttpBlogService, private httpUser: HttpUserService, private httpComment: HttpCommentService, private blogService: BlogService, public auth: AuthService, private route: ActivatedRoute, private postHttp: HttpPostService) { }
-
-  async ngOnInit() {
-    this.commentCreationForm = this.createNewFormGroup();
-    this.editPostForm = this.createNewFormGroupForPostEditing();
-    await this.route.params.subscribe((params) => {
+  constructor(private httpBlog: HttpBlogService, private httpUser: HttpUserService, private httpComment: HttpCommentService, private blogService: BlogService, public auth: AuthService, private route: ActivatedRoute, private postHttp: HttpPostService) {
+    this.route.params.subscribe((params) => {
       this.postId = params.postId;
       this.postHttp.getSinglePost(this.blogService.getBlogId, this.postId).subscribe((data: any) => {
         this.post = data[0];
@@ -49,6 +45,11 @@ export class PostComponent implements OnInit {
         });
       });
     });
+  }
+
+  ngOnInit() {
+    this.commentCreationForm = this.createNewFormGroup();
+    this.editPostForm = this.createNewFormGroupForPostEditing();
   }
 
   createNewFormGroup() {
@@ -81,7 +82,13 @@ export class PostComponent implements OnInit {
       content: this.commentCreationForm.value.content,
       date: new Date
     }
-    this.httpComment.createComment(this.blogService.getBlogId, this.postId, payload).subscribe((data) => {
+    await this.httpComment.createComment(this.blogService.getBlogId, this.postId, payload).subscribe((data) => {
+      if (data) {
+        this.commentCreationForm.reset();
+        this.postHttp.getSinglePost(this.blogService.getBlogId, this.postId).subscribe((data: any) => {
+          this.post = data[0];
+        });
+      }
     });
   }
 
