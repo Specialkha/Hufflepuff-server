@@ -17,6 +17,7 @@ import { TosComponent } from './app/modules/tos/tos.component';
 const routes: Routes = [
   { path: 'accueil', component: MainPageComponent },
   { path: 'contact', component: ContactComponent },
+  { path: 'news-creation', component: NewsCreationComponent },
   { path: 'liste-des-blogs', component: BlogsListComponent },
   { path: 'blog/:blogId', component: BlogPageComponent },
   { path: 'blog-creation', component: BlogCreationComponent, canActivate: [AuthGuard] },
