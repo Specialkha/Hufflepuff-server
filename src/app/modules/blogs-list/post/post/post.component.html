@@ -32,17 +32,17 @@
         </form>
       </div>
       <div *ngIf="isLoaded">
-        <p>Soyez le premier à réagir !</p>
-      </div>
-      <div *ngIf="post.comments.length > 0">
-        <p>Ils ont réagit :</p>
-        <hr>
-        <div *ngFor="let comment of post.comments">
-          <app-comments [comment]="comment" [postId]="postId"></app-comments>
+        <div *ngIf="post.comments.length > 0">
+          <p>Ils ont réagit :</p>
+          <hr>
+          <div *ngFor="let comment of post.comments">
+            <app-comments [comment]="comment" [postId]="postId"></app-comments>
+          </div>
+        </div>
+        <div *ngIf="post.comments.length === 0">
+          <p>Soyez le premier à réagir !</p>
         </div>
       </div>
-    </div>
-    <div *ngIf="post.comments.length === 0">
     </div>
   </div>
 </div>
