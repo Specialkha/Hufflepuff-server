@@ -46,7 +46,7 @@ export class AccountCreationComponent implements OnInit {
   }
 
   onCreate() {
-    if (this.f.password === this.f.confirm) {
+    if (this.f.password === this.f.confirm && this.f.password && this.f.confirm) {
       const userToCreate: User = {
         genre: this.f.genre,
         lastName: this.f.lastName,

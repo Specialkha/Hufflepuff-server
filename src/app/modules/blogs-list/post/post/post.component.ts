@@ -25,6 +25,7 @@ export class PostComponent implements OnInit {
 
   post: Post;
   postId: string;
+  isLoaded: boolean = false;
 
   isPostOwner: boolean = false;
   onEdit: boolean = false;
@@ -38,6 +39,7 @@ export class PostComponent implements OnInit {
         this.httpBlog.getSingleBlog(this.blogService.getBlogId).subscribe((blog: Blog) => {
           this.httpUser.getUserWithToken(this.auth.authToken).subscribe((user: User) => {
             this.userWriter = user;
+            this.isLoaded = true;
             if (blog.authorId === user._id) {
               this.isPostOwner = true;
             }
