@@ -37,12 +37,14 @@ export class PostComponent implements OnInit {
       this.postHttp.getSinglePost(this.blogService.getBlogId, this.postId).subscribe((data: any) => {
         this.post = data[0];
         this.httpBlog.getSingleBlog(this.blogService.getBlogId).subscribe((blog: Blog) => {
+          this.isLoaded = true;
           this.httpUser.getUserWithToken(this.auth.authToken).subscribe((user: User) => {
             this.userWriter = user;
-            this.isLoaded = true;
             if (blog.authorId === user._id) {
               this.isPostOwner = true;
             }
+          }, err => {
+            console.error(err)
           });
         });
       });

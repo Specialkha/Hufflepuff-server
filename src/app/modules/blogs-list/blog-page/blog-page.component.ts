@@ -44,6 +44,8 @@ export class BlogPageComponent {
                 headline: this.blog.headline,
                 description: this.blog.description
               });
+            }, err => {
+              console.error(err)
             });
           });
         });
