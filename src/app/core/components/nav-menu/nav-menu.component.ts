@@ -32,6 +32,16 @@ export class NavMenuComponent implements OnInit {
     if (this.auth.authToken)
       this.httpUser.getUserWithToken(this.auth.authToken).subscribe((user: User) => {
         this.auth.notifyUserObservable(user);
+        this.auth.notifyObservable(this.auth.authToken);
+      }, err => {
+        if (err) {
+          this.httpUser.userLogout('').subscribe((data) => {
+            if (data) {
+              this.auth.authToken = undefined;
+              console.log('Vous avez été déconnecté');
+            }
+          });
+        }
       });
   }
 

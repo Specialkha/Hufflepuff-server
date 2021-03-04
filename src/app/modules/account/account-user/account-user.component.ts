@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { HttpUserService } from 'src/app/core/http/user/httpUser.service';
 import { User } from 'src/app/core/model/user';
 import { AuthService } from 'src/app/core/services/auth.service';
@@ -14,8 +15,13 @@ export class AccountUserComponent implements OnInit {
   accountForm: FormGroup;
   user: User;
 
-  constructor(private httpUser: HttpUserService, private auth: AuthService) {
+  constructor(private httpUser: HttpUserService, private auth: AuthService, private router: Router) {
     this.accountForm = this.createNewFormGroup();
+    auth.dataFromObservable.subscribe(data => {
+      if (!data) {
+        router.navigate(['/']);
+      }
+    })
   }
 
   async ngOnInit() {
