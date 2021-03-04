@@ -31,6 +31,8 @@ export class PostComponent implements OnInit {
   onEdit: boolean = false;
   userWriter: User;
 
+  // onOpenAnswer: boolean = false;
+
   constructor(private httpBlog: HttpBlogService, private httpUser: HttpUserService, private httpComment: HttpCommentService, private blogService: BlogService, public auth: AuthService, private route: ActivatedRoute, private postHttp: HttpPostService) {
     this.route.params.subscribe((params) => {
       this.postId = params.postId;
@@ -54,6 +56,7 @@ export class PostComponent implements OnInit {
   ngOnInit() {
     this.commentCreationForm = this.createNewFormGroup();
     this.editPostForm = this.createNewFormGroupForPostEditing();
+    this.commentCreationForm = this.createNewFormGroup();
   }
 
   createNewFormGroup() {
@@ -95,5 +98,29 @@ export class PostComponent implements OnInit {
       }
     });
   }
+
+  createNewFormGroupForComment() {
+    return new FormGroup({
+      content: new FormControl('', Validators.required)
+    });
+  }
+
+  // async onCreateComment() {
+  //   this.onOpenAnswer = false;
+  //   let userName: string;
+  //   let userId: string
+  //   await this.httpUser.getUserWithToken(this.auth.authToken).subscribe((user: User) => {
+  //     userName = user.lastName + ' ' + user.firstName;
+  //     userId = user._id;
+  //   });
+  //   const payload: Comment = {
+  //     author: userName,
+  //     authorId: userId,
+  //     content: this.commentCreationForm.value.content,
+  //     date: new Date
+  //   }
+  //   this.httpComment.createComment(this.blogService.getBlogId, this.postId, payload).subscribe((data) => {
+  //   });
+  // }
 
 }

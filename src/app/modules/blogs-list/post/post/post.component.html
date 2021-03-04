@@ -27,16 +27,30 @@
       <div *ngIf="auth.authToken">
         <p>Réagir :</p>
         <form [formGroup]="commentCreationForm" (ngSubmit)="onCreateComment()">
-          <textarea formControlName="content" cols="80" rows="5" class="comment"></textarea>
-          <button type="submit" class="btn btn-primary">Réagir</button>
+          <textarea formControlName="content" cols="77" rows="5" class="comment"></textarea>
+          <button type="submit" class="btn btn-primary submit">Réagir</button>
         </form>
       </div>
       <div *ngIf="isLoaded">
-        <div *ngIf="post.comments.length > 0">
+        <div *ngIf="post.comments.length > 0" class="reaction-comment">
           <p>Ils ont réagit :</p>
           <hr>
-          <div *ngFor="let comment of post.comments">
-            <app-comments [comment]="comment" [postId]="postId"></app-comments>
+          <div *ngFor="let comment of post.comments" class="users-comments">
+            <div *ngIf="comment">
+              <p class="comment-content" [innerHTML]="comment.comments.content"></p>
+              <p class="date-comment">Ecrit par {{comment.comments.author}} à {{comment.comments.date | date : 'HH:mm'}}
+                le
+                {{comment.comments.date | date : 'd:m:y'}}</p>
+              <!-- <button (click)='onOpenAnswer = !onOpenAnswer' class="btn btn-outline-primary">Répondre</button> -->
+              <hr>
+            </div>
+
+            <!-- <div *ngIf="auth.authToken && onOpenAnswer">
+              <form [formGroup]="commentCreationForm" (ngSubmit)="onCreateComment()">
+                <textarea formControlName="content" cols="30" rows="10"></textarea>
+                <button type="submit" class="btn btn-outline-success">Répondre</button>
+              </form>
+            </div> -->
           </div>
         </div>
         <div *ngIf="post.comments.length === 0">

@@ -1,4 +1,4 @@
-.main-content{
+.main-content {
   margin-right: unset;
   margin-left: unset;
 }
@@ -24,17 +24,54 @@
   text-align: justify;
 }
 
+textarea {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 100%;
+  outline: none;
+}
+
 .post-comment {
-  margin: 0 250px 0 250px;
+  margin: 25px auto;
+  width: 45%;
   padding-bottom: 50px;
 }
 
-.comment-prompt{
+.submit {
+  width: 100%;
+}
+
+.comment-prompt {
   text-align: center;
   font-size: 24px;
   margin-top: 50px;
 }
 
-.comment{
+.reaction-comment {
+  margin-top: 25px;
+}
+
+.users-comments {
+  margin-left: 50px;
+}
+
+hr {
+  border: 0;
+  height: 1px;
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+}
+
+.comment-content {
+  text-align: justify;
+  white-space: pre-wrap;
+}
+
+.date-comment {
+  margin-left: 25px;
+  font-size: 12px;
+}
+
+.comment {
   resize: none;
 }
