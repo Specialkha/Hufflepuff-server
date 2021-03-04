@@ -21,7 +21,7 @@ export class AccountUserComponent implements OnInit {
       if (!data) {
         router.navigate(['/']);
       }
-    })
+    });
   }
 
   async ngOnInit() {
