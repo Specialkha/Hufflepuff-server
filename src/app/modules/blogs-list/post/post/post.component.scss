@@ -21,10 +21,18 @@
 
 .post-content {
   margin: 0 50px 0 50px;
+  text-align: justify;
 }
 
 .post-comment {
   margin: 0 250px 0 250px;
+  padding-bottom: 50px;
+}
+
+.comment-prompt{
+  text-align: center;
+  font-size: 24px;
+  margin-top: 50px;
 }
 
 .comment{
