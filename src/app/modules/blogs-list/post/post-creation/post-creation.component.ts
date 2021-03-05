@@ -19,7 +19,7 @@ export class PostCreationComponent implements OnInit {
 
   idBlog: string;
 
-  constructor(private random: RandomGeneratorService,private httpPost: HttpPostService, private httpBlog: HttpBlogService, private httpUser: HttpUserService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private random: RandomGeneratorService, private httpPost: HttpPostService, private httpBlog: HttpBlogService, private httpUser: HttpUserService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -31,7 +31,7 @@ export class PostCreationComponent implements OnInit {
   newFormGroupForPostCreation() {
     return new FormGroup({
       title: new FormControl('', Validators.required),
-      content: new FormControl('', Validators.required)
+      content: new FormControl('', [Validators.required, Validators.maxLength(20000)])
     });
   }
 
