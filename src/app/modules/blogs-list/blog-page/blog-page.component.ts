@@ -45,6 +45,7 @@ export class BlogPageComponent {
                 description: this.blog.description
               });
             }, err => {
+              this.blog.authorId = e.lastName + ' ' + e.firstName;
               console.error(err)
             });
           });
