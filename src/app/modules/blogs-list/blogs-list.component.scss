@@ -51,9 +51,9 @@ button {
   cursor: pointer;
   border-radius: 5px;
   transition: transform .2s ease;
-  -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
-  box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 2px 2px 1px 0px rgba(0, 0, 0, 0.4);
+  -moz-box-shadow: 2px 2px 1px 0px rgba(0, 0, 0, 0.4);
+  box-shadow: 2px 2px 1px 0px rgba(0, 0, 0, 0.4);
 }
 
 .zoom:hover {
