@@ -2,13 +2,12 @@
     <form [formGroup]="postCreationForm" (ngSubmit)="onCreate()" class="creation-form">
         <div class="div-input">
             <label for="title">Titre de votre post</label>
-            <quill-editor  type="text" formControlName="title"></quill-editor>
+            <quill-editor type="text" formControlName="title"></quill-editor>
         </div>
         <div class="div-input">
             <label for="content">Votre contenu</label>
-            <quill-editor  type="text" formControlName="content"></quill-editor>
+            <quill-editor type="text" formControlName="content"></quill-editor>
         </div>
         <button type="submit" class="btn btn-success submit">Créer votre post</button>
     </form>
 </div>
-
