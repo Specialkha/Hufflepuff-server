@@ -19,13 +19,17 @@
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label for="lastName">Nom</label>
+                            <label for="lastName">Nom *</label>
                             <input type="text" class="form-control" formControlName="lastName">
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="firstName">Prénom</label>
+                            <label for="firstName">Prénom *</label>
                             <input type="text" class="form-control" formControlName="firstName">
                         </div>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="email">E-mail *</label>
+                        <input type="text" formControlName="email" class="form-control">
                     </div>
                     <div class="form-row">
                         <div class="form-group">
@@ -42,12 +46,8 @@
                             <label for="city">Ville</label>
                             <input type="text" class="form-control" formControlName="city">
                         </div>
-                        <div class="form-group col-md-4">
-                            <label for="email">E-mail</label>
-                            <input type="text" formControlName="email" class="form-control">
-                        </div>
                         <div class="form-group col-md-2">
-                            <label for="mobile">Téléphone mobile</label>
+                            <label for="mobile">Téléphone mobile *</label>
                             <input type="text" class="form-control" formControlName="mobile">
                         </div>
                     </div>

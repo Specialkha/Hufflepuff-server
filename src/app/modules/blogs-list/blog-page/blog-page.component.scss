@@ -39,3 +39,20 @@ h3 {
 button {
   outline: none;
 }
+
+.card {
+  border-radius: 15px;
+}
+
+.card-header {
+  text-align: center;
+  max-height: 100px;
+  overflow: hidden;
+}
+
+.card-body {
+  width: 90%;
+  margin: 5px auto;
+  max-height: 200px;
+  overflow: hidden;
+}
