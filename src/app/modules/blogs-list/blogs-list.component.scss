@@ -17,14 +17,11 @@ h1 {
   margin: 25px;
 }
 
-p {
-  max-height: 100px;
-  overflow: hidden;
-}
 
 button {
   background-color: #0053a3;
   font-size: 15px;
+  margin: 25px;
 }
 
 .card {
@@ -38,6 +35,8 @@ button {
 .card-body {
   width: 90%;
   margin: 5px auto;
+  max-height: 200px;
+  overflow: hidden;
 }
 
 .button-blog {
@@ -139,4 +138,9 @@ fa-icon {
   &:invalid {
     box-shadow: none;
   }
+}
+
+h2{
+  max-height: 100px;
+  overflow: hidden;
 }
