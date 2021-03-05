@@ -43,8 +43,8 @@
           <h3 [innerHTML]="blog.description"></h3>
         </div>
 
-        <div *ngIf="blog.posts">
-          <div *ngFor="let post of blog.posts">
+        <div class="container" *ngIf="blog.posts">
+          <div class="row" *ngFor="let post of blog.posts">
             <div class="card bg-default" style="margin-bottom: 20px;">
               <h2 class="card-header" [innerHTML]="post.title"></h2>
               <div class="card-body">
@@ -54,9 +54,8 @@
                 <p class="card-text" [innerHTML]="post.content | slice : 0:300"></p>
               </div>
               <div style="width: 100%; margin: auto;">
-
                 <button (click)="onNavigate(blog._id, post)" style="margin:10px; font-size: 15px; width: 30%;"
-                  class="btn btn-primary">Voir le
+                  class="btn btn-primary button-blog">Voir le
                   post</button>
               </div>
             </div>

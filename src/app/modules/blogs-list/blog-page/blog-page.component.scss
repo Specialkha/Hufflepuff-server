@@ -18,7 +18,7 @@ h3 {
 }
 
 .card {
-  width: 40%;
+  width: 80%;
   margin: auto;
 }
 
@@ -37,6 +37,7 @@ h3 {
 }
 
 button {
+
   outline: none;
 }
 
@@ -46,13 +47,22 @@ button {
 
 .card-header {
   text-align: center;
-  max-height: 100px;
+  max-height: 200px;
   overflow: hidden;
 }
 
 .card-body {
   width: 90%;
   margin: 5px auto;
-  max-height: 200px;
+  max-height: 300px;
   overflow: hidden;
+}
+
+.button-blog {
+  background-color: #0053a3;
+  margin: 10px auto;
+  width: 30%;
+  border-radius: 15px;
+  outline: none;
+  font-size: 15px;
 }
