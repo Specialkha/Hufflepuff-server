@@ -17,13 +17,6 @@ h1 {
   margin: 25px;
 }
 
-
-button {
-  background-color: #0053a3;
-  font-size: 15px;
-  margin: 25px;
-}
-
 .card {
   border-radius: 15px;
 }
@@ -144,4 +137,14 @@ fa-icon {
 h2{
   max-height: 100px;
   overflow: hidden;
+}
+
+button {
+  background-color: #0053a3;
+  font-size: 15px;
+  margin: 25px;
+}
+
+button:hover{
+    background-color: #00417e;
 }

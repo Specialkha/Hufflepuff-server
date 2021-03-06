@@ -28,12 +28,12 @@
         <p>Réagir :</p>
         <form [formGroup]="commentCreationForm" (ngSubmit)="onCreateComment()">
           <textarea formControlName="content" cols="77" rows="5" class="comment"></textarea>
-          <button type="submit" class="btn btn-primary submit">Réagir</button>
+          <button type="submit" class="btn btn-primary blue-button submit">Réagir</button>
         </form>
       </div>
       <div *ngIf="isLoaded">
         <div *ngIf="post.comments.length > 0" class="reaction-comment">
-          <p>Ils ont réagit :</p>
+          <p>Ils ont réagi :</p>
           <hr>
           <div *ngFor="let comment of post.comments" class="users-comments">
             <div *ngIf="comment">
@@ -43,13 +43,6 @@
                 {{comment.comments.date | date : 'dd/MM/yyyy'}}</p>
               <hr>
             </div>
-          </div>
-          <div *ngIf="auth.authToken">
-            <p>Réagir :</p>
-            <form [formGroup]="commentCreationForm" (ngSubmit)="onCreateComment()">
-              <textarea formControlName="content" cols="77" rows="5" class="comment"></textarea>
-              <button type="submit" class="btn btn-primary submit">Réagir</button>
-            </form>
           </div>
         </div>
         <div *ngIf="post.comments.length === 0">
