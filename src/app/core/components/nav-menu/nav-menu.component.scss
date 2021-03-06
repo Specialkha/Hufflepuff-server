@@ -7,7 +7,7 @@
 }
 
 .topNavMenu {
-  border-bottom: 2px solid #b1bfd8;
+  border-bottom: 2px solid #0053a3;
   margin-bottom: 0;
 }
 
@@ -16,7 +16,8 @@
 }
 
 nav {
-  height: 250px;
+  height: 140px;
+  background-color: #e0e0e0;
 }
 
 .menu-bar {
@@ -42,8 +43,8 @@ ul {
 .connect {
   position: absolute;
   right: 100px;
-  background-color: white;
-  border-color: white;
+  background-color: #e0e0e0 ;
+  border-color: #e0e0e0;
   top: 210px;
 }
 
@@ -51,7 +52,7 @@ ul {
   position: absolute;
   width: 250px;
   top: 30px;
-  background-color: white;
+  background-color: #e0e0e0;
   padding: 15px;
   animation: fadeIn ease-in-out 0.4s;
 }
@@ -92,8 +93,8 @@ a {
   background-image: url('../../../../assets/logo/logo_large.png');
   cursor: pointer;
   background-size: contain;
-  width: 325px;
-  height: 175px;
+  width: 130px;
+  height: 70px;
   margin: 5px auto;
   display: block;
   cursor:initial;
