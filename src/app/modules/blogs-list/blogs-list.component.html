@@ -1,17 +1,33 @@
-<app-nav-menu></app-nav-menu>
-
-<div class="row">
-    <div class="col-md-5">
-        <button class="btn btn-warning" (click)="createNewBlog()">Créez votre blog</button>
-        <h2>Liste des blogs</h2>
-        <ul class="list-group">
-            <li class="list-group-item" *ngFor="let blog of blogs" (click)="selectBlog(blog)"
-                [class.active]="blog === selectedBlog">
-                {{blog.title}}
-            </li>
-        </ul>
-        
+<div class="main-content">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12" style="position: relative;">
+          <button class="input-blog-creation" *ngIf="auth.authToken" class="btn btn-primary" routerLink="/blog-creation">Créez votre
+            blog</button>
+        <h1>Liste des blogs</h1>
+      </div>
+      <div class="search-display">
+        <fa-icon [icon]="faSearch" size="2x"></fa-icon>
+        <div class="search-container">
+          <input class="input-search" type="search" [(ngModel)]="searchText" placeholder="Rechercher un blog"
+            name="search" id="search">
+          <label for="search" class="input-search-label">Chercher un blog</label>
+        </div>
+      </div>
     </div>
-    <div class="col-md-5 col-md-offset-2">
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6" *ngFor="let blog of (blogs | filter: searchText)">
+        <div class="card bg-default zoom" style="margin-bottom: 20px;" (click)="onNavigate(blog)">
+          <h2 class="card-header" [innerHTML]="blog.title"></h2>
+          <div class="card-body">
+            <h3 [innerHTML]="blog.headline"></h3>
+          </div>
+          <button (click)="onNavigate(blog)" class="btn btn-primary button-blog">Voir le
+            blog</button>
+        </div>
+      </div>
     </div>
+  </div>
 </div>

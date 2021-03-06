@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from 'src/app/core/model/user';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-main-page',
@@ -7,7 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainPageComponent implements OnInit {
 
-  constructor() { }
+  user: User;
+
+  constructor(public auth: AuthService) {
+    auth.dataFromUserObservable.subscribe((user: User) => {
+      this.user = user;
+    });
+  }
 
   ngOnInit(): void {
   }

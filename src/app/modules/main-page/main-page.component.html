@@ -1,1 +1,4 @@
-<app-nav-menu></app-nav-menu>
+<div class="main-content">
+  <button *ngIf="auth.authToken && user.adminLevel ==='admin'" routerlink="/news-creation">Ecrire un nouvel
+    article</button>
+</div>

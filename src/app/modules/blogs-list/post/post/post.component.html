@@ -1,0 +1,54 @@
+<div class="main-content">
+  <div class="post-display">
+    <button *ngIf="isPostOwner" class="btn btn-warning" (click)="onEdit = !onEdit">Editez le titre et
+      le contenu de votre post</button>
+
+    <div *ngIf="onEdit">
+      <form [formGroup]="editPostForm" (ngSubmit)="onEditPost()">
+        <div>
+          <label for="title">Titre de votre post</label>
+          <quill-editor type="text" formControlName="title"></quill-editor>
+        </div>
+        <div>
+          <label for="content">Votre contenu</label>
+          <quill-editor type="text" formControlName="content"></quill-editor>
+        </div>
+        <button type="submit">Créer votre post</button>
+      </form>
+    </div>
+
+    <div *ngIf="isLoaded" class="post-module">
+      <h2 [innerHTML]="post.title" class="post-title"></h2>
+      <p class="post-date">Le {{post.date | date : 'dd/MM/yyyy'}} à {{post.date | date : 'HH:mm'}}</p>
+      <p [innerHTML]="post.content" class="post-content"></p>
+    </div>
+
+    <div class="post-comment">
+      <div *ngIf="auth.authToken">
+        <p>Réagir :</p>
+        <form [formGroup]="commentCreationForm" (ngSubmit)="onCreateComment()">
+          <textarea formControlName="content" cols="77" rows="5" class="comment"></textarea>
+          <button type="submit" class="btn btn-primary blue-button submit">Réagir</button>
+        </form>
+      </div>
+      <div *ngIf="isLoaded">
+        <div *ngIf="post.comments.length > 0" class="reaction-comment">
+          <p>Ils ont réagi :</p>
+          <hr>
+          <div *ngFor="let comment of post.comments" class="users-comments">
+            <div *ngIf="comment">
+              <p class="comment-content" [innerHTML]="comment.comments.content"></p>
+              <p class="date-comment">Ecrit par {{comment.comments.author}} à {{comment.comments.date | date : 'HH:mm'}}
+                le
+                {{comment.comments.date | date : 'dd/MM/yyyy'}}</p>
+              <hr>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="post.comments.length === 0">
+          <p class="comment-prompt">Soyez le premier à réagir !</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

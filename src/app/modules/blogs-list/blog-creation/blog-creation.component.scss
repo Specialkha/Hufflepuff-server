@@ -1,0 +1,33 @@
+.creation-form {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.submit {
+    width: 350px;
+    margin: 25px auto;
+}
+
+.div-input {
+    margin: 25px;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    border: 1px solid #0053a3;
+    max-width: 100%;
+
+}
+
+button{
+    font-size: 15px;
+    background-color: #0053a3;
+    border-color: #0053a3 !important;
+}
+
+button:hover{
+    background-color: #00417e;
+}

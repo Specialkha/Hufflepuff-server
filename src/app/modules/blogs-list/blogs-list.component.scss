@@ -1,0 +1,151 @@
+$primary: #0053a3;
+$secondary: #c82333;
+$white: #fff;
+$gray: #1d1919;
+
+.blog-list {
+  cursor: pointer;
+}
+
+.input-blog-creation {
+  position: absolute;
+  outline: none;
+}
+
+h1 {
+  text-align: center;
+  margin: 25px;
+}
+
+.card {
+  border-radius: 15px;
+}
+
+.card-header {
+  text-align: center;
+  background-color: #e0e0e0;
+}
+
+.card-body {
+  width: 90%;
+  margin: 5px auto;
+  max-height: 200px;
+  overflow: hidden;
+}
+
+.button-blog {
+  margin: 10px auto;
+  width: 30%;
+  border-radius: 15px;
+  outline: none;
+}
+
+.zoom {
+  cursor: pointer;
+  border-radius: 5px;
+  transition: transform .2s ease;
+  -webkit-box-shadow: 2px 2px 1px 0px rgba(0, 0, 0, 0.4);
+  -moz-box-shadow: 2px 2px 1px 0px rgba(0, 0, 0, 0.4);
+  box-shadow: 2px 2px 1px 0px rgba(0, 0, 0, 0.4);
+}
+
+.zoom:hover {
+  transform: scale(1.1);
+  outline: none;
+}
+
+.search-display {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+  margin: 0 auto;
+  margin-bottom: 25px;
+}
+
+fa-icon {
+  padding: 15px 0 0;
+  margin-top: 10px;
+}
+
+.search-container {
+  position: relative;
+  padding: 15px 0 0;
+  margin-top: 10px;
+  width: 50%;
+}
+
+.input-search {
+  font-family: inherit;
+  width: 100%;
+  border: 0;
+  border-bottom: 2px solid $gray;
+  outline: 0;
+  font-size: 1.3rem;
+  color: $white;
+  padding: 7px 0;
+  background: transparent;
+  transition: border-color 0.2s;
+
+  &::placeholder {
+    color: transparent;
+  }
+
+  &:placeholder-shown~.input-search-label {
+    font-size: 1.3rem;
+    cursor: text;
+    top: 20px;
+  }
+}
+
+.input-search-label {
+  position: absolute;
+  top: 0;
+  display: block;
+  transition: 0.2s;
+  font-size: 1rem;
+  color: $gray;
+}
+
+.input-search:focus {
+  ~.input-search-label {
+    position: absolute;
+    top: 0;
+    display: block;
+    transition: 0.2s;
+    font-size: 1rem;
+    color: $primary;
+    font-weight: 700;
+  }
+
+  padding-bottom: 6px;
+  font-weight: 700;
+  border-width: 3px;
+  border-image: linear-gradient(to right, $primary, $secondary);
+  border-image-slice: 1;
+}
+
+.input-search {
+
+  &:required,
+  &:invalid {
+    box-shadow: none;
+  }
+}
+
+h2{
+  max-height: 100px;
+  overflow: hidden;
+}
+
+button {
+  background-color: #0053a3;
+  border-color: #0053a3 !important;
+  font-size: 15px;
+  margin: 25px;
+}
+
+button:hover{
+    background-color: #00417e;
+}

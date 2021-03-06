@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpService } from 'src/app/core/http/user/http.service';
+import { Router } from '@angular/router';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { HttpBlogService } from 'src/app/core/http/blog/httpBlog.service';
+import { AuthService } from 'src/app/core/services/auth.service';
 import { Blog } from '../../core/model/blog';
-import { BlogService } from '../../core/services/blog.service';
 
 @Component({
   selector: 'app-blogs-list',
@@ -10,70 +12,23 @@ import { BlogService } from '../../core/services/blog.service';
 })
 export class BlogsListComponent implements OnInit {
 
+  faSearch = faSearch;
+
   blogs: Blog[];
   selectedBlog: Blog;
+  searchText: string;
 
-  constructor(private blogService: BlogService, private httpUser: HttpService) { }
-
-  ngOnInit() {
-    // this.blogService
-    //   .getBlogs()
-    //   .then((blogs: Blog[]) => {
-    //     this.blogs = blogs.map((blog) => {
-    //       return blog;
-    //     });
-    //   });
-  }
-
-  private getIndexOfBlog = (blogId: String) => {
-    return this.blogs.findIndex((blog) => {
-      return blog._id === blogId;
+  constructor(private httpBlog: HttpBlogService, public auth: AuthService, private router: Router) {
+    this.httpBlog.getBlogs().subscribe((data) => {
+      this.blogs = data;
     });
   }
 
-  selectBlog(blog: Blog) {
-    this.selectedBlog = blog
-  }
+  ngOnInit() {
+   }
 
-  createNewBlog() {
-    // this.blogService.createBlog(blog).then((newBlog: Blog) => {
-    //   this.createHandler(newBlog);
-    // });
-  }
-
-  // createNewBlog() {
-  //   var blog: Blog = {
-  //     _id: '0',
-  //     title: '',
-  //     content: ''
-  //   };
-
-  //   // By default, a newly-created blog will have the selected state.
-  //   this.selectBlog(blog);
-  // }
-
-  deleteBlog = (blogId: String) => {
-    var idx = this.getIndexOfBlog(blogId);
-    if (idx !== -1) {
-      this.blogs.splice(idx, 1);
-      this.selectBlog(null);
-    }
-    return this.blogs;
-  }
-
-  addBlog = (blog: Blog) => {
-    this.blogs.push(blog);
-    this.selectBlog(blog);
-    return this.blogs;
-  }
-
-  updateBlog = (blog: Blog) => {
-    var idx = this.getIndexOfBlog(blog._id);
-    if (idx !== -1) {
-      this.blogs[idx] = blog;
-      this.selectBlog(blog);
-    }
-    return this.blogs;
+  onNavigate(blog) {
+    this.router.navigate(['/blog', blog._id]);
   }
 
 }
