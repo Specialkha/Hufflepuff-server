@@ -20,6 +20,7 @@ const RESSOURCES_COLLECTION = "ressources";
 
 let refreshTokens = [];
 let connectedUsers = [];
+const accessTokenSecret = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
 
 const app = express();
 app.use(bodyParser.json());
