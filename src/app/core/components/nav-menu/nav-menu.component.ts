@@ -90,6 +90,7 @@ export class NavMenuComponent implements OnInit {
     this.httpUser.userLogout(userCredential).subscribe((data: string) => {
       localStorage.removeItem('token');
       localStorage.removeItem('userId');
+      this.loginOpen = false;
       this.auth.dataFromObservable.subscribe(() => {
         this.auth.authToken = null;
       });
