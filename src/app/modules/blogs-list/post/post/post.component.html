@@ -44,6 +44,14 @@
               <hr>
             </div>
           </div>
+          <div *ngIf="auth.authToken && post.comments.length > 3">
+            <p>Réagir :</p>
+            <form [formGroup]="commentCreationForm" (ngSubmit)="onCreateComment()">
+              <textarea formControlName="content" cols="77" rows="5" class="comment"></textarea>
+              <button type="submit" class="btn btn-primary submit">Réagir</button>
+            </form>
+          </div>
+
         </div>
         <div *ngIf="post.comments.length === 0">
           <p class="comment-prompt">Soyez le premier à réagir !</p>
