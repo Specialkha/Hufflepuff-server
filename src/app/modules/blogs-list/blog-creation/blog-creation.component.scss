@@ -1,5 +1,5 @@
 .creation-form {
-    width: 60%;
+    width: 80%;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -25,6 +25,7 @@
 button{
     font-size: 15px;
     background-color: #0053a3;
+    border-color: #0053a3 !important;
 }
 
 button:hover{
