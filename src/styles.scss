@@ -47,3 +47,13 @@ body {
 button{
   outline: none;
 }
+
+.btn-primary{
+    font-size: 15px;
+    background-color: #0053a3;
+    border-color: #0053a3 !important;
+}
+
+.btn-primary:hover{
+    background-color: #00417e;
+}
