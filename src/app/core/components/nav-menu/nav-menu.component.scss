@@ -43,7 +43,7 @@ ul {
 .connect {
   position: absolute;
   right: 10px;
-  background-color: #e0e0e0 ;
+  background-color: #e0e0e0;
   border-color: #e0e0e0;
   top: 10px;
 }
@@ -57,7 +57,7 @@ ul {
   padding: 15px;
   animation: fadeIn ease-in-out 0.4s;
   border: 1px solid #e0e0e0;
-  
+
 }
 
 @-webkit-keyframes fadeIn {
@@ -100,11 +100,12 @@ a {
   height: 80px;
   margin: 5px auto;
   display: block;
-  cursor:initial;
+  cursor: initial;
 }
 
 .logo-display {
   width: 100%;
+  cursor: pointer;
 }
 
 .logout-display {
