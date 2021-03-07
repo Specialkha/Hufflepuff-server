@@ -35,6 +35,8 @@ import { AccountCreationEmailComponent } from './app/core/components/snack-bar/a
 import { LogoutSuccessComponent } from './app/core/components/snack-bar/logout-success/logout-success.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DeleteUserComponent } from './app/core/components/dialog/delete-user/delete-user.component';
+import { EditBlogSuccessComponent } from './app/core/components/snack-bar/edit-blog-success/edit-blog-success.component';
+import { EditPostSuccessComponent } from './app/core/components/snack-bar/edit-post-success/edit-post-success.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +62,9 @@ import { DeleteUserComponent } from './app/core/components/dialog/delete-user/de
     SuccessLoginComponent,
     AccountCreationEmailComponent,
     LogoutSuccessComponent,
-    DeleteUserComponent
+    DeleteUserComponent,
+    EditBlogSuccessComponent,
+    EditPostSuccessComponent
   ],
   imports: [
     BrowserModule,

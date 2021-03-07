@@ -12,7 +12,9 @@ export class ContentService {
     errorLogin: 'L\'utilisateur ou le mot de passe n\'est pas correct',
     successLogin: 'Vous avez été correctement identifié',
     accountEmail: 'Cet email est déjà utilisé',
-    logoutSuccess: 'Vous avez été correctement déconnecté'
+    logoutSuccess: 'Vous avez été correctement déconnecté',
+    editBlogSuccess: 'Votre blog a bien été mis à jour',
+    editPostSuccess:'Votre post a bien été mis à jour'
   }
 
   getSnackBar() {

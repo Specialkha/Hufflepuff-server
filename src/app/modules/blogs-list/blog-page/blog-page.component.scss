@@ -76,3 +76,14 @@ button {
 .button-blog:hover {
   background-color: #00417e;
 }
+
+.group-button {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.edit-form {
+  margin: 5px;
+}
