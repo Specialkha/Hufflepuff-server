@@ -85,11 +85,9 @@ export class PostComponent implements OnInit {
       title: this.editPostForm.value.title,
       content: this.editPostForm.value.content
     }
-    console.log(payload)
     this.postHttp.updatePost(this.blogService.getBlogId, this.postId, payload).subscribe((data: any) => {
       if (data) {
         this.postHttp.getSinglePost(this.blogService.getBlogId, this.postId).subscribe((updatedPost: any) => {
-          console.log(updatedPost)
           this.post = updatedPost[0];
           this.onEdit = false;
           this._snackBar.openFromComponent(EditPostSuccessComponent, {

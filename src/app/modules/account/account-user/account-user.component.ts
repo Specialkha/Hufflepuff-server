@@ -77,6 +77,7 @@ export class AccountUserComponent implements OnInit {
       mobile: this.f.mobile
     };
     this.httpUser.updateUser(this.user._id, payload).subscribe((data) => {
+      this.router.navigate(['/']);
     });
   }
 
