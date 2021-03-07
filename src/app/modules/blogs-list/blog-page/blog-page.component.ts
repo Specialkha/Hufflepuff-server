@@ -88,6 +88,7 @@ export class BlogPageComponent {
 
   onDeleteBlog() {
     this.blogHttp.deleteBlog(this.blog._id).subscribe(data => {
+      this.router.navigate(['/liste-des-blogs']);
     });
   }
 
