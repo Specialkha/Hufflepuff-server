@@ -1,1 +1,6 @@
 [0m2021.03.07 22:16:19 INFO  Started: Metals version 0.10.0 in workspace 'D:\Projet-Cubes\hufflepuff-cubes-2020' for client vscode 1.53.2.[0m
+[0m2021.03.07 22:16:22 INFO  time: initialize in 2.47s[0m
+[0m2021.03.07 22:16:25 WARN  Build server is not auto-connectable.[0m
+[0m2021.03.07 22:16:25 WARN  no build tool detected in workspace 'D:\Projet-Cubes\hufflepuff-cubes-2020'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. [0m
+mars 07, 2021 10:19:44 PM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFOS: Unsupported notification method: $/setTraceNotification
