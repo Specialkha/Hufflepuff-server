@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-md-12">
                 <form [formGroup]="accountForm" (ngSubmit)="onSubmit()">
-                    <div class="form-group">
+                    <div class="form-group row">
                         <div class="form-check">
                             <label class="form-check-label" for="genre">
                                 Homme
@@ -18,35 +18,39 @@
                         </div>
                     </div>
                     <div class="form-row">
-                        <div class="form-group col-md-6">
+                        <div class="form-group row col-md-6">
                             <label for="lastName">Nom *</label>
                             <input type="text" class="form-control" formControlName="lastName">
                         </div>
-                        <div class="form-group col-md-6">
+                        <div class="form-group row col-md-6">
                             <label for="firstName">Prénom *</label>
                             <input type="text" class="form-control" formControlName="firstName">
                         </div>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="email">E-mail *</label>
-                        <input type="email" formControlName="email" class="form-control">
+                        <div class="form-group row col-md-4">
+                            <label for="email">E-mail *</label>
+                            <input type="email" formControlName="email" class="form-control">
+                        </div>
                     </div>
                     <div class="form-row">
-                        <div class="form-group">
+                        <div class="form-group row">
                             <label for="adress">Adresse</label>
                             <input type="text" class="form-control" formControlName="adress">
                         </div>
-                        <div class="form-group">
+                        <div class="form-group row">
                             <label for="zipCode">Code postal</label>
                             <input type="text" class="form-control" formControlName="zipCode">
                         </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
+                        <div class="form-group row col-md-6">
                             <label for="city">Ville</label>
                             <input type="text" class="form-control" formControlName="city">
                         </div>
-                        <div class="form-group col-md-2">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group row col-md-2">
+                            <label for="phone">Téléphone</label>
+                            <input type="text" class="form-control" formControlName="phone">
+                        </div>
+                        <div class="form-group row col-md-2">
                             <label for="mobile">Téléphone mobile *</label>
                             <input type="text" class="form-control" formControlName="mobile">
                         </div>
@@ -54,7 +58,7 @@
                     <button type="submit" class="btn btn-primary blue-button">Sauvegarder</button>
                 </form>
 
-                <button class="btn btn-danger" (click)="onDeleteAccount()">Supprimer votre compte</button>
+                <button class="btn btn-danger" (click)="openDialog()">Supprimer votre compte</button>
             </div>
         </div>
     </div>

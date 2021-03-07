@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { DeleteUserComponent } from 'src/app/core/components/dialog/delete-user/delete-user.component';
 import { HttpUserService } from 'src/app/core/http/user/httpUser.service';
 import { User } from 'src/app/core/model/user';
 import { AuthService } from 'src/app/core/services/auth.service';
@@ -15,7 +17,7 @@ export class AccountUserComponent implements OnInit {
   accountForm: FormGroup;
   user: User;
 
-  constructor(private httpUser: HttpUserService, private auth: AuthService, private router: Router) {
+  constructor(private httpUser: HttpUserService, private auth: AuthService, private router: Router, public dialog: MatDialog) {
     this.accountForm = this.createNewFormGroup();
     auth.dataFromObservable.subscribe(data => {
       if (!data) {
@@ -79,8 +81,7 @@ export class AccountUserComponent implements OnInit {
     });
   }
 
-  onDeleteAccount() {
-    this.httpUser.deleteUser(this.user._id).subscribe(data => {
-    });
+  openDialog() {
+    this.dialog.open(DeleteUserComponent);
   }
 }
