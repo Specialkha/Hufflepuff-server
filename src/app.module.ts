@@ -37,6 +37,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { DeleteUserComponent } from './app/core/components/dialog/delete-user/delete-user.component';
 import { EditBlogSuccessComponent } from './app/core/components/snack-bar/edit-blog-success/edit-blog-success.component';
 import { EditPostSuccessComponent } from './app/core/components/snack-bar/edit-post-success/edit-post-success.component';
+import { EditUserSuccessComponent } from './app/core/components/snack-bar/edit-user-success/edit-user-success.component';
+import { EditUserErrorComponent } from './app/core/components/snack-bar/edit-user-error/edit-user-error.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +66,9 @@ import { EditPostSuccessComponent } from './app/core/components/snack-bar/edit-p
     LogoutSuccessComponent,
     DeleteUserComponent,
     EditBlogSuccessComponent,
-    EditPostSuccessComponent
+    EditPostSuccessComponent,
+    EditUserSuccessComponent,
+    EditUserErrorComponent
   ],
   imports: [
     BrowserModule,
