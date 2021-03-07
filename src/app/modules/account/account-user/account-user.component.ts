@@ -33,7 +33,6 @@ export class AccountUserComponent implements OnInit {
         genre: this.user.genre,
         lastName: this.user.lastName,
         firstName: this.user.firstName,
-        password: this.user.password,
         email: this.user.email,
         adress: this.user.adress,
         zipCode: this.user.zipCode,

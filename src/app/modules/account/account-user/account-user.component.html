@@ -2,9 +2,9 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <form [formGroup]="accountForm" (ngSubmit)="onSubmit()">
-                    <div class="form-group row">
-                        <div class="form-check">
+                <form [formGroup]="accountForm" (ngSubmit)="onSubmit()" class="well form-horizontal">
+                    <div class="form-group row radio-group">
+                        <div class="form-check radio-input">
                             <label class="form-check-label" for="genre">
                                 Homme
                                 <input class="form-check-input" type="radio" formControlName="genre" value="male">
@@ -17,48 +17,101 @@
                             </label>
                         </div>
                     </div>
-                    <div class="form-row">
-                        <div class="form-group row col-md-6">
-                            <label for="lastName">Nom *</label>
-                            <input type="text" class="form-control" formControlName="lastName">
-                        </div>
-                        <div class="form-group row col-md-6">
-                            <label for="firstName">Prénom *</label>
-                            <input type="text" class="form-control" formControlName="firstName">
-                        </div>
-                        <div class="form-group row col-md-4">
-                            <label for="email">E-mail *</label>
-                            <input type="email" formControlName="email" class="form-control">
+                    <div class="form-group">
+                        <label for="lastName" class="col-md-4 control-label">Nom *</label>
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                <input type="text" class="form-control input" formControlName="lastName">
+                            </div>
                         </div>
                     </div>
-                    <div class="form-row">
-                        <div class="form-group row">
-                            <label for="adress">Adresse</label>
-                            <input type="text" class="form-control" formControlName="adress">
-                        </div>
-                        <div class="form-group row">
-                            <label for="zipCode">Code postal</label>
-                            <input type="text" class="form-control" formControlName="zipCode">
-                        </div>
-                        <div class="form-group row col-md-6">
-                            <label for="city">Ville</label>
-                            <input type="text" class="form-control" formControlName="city">
+                    <div class="form-group">
+                        <label for="firstName" class="col-md-4 control-label">Prénom *</label>
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                <input type="text" class="form-control input" formControlName="firstName">
+                            </div>
                         </div>
                     </div>
-                    <div class="form-row">
-                        <div class="form-group row col-md-2">
-                            <label for="phone">Téléphone</label>
-                            <input type="text" class="form-control" formControlName="phone">
-                        </div>
-                        <div class="form-group row col-md-2">
-                            <label for="mobile">Téléphone mobile *</label>
-                            <input type="text" class="form-control" formControlName="mobile">
+                    <div class="form-group">
+                        <label for="email" class="col-md-4 control-label">E-mail *</label>
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                                <input type="email" formControlName="email" class="form-control input">
+                            </div>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary blue-button">Sauvegarder</button>
+                    <div class="form-group">
+                        <label for="zipCode" class="col-md-4 control-label">Mot de passe</label>
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                <input type="password" class="form-control input" formControlName="password">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="zipCode" class="col-md-4 control-label">Confirmation</label>
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                <input type="password" class="form-control input" formControlName="confirm">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="adress" class="col-md-4 control-label">Adresse</label>
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+                                <input type="text" class="form-control input" formControlName="adress">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="zipCode" class="col-md-4 control-label">Code postal</label>
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+                                <input type="text" class="form-control input" formControlName="zipCode">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="city" class="col-md-4 control-label">Ville</label>
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+                                <input type="text" class="form-control input" formControlName="city">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone" class="col-md-4 control-label">Téléphone</label>
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+                                <input type="text" class="form-control input" formControlName="phone">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="mobile" class="col-md-4 control-label">Téléphone mobile *</label>
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+                                <input type="text" class="form-control input" formControlName="mobile">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="button-group">
+                        <button class="btn btn-danger button-form" (click)="openDialog()">Supprimer votre compte</button>
+                        <button type="submit" class="btn btn-primary button-form">Sauvegarder</button>
+                    </div>
                 </form>
-
-                <button class="btn btn-danger" (click)="openDialog()">Supprimer votre compte</button>
             </div>
         </div>
     </div>

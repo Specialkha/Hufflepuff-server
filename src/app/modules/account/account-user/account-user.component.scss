@@ -5,6 +5,41 @@
   margin: 15px 0 15px 0;
 }
 
-.blue-button:hover{
-    background-color: #00417e;
+.blue-button:hover {
+  background-color: #00417e;
+}
+
+.radio-group {
+  margin: 0 auto 15px auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 30%;
+}
+
+.radio-input {
+  width: 30%;
+}
+
+.input {
+  height: 31px;
+}
+
+i {
+  margin: -6px;
+}
+
+.button-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 60%;
+  margin: 25px auto;
+}
+
+.button-form {
+  margin: 15px;
+  font-size: 15px;
 }
