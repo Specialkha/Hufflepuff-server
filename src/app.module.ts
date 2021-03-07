@@ -33,6 +33,7 @@ import { ErrorLoginComponent } from './app/core/components/snack-bar/error-login
 import { SuccessLoginComponent } from './app/core/components/snack-bar/success-login/success-login.component';
 import { AccountCreationEmailComponent } from './app/core/components/snack-bar/account-creation-email/account-creation-email.component';
 import { LogoutSuccessComponent } from './app/core/components/snack-bar/logout-success/logout-success.component';
+import { DeleteUserComponent } from './app/core/components/dialog/delete-user/delete-user.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { LogoutSuccessComponent } from './app/core/components/snack-bar/logout-s
     ErrorLoginComponent,
     SuccessLoginComponent,
     AccountCreationEmailComponent,
-    LogoutSuccessComponent
+    LogoutSuccessComponent,
+    DeleteUserComponent
   ],
   imports: [
     BrowserModule,
