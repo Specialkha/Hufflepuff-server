@@ -33,7 +33,7 @@ export class BlogPageComponent {
         this.blogId = params.blogId;
         this.blogHttp.getSingleBlog(this.blogId).subscribe((data: Blog) => {
           this.blog = data;
-          this.userHttp.getSingleUserWithId(this.blog.authorId).subscribe((e: any) => {
+          this.userHttp.getSingleUserWithId(this.blog.authorId).subscribe((e: User) => {
             this.userHttp.getUserWithToken(this.auth.authToken).subscribe((user: User) => {
               if (data.authorId === user._id) {
                 this.isBlogOwner = true;
@@ -46,7 +46,7 @@ export class BlogPageComponent {
               });
             }, err => {
               this.blog.authorId = e.lastName + ' ' + e.firstName;
-              console.error(err)
+              console.error(err);
             });
           });
         });
