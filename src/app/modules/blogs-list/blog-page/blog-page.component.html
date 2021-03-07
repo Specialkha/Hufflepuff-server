@@ -2,12 +2,13 @@
   <div class="row">
     <div class="blog-display">
       <div class="blog-editing">
-        <button *ngIf="isBlogOwner" class="btn btn-warning button-editing" (click)="onCreatePost()">Ecrivez un
+        <button *ngIf="isBlogOwner" class="btn btn-primary button-editing" (click)="onCreatePost()">Ecrivez un
           post dans
           votre
           blog</button>
 
-        <button *ngIf="isBlogOwner" class="btn btn-warning button-editing" (click)="onEdit = true">Editez le titre et
+        <button *ngIf="isBlogOwner" class="btn btn-primary button-editing" (click)="onEdit = true">Editez le
+          titre et
           la description de votre blog</button>
       </div>
 
