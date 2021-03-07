@@ -11,7 +11,8 @@ export class ContentService {
     errorPassword: 'Le mot de passe et la confirmation ne sont pas identiques',
     errorLogin: 'L\'utilisateur ou le mot de passe n\'est pas correct',
     successLogin: 'Vous avez été correctement identifié',
-    accountEmail: 'Cet email est déjà utilisé'
+    accountEmail: 'Cet email est déjà utilisé',
+    logoutSuccess: 'Vous avez été correctement déconnecté'
   }
 
   getSnackBar() {

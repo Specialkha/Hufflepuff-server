@@ -7,6 +7,7 @@ import { HttpUserService } from '../../http/user/httpUser.service';
 import { User } from '../../model/user';
 import { AuthService } from '../../services/auth.service';
 import { ErrorLoginComponent } from '../snack-bar/error-login/error-login.component';
+import { LogoutSuccessComponent } from '../snack-bar/logout-success/logout-success.component';
 import { SuccessLoginComponent } from '../snack-bar/success-login/success-login.component';
 
 @Component({
@@ -93,6 +94,11 @@ export class NavMenuComponent implements OnInit {
       this.loginOpen = false;
       this.auth.dataFromObservable.subscribe(() => {
         this.auth.authToken = null;
+      });
+      this._snackBar.openFromComponent(LogoutSuccessComponent, {
+        duration: this.durationInSeconds * 1000,
+        panelClass: "list-group-item-success",
+        verticalPosition: "top",
       });
     });
   }

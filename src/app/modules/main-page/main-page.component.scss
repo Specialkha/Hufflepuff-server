@@ -1,0 +1,10 @@
+.news-display {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.news {
+    width: 30%;
+    margin: 50px auto;
+}
