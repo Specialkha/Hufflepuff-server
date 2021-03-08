@@ -4,3 +4,4 @@
 [0m2021.03.07 22:16:25 WARN  no build tool detected in workspace 'D:\Projet-Cubes\hufflepuff-cubes-2020'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. [0m
 mars 07, 2021 10:19:44 PM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
 INFOS: Unsupported notification method: $/setTraceNotification
+[0m2021.03.08 00:21:31 INFO  shutting down Metals[0m
