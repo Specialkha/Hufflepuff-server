@@ -26,10 +26,13 @@
             <label for="content" for="title">Contenu du blog</label>
             <quill-editor type="text" formControlName="description"></quill-editor>
           </div>
-          <button class="btn-primary" type="submit">Sauvegarder</button>
+          <div class="group-button">
+            <button class="btn btn-primary edit-form" type="submit">Sauvegarder</button>
+            <button class="btn btn btn-danger edit-form" (click)="onDeleteBlog()">Supprimer ce blog</button>
+          </div>
         </form>
 
-        <button class="btn btn-danger" (click)="onDeleteBlog()">Supprimer ce blog</button>
+
       </div>
 
       <div *ngIf="blog">

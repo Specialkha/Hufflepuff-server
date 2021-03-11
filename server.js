@@ -374,7 +374,7 @@ app.put("/api/" + BLOGS_COLLECTION + "/:blogId" + "/post" + "/:postId", authenti
   let updatePost = req.body;
   delete updatePost._id;
 
-  db.collection(BLOGS_COLLECTION).findOneAndUpdate({ _id: new ObjectID(req.params.id) }, { $set: updatePost }, function (err, doc) {
+  db.collection(BLOGS_COLLECTION).findOneAndUpdate({ _id: new ObjectID(req.params.blogId) }, { $set: { "posts.$[index].title": updatePost.title, "posts.$[index].content": updatePost.content } }, { "arrayFilters": [{ "index._id": req.params.postId }] }, function (err, doc) {
     if (err) {
       handleError(res, err.message, "Failed to update blog");
     } else {
