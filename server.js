@@ -25,6 +25,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(cors());
+app.disable('x-powered-by');
 
 // Create link to Angular build directory
 const distDir = __dirname + "/dist/";
