@@ -8,9 +8,9 @@ describe('ErrorPasswordComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ErrorPasswordComponent ]
+      declarations: [ErrorPasswordComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
