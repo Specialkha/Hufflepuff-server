@@ -44,16 +44,40 @@ body {
   height: 150px !important;
 }
 
-button{
+button {
   outline: none;
 }
 
-.btn-primary{
-    font-size: 15px;
-    background-color: #0053a3;
-    border-color: #0053a3 !important;
+.btn-primary {
+  font-size: 15px;
+  background-color: #0053a3;
+  border-color: #0053a3 !important;
 }
 
-.btn-primary:hover{
-    background-color: #00417e;
+.btn-primary:hover {
+  background-color: #00417e;
+}
+
+@media screen and (max-width: 1500px) {
+  .main-content {
+    margin: 0 125px 0 125px;
+  }
+}
+
+@media screen and (max-width: 1280px) {
+  .main-content {
+    margin: 0 75px 0 75px;
+  }
+}
+
+@media screen and (max-width: 1080px) {
+  .main-content {
+    margin: 0 50px 0 50px;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .main-content {
+    margin: 0 25px 0 25px;
+  }
 }

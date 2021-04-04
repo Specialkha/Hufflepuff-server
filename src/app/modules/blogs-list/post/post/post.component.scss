@@ -76,7 +76,7 @@ hr {
   resize: none;
 }
 
-button{
+button {
   margin: 15px;
 }
 
@@ -87,6 +87,30 @@ button{
   margin: 15px 0 15px 0;
 }
 
-.blue-button:hover{
-    background-color: #00417e;
+.blue-button:hover {
+  background-color: #00417e;
+}
+
+@media screen and (max-width: 1500px) {
+  .post-display {
+    margin: 0 125px 0 125px;
+  }
+}
+
+@media screen and (max-width: 1280px) {
+  .post-display {
+    margin: 0 75px 0 75px;
+  }
+}
+
+@media screen and (max-width: 1080px) {
+  .post-display {
+    margin: 0 50px 0 50px;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .post-display {
+    margin: 0 25px 0 25px;
+  }
 }

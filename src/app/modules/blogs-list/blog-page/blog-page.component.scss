@@ -29,6 +29,11 @@ h3 {
 .blog-editing {
   width: 30%;
   margin: 15px auto;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 }
 
 .button-editing {
@@ -37,7 +42,6 @@ h3 {
 }
 
 button {
-
   outline: none;
 }
 
@@ -69,6 +73,17 @@ button {
   font-size: 15px;
 }
 
-.button-blog:hover{
-    background-color: #00417e;
+.button-blog:hover {
+  background-color: #00417e;
+}
+
+.group-button {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.edit-form {
+  margin: 5px;
 }

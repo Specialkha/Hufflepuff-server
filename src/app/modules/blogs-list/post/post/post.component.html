@@ -1,6 +1,6 @@
 <div class="main-content">
   <div class="post-display">
-    <button *ngIf="isPostOwner" class="btn btn-warning" (click)="onEdit = !onEdit">Editez le titre et
+    <button *ngIf="isPostOwner" class="btn btn-primary" (click)="onEdit = !onEdit">Editez le titre et
       le contenu de votre post</button>
 
     <div *ngIf="onEdit">
@@ -13,7 +13,7 @@
           <label for="content">Votre contenu</label>
           <quill-editor type="text" formControlName="content"></quill-editor>
         </div>
-        <button type="submit">Créer votre post</button>
+        <button class="btn btn-primary" type="submit">Editez votre post</button>
       </form>
     </div>
 
@@ -44,6 +44,14 @@
               <hr>
             </div>
           </div>
+          <div *ngIf="auth.authToken && post.comments.length > 3">
+            <p>Réagir :</p>
+            <form [formGroup]="commentCreationForm" (ngSubmit)="onCreateComment()">
+              <textarea formControlName="content" cols="77" rows="5" class="comment"></textarea>
+              <button type="submit" class="btn btn-primary submit">Réagir</button>
+            </form>
+          </div>
+
         </div>
         <div *ngIf="post.comments.length === 0">
           <p class="comment-prompt">Soyez le premier à réagir !</p>

@@ -32,6 +32,13 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ErrorLoginComponent } from './app/core/components/snack-bar/error-login/error-login.component';
 import { SuccessLoginComponent } from './app/core/components/snack-bar/success-login/success-login.component';
 import { AccountCreationEmailComponent } from './app/core/components/snack-bar/account-creation-email/account-creation-email.component';
+import { LogoutSuccessComponent } from './app/core/components/snack-bar/logout-success/logout-success.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { DeleteUserComponent } from './app/core/components/dialog/delete-user/delete-user.component';
+import { EditBlogSuccessComponent } from './app/core/components/snack-bar/edit-blog-success/edit-blog-success.component';
+import { EditPostSuccessComponent } from './app/core/components/snack-bar/edit-post-success/edit-post-success.component';
+import { EditUserSuccessComponent } from './app/core/components/snack-bar/edit-user-success/edit-user-success.component';
+import { EditUserErrorComponent } from './app/core/components/snack-bar/edit-user-error/edit-user-error.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +62,13 @@ import { AccountCreationEmailComponent } from './app/core/components/snack-bar/a
     ErrorPasswordComponent,
     ErrorLoginComponent,
     SuccessLoginComponent,
-    AccountCreationEmailComponent
+    AccountCreationEmailComponent,
+    LogoutSuccessComponent,
+    DeleteUserComponent,
+    EditBlogSuccessComponent,
+    EditPostSuccessComponent,
+    EditUserSuccessComponent,
+    EditUserErrorComponent
   ],
   imports: [
     BrowserModule,
@@ -66,6 +79,7 @@ import { AccountCreationEmailComponent } from './app/core/components/snack-bar/a
     NgbModule,
     ReactiveFormsModule,
     FontAwesomeModule,
+    MatDialogModule,
     QuillModule.forRoot(),
     BrowserAnimationsModule,
     MatSnackBarModule

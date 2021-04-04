@@ -11,6 +11,8 @@ import { HttpUserService } from 'src/app/core/http/user/httpUser.service';
 import { User } from 'src/app/core/model/user';
 import { HttpBlogService } from 'src/app/core/http/blog/httpBlog.service';
 import { Blog } from 'src/app/core/model/blog';
+import { EditPostSuccessComponent } from 'src/app/core/components/snack-bar/edit-post-success/edit-post-success.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -19,6 +21,8 @@ import { Blog } from 'src/app/core/model/blog';
   styleUrls: ['./post.component.scss']
 })
 export class PostComponent implements OnInit {
+
+  durationInSeconds: number = 3;
 
   editPostForm: FormGroup;
   commentCreationForm: FormGroup;
@@ -33,7 +37,7 @@ export class PostComponent implements OnInit {
 
   // onOpenAnswer: boolean = false;
 
-  constructor(private httpBlog: HttpBlogService, private httpUser: HttpUserService, private httpComment: HttpCommentService, private blogService: BlogService, public auth: AuthService, private route: ActivatedRoute, private postHttp: HttpPostService) {
+  constructor(private _snackBar: MatSnackBar, private httpBlog: HttpBlogService, private httpUser: HttpUserService, private httpComment: HttpCommentService, private blogService: BlogService, public auth: AuthService, private route: ActivatedRoute, private postHttp: HttpPostService) {
     this.route.params.subscribe((params) => {
       this.postId = params.postId;
       this.postHttp.getSinglePost(this.blogService.getBlogId, this.postId).subscribe((data: any) => {
@@ -44,6 +48,10 @@ export class PostComponent implements OnInit {
             this.userWriter = user;
             if (blog.authorId === user._id) {
               this.isPostOwner = true;
+              this.editPostForm.patchValue({
+                title: this.post.title,
+                content: this.post.content
+              });
             }
           }, err => {
             console.error(err)
@@ -73,6 +81,23 @@ export class PostComponent implements OnInit {
   }
 
   onEditPost() {
+    const payload = {
+      title: this.editPostForm.value.title,
+      content: this.editPostForm.value.content
+    }
+    this.postHttp.updatePost(this.blogService.getBlogId, this.postId, payload).subscribe((data: any) => {
+      if (data) {
+        this.postHttp.getSinglePost(this.blogService.getBlogId, this.postId).subscribe((updatedPost: any) => {
+          this.post = updatedPost[0];
+          this.onEdit = false;
+          this._snackBar.openFromComponent(EditPostSuccessComponent, {
+            duration: this.durationInSeconds * 1000,
+            panelClass: "list-group-item-success",
+            verticalPosition: "top",
+          });
+        });
+      }
+    });
 
   }
 

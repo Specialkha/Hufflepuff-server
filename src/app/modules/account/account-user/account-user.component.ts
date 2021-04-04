@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { DeleteUserComponent } from 'src/app/core/components/dialog/delete-user/delete-user.component';
+import { EditUserErrorComponent } from 'src/app/core/components/snack-bar/edit-user-error/edit-user-error.component';
+import { EditUserSuccessComponent } from 'src/app/core/components/snack-bar/edit-user-success/edit-user-success.component';
 import { HttpUserService } from 'src/app/core/http/user/httpUser.service';
 import { User } from 'src/app/core/model/user';
 import { AuthService } from 'src/app/core/services/auth.service';
@@ -12,10 +17,12 @@ import { AuthService } from 'src/app/core/services/auth.service';
 })
 export class AccountUserComponent implements OnInit {
 
+  durationInSeconds:number = 3;
+
   accountForm: FormGroup;
   user: User;
 
-  constructor(private httpUser: HttpUserService, private auth: AuthService, private router: Router) {
+  constructor(private httpUser: HttpUserService, private auth: AuthService, private router: Router, public dialog: MatDialog, private _snackBar:MatSnackBar) {
     this.accountForm = this.createNewFormGroup();
     auth.dataFromObservable.subscribe(data => {
       if (!data) {
@@ -31,7 +38,6 @@ export class AccountUserComponent implements OnInit {
         genre: this.user.genre,
         lastName: this.user.lastName,
         firstName: this.user.firstName,
-        password: this.user.password,
         email: this.user.email,
         adress: this.user.adress,
         zipCode: this.user.zipCode,
@@ -76,11 +82,22 @@ export class AccountUserComponent implements OnInit {
       mobile: this.f.mobile
     };
     this.httpUser.updateUser(this.user._id, payload).subscribe((data) => {
+      this._snackBar.openFromComponent(EditUserSuccessComponent, {
+        duration: this.durationInSeconds * 1000,
+        panelClass: "list-group-item-success",
+        verticalPosition: "top",
+      });
+      this.router.navigate(['/']);
+    }, err => {
+      this._snackBar.openFromComponent(EditUserErrorComponent, {
+        duration: this.durationInSeconds * 1000,
+        panelClass: "list-group-item-danger",
+        verticalPosition: "top",
+      });
     });
   }
 
-  onDeleteAccount() {
-    this.httpUser.deleteUser(this.user._id).subscribe(data => {
-    });
+  openDialog() {
+    this.dialog.open(DeleteUserComponent);
   }
 }
