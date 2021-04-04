@@ -8,9 +8,9 @@ describe('AccountCreationComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AccountCreationComponent ]
+      declarations: [AccountCreationComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
