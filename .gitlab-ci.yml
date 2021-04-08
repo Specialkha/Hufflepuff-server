@@ -2,5 +2,6 @@
 image: node:latest
 test_async:
   script:
+    - npm install npm@6.11.0 -g 
     - npm install --legacy-peer-deps
     - npx jest
