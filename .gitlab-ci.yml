@@ -2,5 +2,6 @@
 image: node:latest
 test_async:
   script:
+    - npm update
     - npm install
     - npx jest
