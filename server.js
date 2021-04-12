@@ -8,7 +8,7 @@ const jwt = require('jsonwebtoken');
 const { verify } = require('./middleware');
 const cors = require('cors');
 
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt-nodejs');
 const saltRounds = 10;
 const myPlaintextPassword = 's0/\/\P4$$w0rD';
 const someOtherPlaintextPassword = 'not_bacon';
