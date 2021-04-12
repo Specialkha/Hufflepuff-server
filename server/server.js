@@ -5,7 +5,7 @@ const cookieParser = require('cookie-parser');
 const mongodb = require("mongodb");
 const ObjectID = mongodb.ObjectID;
 const jwt = require('jsonwebtoken');
-const { verify } = require('./middleware');
+const { verify } = require('../middleware');
 const cors = require('cors');
 
 const bcrypt = require('bcrypt-nodejs');
@@ -14,7 +14,7 @@ const myPlaintextPassword = 's0/\/\P4$$w0rD';
 const someOtherPlaintextPassword = 'not_bacon';
 
 const USERS_COLLECTION = "users";
-const BLOGS_COLLECTION = "blogs";
+
 const NEWS_COLLECTION = "news";
 const RESSOURCES_COLLECTION = "ressources";
 
@@ -35,6 +35,8 @@ app.use(express.static(distDir));
 
 // Create a database variable outside of the database connection callback to reuse the connection pool in your app.
 let db;
+
+require('./routes/blogs')(app);
 
 // Connect to the database before starting the application server.
 mongodb.MongoClient.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/CUBES", {
@@ -169,24 +171,7 @@ app.post('/api/auth/logout', (req, res) => {
   res.status(200).send("Logout successful");
 });
 
-// Verify authenticity of authToken
-const authenticateJWT = (req, res, next) => {
-  const authHeader = req.headers.authorization;
 
-  if (authHeader) {
-    const token = authHeader.split(' ')[0];
-    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
-      if (err) {
-        return res.sendStatus(403);
-      }
-
-      req.user = user;
-      next();
-    });
-  } else {
-    res.sendStatus(401);
-  }
-};
 
 /*  "/api/users/:id"
  *    GET: find contact by username
